@@ -32,6 +32,7 @@ export const HeadlineWrapper = styled.div`
   font-family: "Russo One", sans-serif;
   font-size: 25px;
   color: #2185d0;
+  cursor: default;
 `;
 
 export const NavItemWrapper = styled.div`
@@ -55,7 +56,23 @@ export const NavItem = styled.div`
     text-decoration: underline;
     transition: 1s;
   }
+`;
 
+
+export const NavAccountsItem = styled.div`
+  padding-right: 20px;
+  font-weight: bold;
+  color: #00324d;
+  margin: auto 0;
+  font-size: 15px;
+  cursor: default;
+  padding: 7px;
+  border-radius: 7px;
+
+  &:hover {
+    background-color: #dbdbdb;
+    transition: 0.5s;
+  }
 `;
 
 export const AccountsWrapper = styled.div`
@@ -77,6 +94,7 @@ export const WelcomeDialog = styled.div`
   padding-top: 7vh;
   padding-down: 2vh;
   height: 35vh;
+  cursor: default;
 `;
 
 export const WelcomeDivWrapper = styled.div`
@@ -115,10 +133,9 @@ export const BottomSublineHeader = styled.div`
 `;
 
 export const BottomSubline = styled.div`
-  font-family: "Russo One", sans-serif;
-  font-size: 14px;
+  font-family: "Libre Baskerville", serif;
+  font-size: 11.5px;
   color: #bfbfbf;
-  word-wrap: break-word;
 `;
 
 export const BottomModal = styled.div`
@@ -177,14 +194,42 @@ export const TrustedCompanyDescription = styled.div`
 `;
 
 export const HomeBottom = styled.div`
+  display: flex;
+  flex-direction: row;
   width: 100vw;
   height: 50vh;
   margin-top: 110vh;
   margin-left: auto;
   margin-right: auto;
   background-color: #001a3f;
+`;
+
+export const MenuTitle = styled.div`
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 4vh;
+  font-family: "Libre Baskerville", serif;
+  color: #001a3f;
+  font-weight: bold;
+`;
+
+
+export const MenuSubTitle = styled.div`
+  margin: 2vh 3vw;
+  font-family: "Libre Baskerville", serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #001a3f;
+`;
+
+export const MenuBoard = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100vw;
+  height: 60vh;
+  background-color: white;
+  position: absolute;
+  top: 7%;
 `;
 
 export const HomeBottomModalHeadline = styled.div`

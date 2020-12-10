@@ -10,6 +10,7 @@ import TrustedCompanies from "../components/home/TrustedCompanies";
 import Solutions from "../components/home/Solutions";
 import Bottom from "../components/home/Bottom";
 
+
 const Home = (props) => {
   return (
     <>

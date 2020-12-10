@@ -5,6 +5,7 @@
 *.log
 
 /gui/node_modules
+/node_modules
 
 # BlueJ files
 *.ctxt
