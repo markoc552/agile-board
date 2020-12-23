@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import HomeBackground from "../../assets/images/home.jpg";
 import BottomBackground from "../../assets/images/home-bottom.jpg";
+import WelcomeBackground from "../../assets/images/welcome-widget.jpg";
 
 export const MainContainerWrapper = styled.div`
   width: 100vw;
@@ -57,7 +58,6 @@ export const NavItem = styled.div`
     transition: 1s;
   }
 `;
-
 
 export const NavAccountsItem = styled.div`
   padding-right: 20px;
@@ -213,7 +213,6 @@ export const MenuTitle = styled.div`
   font-weight: bold;
 `;
 
-
 export const MenuSubTitle = styled.div`
   margin: 2vh 3vw;
   font-family: "Libre Baskerville", serif;
@@ -245,4 +244,164 @@ export const SolutionImageWrapper = styled.div`
   width: 30vw;
   height: 30vh;
   margin: -17vh 37vw;
+`;
+
+export const DashboardNav = styled.div`
+  width: 100vw;
+  height: 5.5vh;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0px 7px 14px 0px rgba(50, 50, 50, 0.41);
+`;
+
+export const ContentNav = styled.div`
+  width: 45vw;
+  height: 5.5vh;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  background-color: #1b5cb5;
+`;
+
+export const DashboardNavHeadline = styled.div`
+  padding: 5px;
+  font-family: "Russo One", sans-serif;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.07);
+  font-size: 19px;
+  color: black;
+  width: 14vw;
+  height: 5.5vh;
+  z-index: 10;
+`;
+
+export const DashboardNavItem = styled.div`
+  padding: 10px;
+  font-family: "Russo One", sans-serif;
+  color: black;
+  font-size: 15px;
+  cursor: default;
+  margin: 5px auto;
+  width: 11vw;
+  height: 5vh;
+  border-radius: 10px;
+  transition: 0.7s;
+
+  &:hover {
+    background-color: #63a4ff;
+  }
+`;
+
+export const DashboardHeadline = styled.div`
+  font-family: "Russo One", sans-serif;
+  font-size: 15px;
+  margin: 12px 20px;
+`;
+
+export const WelcomeWidgetHello = styled.div`
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  font-size: 45px;
+  color: #f5f5f5;
+  margin: 7vh auto;
+`;
+
+export const DashboardWelcomeWrapper = styled.div`
+  width: 100vw;
+  height: 94.5vh;
+  display: flex;
+  flex-direction: row;
+  background-color: #f4f5f7;
+`;
+
+export const Headline = styled.div`
+  padding: 35px;
+  font-family: "Libre Baskerville", serif;
+  color: #253858;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+`;
+
+export const SystemDashboardContentWrapper = styled.div`
+  width: 45vw;
+  height: 25vh;
+  background-color: white;
+  margin: 45px;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.17);
+`;
+
+export const ProjectNavigation = styled.div`
+  width: 15vw;
+  height: 100vh;
+  background-color: #f4f5f7;
+`;
+
+export const WelcomeWidget = styled.div`
+  width: 40vw;
+  height: 35.9vh;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0.4vh auto;
+  display: flex;
+  flex-direction: column;
+  background-image: url(${WelcomeBackground});
+  background-repeat: no-repeat;
+  background-size: 115% 125%;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+`;
+
+export const ComponentWidget = styled.div`
+  width: 70vw;
+  height: 75vh;
+  background-color: white;
+  border-radius: 10px;
+  margin: 2vh 2vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+`;
+
+export const AccountImageWrapper = styled.div`
+  margin: 5vh auto;
+  width: 7vw;
+  height: 7vh;
+  border-radius: 50px;
+`;
+
+export const TodoWidget = styled.div`
+  width: 35vw;
+  height: 75.5vh;
+  background-color: white;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-right: 7vw;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+`;
+
+export const TimeWidget = styled.div`
+  width: 19vw;
+  height: 36.5vh;
+  background-color: white;
+  padding: 35px;
+  border-radius: 10px;
+  margin: 0.4vh 2.5vw;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+  font-family: "Russo One", sans-serif;
+  font-size: 13px;
+`;
+
+export const ProjectNavigationItem = styled.div`
+  padding: 15px;
+  margin: 10px 40px;
+  font-family: "Libre Baskerville", serif;
+  cursor: pointer;
+  width: 11vw;
+  transition: 0.5s;
+  border-radius: 2px;
+
+  &:hover {
+    background-color: #abb2c2;
+  }
 `;
