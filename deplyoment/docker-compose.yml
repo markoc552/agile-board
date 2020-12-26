@@ -24,8 +24,9 @@ services:
     << : *healthcheck-config
     test: ["CMD", "curl", "-f", "http://localhost:5432"]
    environment:
-    - POSTGRES_USER=marko
+    - POSTGRES_USER=admin
     - POSTGRES_PASSWORD=admin123
+    - POSTGRES_DB=agile
    volumes:
     - postgres_data:/var/lib/postgresql/data
    networks:
