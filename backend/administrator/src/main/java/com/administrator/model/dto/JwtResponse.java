@@ -1,4 +1,4 @@
-package com.administrator.model;
+package com.administrator.model.dto;
 
 import lombok.*;
 

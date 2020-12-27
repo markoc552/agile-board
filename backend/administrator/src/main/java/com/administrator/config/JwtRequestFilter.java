@@ -1,7 +1,6 @@
 package com.administrator.config;
 
 import com.administrator.exceptions.*;
-import com.administrator.model.dao.*;
 import com.administrator.services.*;
 import lombok.*;
 import org.javatuples.*;
@@ -37,9 +36,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         Pair<String, String> parsedToken = parseToken(requestToken);
 
-        if (parsedToken == null)
-            throw new JwtAuthenticationException("Error while parsing exception");
-
         if (parsedToken.getValue0() != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = userService.loadUserByUsername(parsedToken.getValue0());
@@ -59,13 +55,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private Pair<String,String> parseToken(String requestToken) {
 
         String username;
-        String token = null;
+        String token;
 
         if (requestToken != null && requestToken.startsWith("Bearer")) {
 
             try {
-                username = jwtToken.getUsernameFromToken(token);
                 token = requestToken.substring(7);
+                username = jwtToken.getUsernameFromToken(token);
 
                 return new Pair<>(username, token);
 
@@ -73,6 +69,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 LOG.info("Unable to get username from token!");
             }
         }
-        return null;
+        return new Pair<>(null, null);
     }
 }

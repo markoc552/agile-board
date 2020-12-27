@@ -1,4 +1,4 @@
-package com.administrator.controller;
+package com.administrator.controllers;
 
 
 import com.administrator.exceptions.*;

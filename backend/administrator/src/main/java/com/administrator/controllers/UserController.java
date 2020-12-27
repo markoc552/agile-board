@@ -1,4 +1,4 @@
-package com.administrator.controller;
+package com.administrator.controllers;
 
 
 import com.administrator.exceptions.*;
@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
-import static com.administrator.util.AgileAdminConstants.USERNAME_CAN_T_BE_NULL;
-import static com.administrator.util.AgileAdminConstants.USER_CAN_T_BE_NULL;
+import static com.administrator.util.AgileAdminConstants.*;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/v1/user")
 public class UserController {
 
@@ -50,7 +49,7 @@ public class UserController {
 
         userService.deleteUser(userDto);
 
-        return ResponseEntity.ok("User successfully");
+        return ResponseEntity.ok("User successfully deleted");
     }
 
     @GetMapping("/getUser")

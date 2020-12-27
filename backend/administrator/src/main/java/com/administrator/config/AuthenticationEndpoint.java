@@ -14,6 +14,6 @@ public class AuthenticationEndpoint implements AuthenticationEntryPoint, Seriali
 
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
 
-        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, httpServletResponse.toString());
     }
 }

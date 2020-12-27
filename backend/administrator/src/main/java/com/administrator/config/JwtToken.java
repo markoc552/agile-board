@@ -15,7 +15,7 @@ public class JwtToken implements Serializable {
 
     public static final long TOKEN_EXPIRATION_TIME = 10L * 60L * 60L * 1000L;
 
-    private String secret;
+    private String secret = "test123";
 
     public String generateToken(UserDetails userDetails) {
 

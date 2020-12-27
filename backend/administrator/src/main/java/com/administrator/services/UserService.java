@@ -1,8 +1,8 @@
 package com.administrator.services;
 
 
+import com.administrator.aspects.*;
 import com.administrator.exceptions.*;
-import com.administrator.model.*;
 import com.administrator.model.dao.*;
 import com.administrator.model.dto.*;
 import com.administrator.repository.*;
@@ -24,9 +24,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserCredentialsRepository userCredentialsRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+
+    @Log
     public UserDetails loadUserByUsername(String username) {
 
         if (username == null)
@@ -40,12 +41,16 @@ public class UserService implements UserDetailsService {
 
             CustomUserDetails userDetails = new CustomUserDetails();
             userDetails.setUsername(user.getUsername());
+            userDetails.setAccountNonLocked(true);
+            userDetails.setAccountNonExpired(true);
+            userDetails.setEnabled(true);
 
             Optional<UserCredentialsDao> userCredentials = userCredentialsRepository.findByUsername(user.getUsername());
 
             if (userCredentials.isPresent()) {
 
                 userDetails.setPassword(userCredentials.get().getPassword());
+                userDetails.setCredentialsNonExpired(true);
 
                 return userDetails;
             }
@@ -56,6 +61,7 @@ public class UserService implements UserDetailsService {
             throw new SecurityException("User not found!");
     }
 
+    @Log
     public UserDao createUser(UserDto userDto) throws UserAlreadyExistsException {
 
         Optional<UserDao> byUsername = userRepository.findByUsername(userDto.getUsername());
@@ -68,6 +74,7 @@ public class UserService implements UserDetailsService {
         return saveUser(userDto);
     }
 
+    @Log
     public UserDao updateUser(UserDto userDto) throws UserNotFoundException {
 
         updateUserCredentials(userDto);
@@ -75,6 +82,7 @@ public class UserService implements UserDetailsService {
         return updateUserInfo(userDto);
     }
 
+    @Log
     public void deleteUser(UserDto userDto) throws UserNotFoundException {
 
         Optional<UserDao> byUsername = userRepository.findByUsername(userDto.getUsername());
@@ -88,6 +96,7 @@ public class UserService implements UserDetailsService {
             throw new UserNotFoundException(USER_NOT_EXISTS);
     }
 
+    @Log
     public UserDao getUserByUsername(String username) throws UserNotFoundException {
 
         Optional<UserDao> byUsername = userRepository.findByUsername(username);
@@ -98,6 +107,7 @@ public class UserService implements UserDetailsService {
             throw new UserNotFoundException(USER_NOT_EXISTS);
     }
 
+    @Log
     public UserCredentialsDao getCredentialsByUsername(String username) throws UserNotFoundException {
 
         Optional<UserCredentialsDao> byUsername = userCredentialsRepository.findByUsername(username);
@@ -108,16 +118,18 @@ public class UserService implements UserDetailsService {
             throw new UserNotFoundException(USER_NOT_EXISTS);
     }
 
+    @Log
     private void saveUserCredentials(UserDto userDto) {
 
         UserCredentialsDao userCredentials = new UserCredentialsDao();
         userCredentials.setUsername(userDto.getUsername());
-        userCredentials.setPassword(userDto.getPassword());
+        userCredentials.setPassword(encoder.encode(userDto.getPassword()));
         userCredentials.setRole(userDto.getRole());
 
         userCredentialsRepository.save(userCredentials);
     }
 
+    @Log
     private UserDao saveUser(UserDto userDto) {
 
         UserDao userDao = new UserDao();
@@ -129,6 +141,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(userDao);
     }
 
+    @Log
     private UserDao updateUserInfo(UserDto userDto) throws UserNotFoundException {
 
         Optional<UserDao> byUsername = userRepository.findByUsername(userDto.getUsername());
@@ -147,6 +160,7 @@ public class UserService implements UserDetailsService {
             throw new UserNotFoundException(USER_NOT_EXISTS);
     }
 
+    @Log
     private void updateUserCredentials(UserDto userDto) throws UserNotFoundException {
 
         Optional<UserCredentialsDao> userCredentials = userCredentialsRepository.findByUsername(userDto.getUsername());

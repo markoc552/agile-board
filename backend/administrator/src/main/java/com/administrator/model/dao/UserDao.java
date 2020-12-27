@@ -27,4 +27,14 @@ public class UserDao implements Serializable {
     @NotNull
     @Email
     private String email;
+
+    public String toString() {
+        return "UserDao{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

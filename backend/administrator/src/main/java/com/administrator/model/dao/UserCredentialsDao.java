@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import java.io.*;
 
 @Entity
-@Table(name = "user-credentials")
+@Table(name = "user_credentials")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,4 +24,13 @@ public class UserCredentialsDao implements Serializable {
     private String password;
     @NotNull
     private String role;
+
+    public String toString() {
+        return "UserCredentialsDao{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
