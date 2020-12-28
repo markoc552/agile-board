@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +17,7 @@ import java.io.*;
 public class UserDao implements Serializable {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
@@ -27,6 +29,10 @@ public class UserDao implements Serializable {
     @NotNull
     @Email
     private String email;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "credential_id", referencedColumnName = "id")
+    private UserCredentialsDao credentials;
 
     public String toString() {
         return "UserDao{" +

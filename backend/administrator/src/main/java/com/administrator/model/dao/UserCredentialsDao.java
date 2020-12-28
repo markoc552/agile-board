@@ -16,6 +16,7 @@ import java.io.*;
 public class UserCredentialsDao implements Serializable {
 
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
@@ -24,6 +25,9 @@ public class UserCredentialsDao implements Serializable {
     private String password;
     @NotNull
     private String role;
+
+    @OneToOne(mappedBy = "credentials", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private UserDao user;
 
     public String toString() {
         return "UserCredentialsDao{" +

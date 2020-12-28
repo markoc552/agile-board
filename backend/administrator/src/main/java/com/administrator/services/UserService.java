@@ -24,7 +24,8 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserCredentialsRepository userCredentialsRepository;
 
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
 
     @Log
@@ -39,20 +40,13 @@ public class UserService implements UserDetailsService {
 
             UserDao user = userDao.get();
 
-            CustomUserDetails userDetails = new CustomUserDetails();
-            userDetails.setUsername(user.getUsername());
-            userDetails.setAccountNonLocked(true);
-            userDetails.setAccountNonExpired(true);
-            userDetails.setEnabled(true);
-
             Optional<UserCredentialsDao> userCredentials = userCredentialsRepository.findByUsername(user.getUsername());
 
             if (userCredentials.isPresent()) {
 
-                userDetails.setPassword(userCredentials.get().getPassword());
-                userDetails.setCredentialsNonExpired(true);
+                user.setCredentials(userCredentials.get());
 
-                return userDetails;
+                return new CustomUserDetails(user);
             }
 
             return null;

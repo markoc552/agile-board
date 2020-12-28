@@ -34,9 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailsService userService;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder amb) throws Exception {
         amb.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
     }
@@ -47,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/v1/user/createUser", "/v1/jwt/authenticate").permitAll()
+        http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser").permitAll()
+                   .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)
                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -59,17 +57,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-    @Bean()
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     public UsernamePasswordAuthenticationFilter getAuthenticationFilter() throws Exception {
 
-        AuthenticationFilter filter = new AuthenticationFilter();
-        filter.setAuthenticationManager(authenticationManagerBean());
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter();
 
-        filter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler() {
+        authenticationFilter.setAuthenticationManager(authenticationManagerBean());
+
+        authenticationFilter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler() {
 
             @Override
             public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
@@ -80,6 +79,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         });
 
-        return filter;
+        return authenticationFilter;
     }
 }
