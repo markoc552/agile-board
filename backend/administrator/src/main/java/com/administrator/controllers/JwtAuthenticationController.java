@@ -2,15 +2,16 @@ package com.administrator.controllers;
 
 
 import com.administrator.config.*;
-import com.administrator.exceptions.*;
 import com.administrator.model.dto.*;
 import com.administrator.services.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.security.access.prepost.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.*;
+import javax.validation.constraints.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -27,10 +28,7 @@ public class JwtAuthenticationController {
     private JwtToken jwtToken;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<Object> generateJwtToken(@RequestBody JwtRequest jwtRequest) throws JwtAuthenticationException {
-
-        if (jwtRequest == null)
-            throw new JwtAuthenticationException("Jwt request can't be null!");
+    public ResponseEntity<Object> generateJwtToken(@Valid @NotNull(message = "Jwt request can't be null!") @RequestBody JwtRequest jwtRequest) {
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword()));
 

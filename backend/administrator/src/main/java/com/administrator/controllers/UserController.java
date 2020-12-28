@@ -7,11 +7,16 @@ import com.administrator.model.dto.*;
 import com.administrator.services.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.*;
+import javax.validation.constraints.*;
 
 import static com.administrator.util.AgileAdminConstants.*;
 
 @RestController
+@Validated
 @CrossOrigin(origins = "*")
 @RequestMapping("/v1/user")
 public class UserController {
@@ -20,10 +25,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/createUser")
-    public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) throws RequestException, UserAlreadyExistsException {
-
-        if (userDto == null)
-            throw new RequestException(USER_CAN_T_BE_NULL);
+    public ResponseEntity<Object> createUser(@Valid @NotNull(message = USER_CAN_T_BE_NULL) @RequestBody UserDto userDto) throws UserAlreadyExistsException {
 
         UserDao userDao = userService.createUser(userDto);
 
@@ -31,10 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/updateUser")
-    public ResponseEntity<Object> updateUser(@RequestBody UserDto userDto) throws RequestException, UserNotFoundException {
-
-        if (userDto == null)
-            throw new RequestException(USER_CAN_T_BE_NULL);
+    public ResponseEntity<Object> updateUser(@Valid @NotNull(message = USER_CAN_T_BE_NULL) @RequestBody UserDto userDto) throws UserNotFoundException {
 
         UserDao userDao = userService.updateUser(userDto);
 
@@ -42,10 +41,7 @@ public class UserController {
     }
 
     @PostMapping("/deleteUser")
-    public ResponseEntity<Object> deleteUser(@RequestBody UserDto userDto) throws RequestException, UserNotFoundException {
-
-        if (userDto == null)
-            throw new RequestException(USER_CAN_T_BE_NULL);
+    public ResponseEntity<Object> deleteUser(@Valid @NotNull(message = USER_CAN_T_BE_NULL) @RequestBody UserDto userDto) throws UserNotFoundException {
 
         userService.deleteUser(userDto);
 
@@ -53,10 +49,7 @@ public class UserController {
     }
 
     @GetMapping("/getUser")
-    public ResponseEntity<Object> getUser(@RequestParam(name = "username") String username) throws RequestException, UserNotFoundException {
-
-        if (username == null)
-            throw new RequestException(USERNAME_CAN_T_BE_NULL);
+    public ResponseEntity<Object> getUser(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username) throws UserNotFoundException {
 
         UserDao user = userService.getUserByUsername(username);
 
@@ -64,10 +57,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserCredentials")
-    public ResponseEntity<Object> getUserCredentials(@RequestParam(name = "username") String username) throws RequestException, UserNotFoundException {
-
-        if (username == null)
-            throw new RequestException(USERNAME_CAN_T_BE_NULL);
+    public ResponseEntity<Object> getUserCredentials(@NotNull(message = USERNAME_CAN_T_BE_NULL) @RequestParam(name = "username") String username) throws UserNotFoundException {
 
         UserCredentialsDao credentials = userService.getCredentialsByUsername(username);
 
@@ -75,10 +65,8 @@ public class UserController {
     }
 
     @GetMapping("/changeRole")
-    public ResponseEntity<Object> changeRole(@RequestParam(name = "username") String username, @RequestParam(name = "role") String role) throws RequestException, UserNotFoundException {
-
-        if (role == null || username == null)
-            throw new RequestException("Username or role can't be null!");
+    public ResponseEntity<Object> changeRole(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username,
+                                             @NotNull(message = "Role can't be null") @RequestParam(name = "role") String role) throws UserNotFoundException {
 
         UserCredentialsDao credentials = userService.changeRole(username, role);
 

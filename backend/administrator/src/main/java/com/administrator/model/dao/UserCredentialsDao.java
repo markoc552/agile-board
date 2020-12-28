@@ -19,11 +19,11 @@ public class UserCredentialsDao implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotNull(message = "Username can't be null!")
     private String username;
-    @NotNull
+    @NotNull(message = "Password can't be null!")
     private String password;
-    @NotNull
+    @NotNull(message = "Role can't be null!")
     private String role;
 
     @OneToOne(mappedBy = "credentials", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)

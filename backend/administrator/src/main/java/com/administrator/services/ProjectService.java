@@ -88,4 +88,16 @@ public class ProjectService {
         else
             throw new ProjectNotFoundException();
     }
+
+    @Log
+    public List<ProjectDao> getProjectsByManager(String manager) throws ProjectNotFoundException {
+
+        Optional<List<ProjectDao>> byManager = projectsRepository.findByManager(manager);
+
+        if (byManager.isPresent())
+            return byManager.get();
+
+        else
+            throw new ProjectNotFoundException();
+    }
 }

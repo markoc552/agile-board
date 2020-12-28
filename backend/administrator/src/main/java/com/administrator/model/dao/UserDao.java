@@ -20,14 +20,14 @@ public class UserDao implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotNull(message = "Username is mandatory!")
     private String username;
-    @NotNull
+    @NotNull(message = "Firstname is mandatory!")
     private String firstname;
-    @NotNull
+    @NotNull(message = "Lastname is mandatory!")
     private String lastname;
-    @NotNull
-    @Email
+    @NotNull(message = "Email is mandatory!")
+    @Email(message = "Email is not properly formatted!")
     private String email;
 
     @OneToOne(fetch = FetchType.EAGER)

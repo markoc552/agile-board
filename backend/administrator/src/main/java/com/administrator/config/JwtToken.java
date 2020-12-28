@@ -2,6 +2,7 @@ package com.administrator.config;
 
 import com.administrator.exceptions.*;
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.*;
@@ -13,9 +14,8 @@ import java.util.*;
 @Component
 public class JwtToken implements Serializable {
 
-    public static final long TOKEN_EXPIRATION_TIME = 10L * 60L * 60L * 1000L;
-
-    private String secret = "test123";
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     public String generateToken(UserDetails userDetails) {
 
@@ -24,12 +24,14 @@ public class JwtToken implements Serializable {
         return Jwts.builder().setClaims(claims)
                              .setSubject(userDetails.getUsername())
                              .setIssuedAt(new Date(System.currentTimeMillis()))
-                             .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))
-                             .signWith(SignatureAlgorithm.HS256, secret)
+                             .setExpiration(new Date(System.currentTimeMillis() + applicationProperties.getTokenExpiration()))
+                             .signWith(SignatureAlgorithm.HS256, applicationProperties.getJwtSecret())
                              .compact();
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
+
+        String secret = applicationProperties.getJwtSecret();
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 
@@ -44,6 +46,8 @@ public class JwtToken implements Serializable {
     }
 
     public String getUsernameFromToken(String token) throws JwtAuthenticationException {
+
+        String secret = applicationProperties.getJwtSecret();
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 

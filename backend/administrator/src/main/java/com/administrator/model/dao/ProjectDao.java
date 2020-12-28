@@ -19,10 +19,20 @@ public class ProjectDao implements Serializable {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotNull(message = "Project name is required!")
     private String name;
-    @NotNull
+    @NotNull(message = "Project's keyword is required!")
     private String keyword;
-    @NotNull
+    @NotNull(message = "Project needs to have a manager!")
     private String manager;
+
+    @Override
+    public String toString() {
+        return "ProjectDao{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", keyword='" + keyword + '\'' +
+                ", manager='" + manager + '\'' +
+                '}';
+    }
 }
