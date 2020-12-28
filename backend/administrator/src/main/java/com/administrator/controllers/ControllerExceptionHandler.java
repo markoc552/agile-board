@@ -14,7 +14,10 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = {UserNotFoundException.class, UserAlreadyExistsException.class})
+    @ExceptionHandler(value = { UserNotFoundException.class,
+                                UserAlreadyExistsException.class,
+                                ProjectAlreadyExistsException.class,
+                                ProjectNotFoundException.class })
     protected ResponseEntity<Object> handleUserException(Exception ex) {
 
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

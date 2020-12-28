@@ -3,6 +3,7 @@ package com.administrator.services;
 
 import com.administrator.aspects.*;
 import com.administrator.exceptions.*;
+import com.administrator.model.*;
 import com.administrator.model.dao.*;
 import com.administrator.model.dto.*;
 import com.administrator.repository.*;
@@ -110,6 +111,23 @@ public class UserService implements UserDetailsService {
             return byUsername.get();
         else
             throw new UserNotFoundException(USER_NOT_EXISTS);
+    }
+
+    @Log
+    public UserCredentialsDao changeRole(String username, String role) throws UserNotFoundException {
+
+        Optional<UserCredentialsDao> byUsername = userCredentialsRepository.findByUsername(username);
+
+        if (byUsername.isPresent()) {
+
+            UserCredentialsDao credentials = byUsername.get();
+
+            credentials.setRole(role);
+
+            return userCredentialsRepository.save(credentials);
+        }
+
+        throw new UserNotFoundException(USER_NOT_EXISTS);
     }
 
     @Log

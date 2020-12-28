@@ -73,4 +73,15 @@ public class UserController {
 
         return ResponseEntity.ok(credentials);
     }
+
+    @GetMapping("/changeRole")
+    public ResponseEntity<Object> changeRole(@RequestParam(name = "username") String username, @RequestParam(name = "role") String role) throws RequestException, UserNotFoundException {
+
+        if (role == null || username == null)
+            throw new RequestException("Username or role can't be null!");
+
+        UserCredentialsDao credentials = userService.changeRole(username, role);
+
+        return ResponseEntity.ok(credentials);
+    }
 }
