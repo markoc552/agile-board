@@ -12,5 +12,5 @@ import org.springframework.context.annotation.*;
 public class ApplicationProperties {
 
     private String jwtSecret;
-    private long tokenExpiration;
+    private String tokenExpiration;
 }

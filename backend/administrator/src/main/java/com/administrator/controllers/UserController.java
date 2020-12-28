@@ -66,7 +66,7 @@ public class UserController {
 
     @GetMapping("/changeRole")
     public ResponseEntity<Object> changeRole(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username,
-                                             @NotNull(message = "Role can't be null") @RequestParam(name = "role") String role) throws UserNotFoundException {
+                                             @NotNull(message = ROLE_CAN_T_BE_NULL) @RequestParam(name = "role") String role) throws UserNotFoundException {
 
         UserCredentialsDao credentials = userService.changeRole(username, role);
 

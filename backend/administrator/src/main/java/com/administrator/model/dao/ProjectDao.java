@@ -1,6 +1,7 @@
 package com.administrator.model.dao;
 
 
+import com.administrator.util.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class ProjectDao implements Serializable {
     private Long id;
     @NotNull(message = "Project name is required!")
     private String name;
+    @Keyword
     @NotNull(message = "Project's keyword is required!")
     private String keyword;
     @NotNull(message = "Project needs to have a manager!")

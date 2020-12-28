@@ -24,7 +24,7 @@ public class JwtToken implements Serializable {
         return Jwts.builder().setClaims(claims)
                              .setSubject(userDetails.getUsername())
                              .setIssuedAt(new Date(System.currentTimeMillis()))
-                             .setExpiration(new Date(System.currentTimeMillis() + applicationProperties.getTokenExpiration()))
+                             .setExpiration(new Date(System.currentTimeMillis() + Long.getLong(applicationProperties.getTokenExpiration())))
                              .signWith(SignatureAlgorithm.HS256, applicationProperties.getJwtSecret())
                              .compact();
     }
