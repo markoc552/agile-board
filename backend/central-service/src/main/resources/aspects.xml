@@ -8,5 +8,4 @@
     <aspects>
         <aspect name="agile.central.aspects.LoggingAspect" />
     </aspects>
-
 </aspectj>

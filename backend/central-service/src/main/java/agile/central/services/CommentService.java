@@ -35,7 +35,7 @@ public class CommentService {
         CommentDao commentDao = new CommentDao();
 
         commentDao.setTaskNumber(comment.getTaskNumber());
-        commentDao.setContent(comment.getContent());
+        commentDao.setContent(content);
         commentDao.setPublisher(comment.getPublisher());
         commentDao.setPublishTime(new Date(Timestamp.valueOf(LocalDateTime.now()).getTime()));
 
@@ -53,7 +53,7 @@ public class CommentService {
 
             CommentDao commentDao = byContent.get();
 
-            commentDao.setContent(comment.getContent());
+            commentDao.setContent(content);
 
             return commentsRepository.save(commentDao);
 

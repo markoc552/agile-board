@@ -31,13 +31,7 @@ public class TaskService {
         if (byName.isPresent())
             throw new TaskAlreadyExistsException(TASK_ALREADY_EXISTS);
 
-        TaskDao taskDao = new TaskDao();
-
-        taskDao.setName(task.getName());
-        taskDao.setKeyword(task.getKeyword());
-        taskDao.setPriority(task.getPriority());
-        taskDao.setAssignee(task.getAssignee());
-        taskDao.setDescription(task.getDescription());
+        TaskDao taskDao = parseTask(task);
 
         return taskRepository.save(taskDao);
     }
@@ -53,7 +47,7 @@ public class TaskService {
 
             TaskDao taskDao = byName.get();
 
-            taskDao.setName(task.getName());
+            taskDao.setName(taskName);
             taskDao.setKeyword(task.getKeyword());
             taskDao.setPriority(task.getPriority());
             taskDao.setAssignee(task.getAssignee());
@@ -103,5 +97,40 @@ public class TaskService {
 
         else
             throw new TaskNotFoundException();
+    }
+
+    @Log
+    public TaskDao addSubtask(String taskNumber, TaskDto task) throws TaskNotFoundException {
+
+        Optional<TaskDao> byNumber = taskRepository.findByNumber(taskNumber);
+
+        if (byNumber.isPresent()) {
+
+            TaskDao mainTask = byNumber.get();
+
+            List<TaskDao> subTasks = mainTask.getSubTasks();
+
+            TaskDao newSubtask = parseTask(task);
+
+            subTasks.add(newSubtask);
+
+            return taskRepository.save(mainTask);
+
+        } else
+            throw new TaskNotFoundException();
+    }
+
+    @Log
+    private TaskDao parseTask(TaskDto task) {
+
+        TaskDao taskDao = new TaskDao();
+
+        taskDao.setName(task.getName());
+        taskDao.setKeyword(task.getKeyword());
+        taskDao.setPriority(task.getPriority());
+        taskDao.setAssignee(task.getAssignee());
+        taskDao.setDescription(task.getDescription());
+
+        return taskDao;
     }
 }

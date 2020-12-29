@@ -63,6 +63,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/ComponentController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/JwtAuthenticationController.java">
           <value>
             <set />
@@ -78,12 +83,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/ComponentDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/TaskDao.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dto/CommentDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dto/ComponentDto.java">
           <value>
             <set />
           </value>
@@ -98,12 +113,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/ComponentRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/TaskRepository.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/CommentService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/CommentServiceOps.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/ComponentService.java">
           <value>
             <set />
           </value>
