@@ -14,4 +14,5 @@ public class CentralConstants {
     public static final String COMMENT_ALREADY_EXISTS = "Comment already exists!";
     public static final String COMPONENT_ALREADY_EXISTS = "Component already exists!";
     public static final String COMPONENT_DOES_NOT_EXISTS = "Component doesn't exists!";
+    public static final String AES_ALGORITHM = "AES/GCM/NoPadding";
 }

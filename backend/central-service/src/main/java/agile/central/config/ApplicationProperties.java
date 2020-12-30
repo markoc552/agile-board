@@ -13,4 +13,6 @@ public class ApplicationProperties {
 
     private String jwtSecret;
     private String tokenExpiration;
+    private String attachmentFolder;
+    private String encryptionKey;
 }
