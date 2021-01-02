@@ -1,23 +1,20 @@
-package agile.central.config;
+package agile.pdf.config;
 
-import agile.central.exceptions.*;
+import agile.pdf.exceptions.*;
 import lombok.*;
 import org.javatuples.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.*;
 import org.springframework.stereotype.*;
-import org.springframework.web.client.*;
 import org.springframework.web.filter.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-
-import static agile.central.util.RestTemplateUtils.fetchUserDetails;
+import static agile.pdf.util.RestTemplateUtils.fetchUserDetails;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -66,6 +63,4 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
         return new Pair<>(null, null);
     }
-
-
 }

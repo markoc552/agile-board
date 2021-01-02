@@ -19,7 +19,6 @@
         <module>administrator-service</module>
         <module>central-service</module>
         <module>pdf-service</module>
-        <module>agile-library</module>
     </modules>
 
 	<pluginRepositories>

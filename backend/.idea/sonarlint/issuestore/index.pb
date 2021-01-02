@@ -7,3 +7,23 @@ C
 pdf-service/pom.xml,3/7/37e9a40bb320a1bd22fdb3d98a1f7c37347457be
 M
 administrator-service/pom.xml,2/7/279ed1653f3a843b74ab498c13e0d28f0d254d2d
+x
+Hcentral-service/src/main/java/agile/central/services/CommentService.java,f/c/fcaf5f0c98b04a33157c40c7fb1563e4b8c6f01d
+Å
+Qcentral-service/src/main/java/agile/central/controllers/AttachmentController.java,7/3/732a3969a41ed0b7e8870f74524351a957be38be
+{
+Kcentral-service/src/main/java/agile/central/services/AttachmentService.java,8/9/8936717561133fd49b7c0aa11c573e202c24e367
+á
+Wcentral-service/src/main/java/agile/central/controllers/ControllerExceptionHandler.java,a/a/aa17780f4cd094f87565fe4e7d6e33cbd789f2fc
+~
+Ncentral-service/src/main/java/agile/central/controllers/CommentController.java,b/f/bfb5e652b9214e7693e54c142ae4637ded43a668
+u
+Ecentral-service/src/main/java/agile/central/services/TaskService.java,4/f/4f4c24b0643d5eb4b20d01a0ed50f08d8689e37d
+Ç
+Radministrator-service/src/main/java/com/administrator/services/ProjectService.java,b/4/b44bb53f9cf1dda8d5b0fe911860010462016eb9
+z
+Jcentral-service/src/main/java/agile/central/services/ComponentService.java,8/b/8b94ba940d5df07ab7b0d575a876ccb859bd9eb0
+
+Oadministrator-service/src/main/java/com/administrator/services/UserService.java,1/1/11db821f20bc1b2d46f27f556788e018a573cb89
+s
+Ccentral-service/src/main/java/agile/central/config/RedisConfig.java,3/7/372bc131a93b9ae81454dfa265312091aebbe8d7

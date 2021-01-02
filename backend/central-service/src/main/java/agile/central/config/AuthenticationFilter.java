@@ -17,8 +17,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-
-
         return super.attemptAuthentication(request, response);
 
     }

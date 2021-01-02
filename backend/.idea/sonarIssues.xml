@@ -53,12 +53,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/AuthenticationFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/JwtRequestFilter.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/JwtToken.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/RedisConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/SecurityConfig.java">
           <value>
             <set />
           </value>
@@ -79,6 +94,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/ComponentController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/ControllerExceptionHandler.java">
           <value>
             <set />
           </value>
@@ -193,6 +213,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/util/LengthNotNull.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/util/LengthValidator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/util/RestTemplateUtils.java">
           <value>
             <set />
@@ -213,7 +243,67 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/config/ApplicationProperties.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/config/AuthenticationFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/config/JwtRequestFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/config/JwtToken.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/config/SecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/controller/PdfCreationController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/exceptions/PdfException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/model/PdfRequest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/model/Task.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/service/PdfCreationService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdf/util/RestTemplateUtils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/pdf-service/src/main/java/agile/pdfservice/PdfServiceApplication.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/pdf-service/src/main/resources/application.yml">
           <value>
             <set />
           </value>

@@ -21,7 +21,7 @@ import java.util.*;
 public class AttachmentService {
 
     @Autowired
-    private FileHashRepository fileHashRepository;
+    private FileRepository fileRepository;
 
     @Autowired
     private ApplicationProperties applicationProperties;
@@ -53,13 +53,13 @@ public class AttachmentService {
 
         String encodedFilename = Base64.toBase64String(fileName.getBytes());
 
-        Optional<FileHashDao> byFilename = fileHashRepository.findByFilename(encodedFilename);
+        Optional<FileDao> byFilename = fileRepository.findByFilename(encodedFilename);
 
         if (byFilename.isPresent()) {
 
-            FileHashDao fileHashDao = byFilename.get();
+            FileDao fileDao = byFilename.get();
 
-            String encodedPath = fileHashDao.getPath();
+            String encodedPath = fileDao.getPath();
 
             String attachmentPath = Arrays.toString(Base64.decode(encodedPath));
 
@@ -80,11 +80,11 @@ public class AttachmentService {
 
         String encodedPath = Base64.toBase64String(pathAsString.getBytes());
 
-        FileHashDao fileHash = new FileHashDao();
-        fileHash.setFilename(filename);
-        fileHash.setPath(encodedPath);
+        FileDao file = new FileDao();
+        file.setFilename(filename);
+        file.setPath(encodedPath);
 
-        fileHashRepository.save(fileHash);
+        fileRepository.save(file);
     }
 
     @Log

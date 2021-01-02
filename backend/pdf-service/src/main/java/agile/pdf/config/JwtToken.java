@@ -1,6 +1,6 @@
-package agile.central.config;
+package agile.pdf.config;
 
-import agile.central.exceptions.*;
+import agile.pdf.exceptions.*;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.authentication.*;
