@@ -14,7 +14,6 @@ import java.sql.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@RedisHash("FileHash")
 public class FileDao implements Serializable {
 
     private String filename;

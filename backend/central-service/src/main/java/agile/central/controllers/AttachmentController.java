@@ -29,22 +29,22 @@ public class AttachmentController {
     AttachmentService attachmentService;
 
 
-    @PostMapping("/uploadAttachment")
-    public ResponseEntity<Object> uploadAttachment(@Valid @LengthNotNull @RequestBody MultipartFile file) throws IOException {
+    @PostMapping("/uploadAttachment/${ticket}")
+    public ResponseEntity<Object> uploadAttachment(@Valid @LengthNotNull @RequestBody MultipartFile file, @NotNull @PathVariable String ticket) throws IOException {
 
         byte[] bytes = file.getBytes();
 
         String filename = file.getOriginalFilename();
 
-        attachmentService.uploadAttachment(bytes, Objects.requireNonNull(filename));
+        attachmentService.uploadAttachment(bytes, Objects.requireNonNull(filename), ticket);
 
         return ResponseEntity.ok(filename);
     }
 
     @GetMapping("/downloadAttachment")
-    public ResponseEntity<Object> downloadAttachment(@NotNull @RequestParam(name = "filename") String filename) throws IOException, StorageException {
+    public ResponseEntity<Object> downloadAttachment(@NotNull @RequestParam(name = "filename") String filename, @NotNull @RequestParam(name = "ticket") String ticket) throws IOException, StorageException {
 
-        byte[] attachment = attachmentService.downloadAttachment(filename);
+        byte[] attachment = attachmentService.downloadAttachment(filename, ticket);
 
         return ResponseEntity.ok(attachment);
     }
