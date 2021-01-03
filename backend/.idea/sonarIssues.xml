@@ -23,6 +23,71 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/JwtRequestFilter.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/JwtToken.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/controllers/ControllerExceptionHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/controllers/JwtAuthenticationController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/controllers/ProjectsController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/controllers/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/model/CustomUserDetails.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/model/dao/ProjectDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/repository/ProjectsRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/repository/UserCredentialsRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/services/ProjectService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/services/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/java/com/administrator/controllers/UserController.java">
           <value>
             <set />
