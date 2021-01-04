@@ -4,18 +4,20 @@ import { Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard"
+import { IntlProvider } from "react-intl";
+
 
 
 const App = (props) => {
   return (
-    <div>
+    <IntlProvider>
       <Router history={history}>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/dashboard" exact component={Dashboard} />
         </Switch>
       </Router>
-    </div>
+    </IntlProvider>
   );
 };
 

@@ -33,6 +33,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/SecurityConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/controllers/ControllerExceptionHandler.java">
           <value>
             <set />
@@ -99,6 +104,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/java/com/administrator/util/AdministratorConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/resources/application.yml">
           <value>
             <set />
           </value>

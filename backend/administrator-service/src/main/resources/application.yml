@@ -22,4 +22,4 @@ logging:
 
 application:
   jwt-secret: ${JWT_SERCRET:secret123}
-  token-expiration: ${TOKEN_EXPIRATION:36,000,000L}
+  token-expiration: "36000000"

@@ -278,8 +278,8 @@ export const DashboardNavHeadline = styled.div`
 
 export const DashboardNavItem = styled.div`
   padding: 10px;
-  font-family: "Russo One", sans-serif;
-  color: black;
+  font-family: "Roboto", sans-serif;
+  color: #253858;
   font-size: 15px;
   cursor: default;
   margin: 5px auto;
@@ -294,7 +294,7 @@ export const DashboardNavItem = styled.div`
 `;
 
 export const DashboardHeadline = styled.div`
-  font-family: "Russo One", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 15px;
   margin: 12px 20px;
 `;
@@ -321,7 +321,7 @@ export const Headline = styled.div`
   color: #253858;
   font-weight: bold;
   font-size: 25px;
-  cursor: pointer;
+  cursor: default;
 `;
 
 export const SystemDashboardContentWrapper = styled.div`
@@ -395,7 +395,7 @@ export const TimeWidget = styled.div`
 export const ProjectNavigationItem = styled.div`
   padding: 15px;
   margin: 10px 40px;
-  font-family: "Libre Baskerville", serif;
+  font-family: "Roboto", sans-serif;
   cursor: pointer;
   width: 11vw;
   transition: 0.5s;
@@ -403,5 +403,65 @@ export const ProjectNavigationItem = styled.div`
 
   &:hover {
     background-color: #abb2c2;
+  }
+`;
+
+export const RegisterLoginWrapper = styled.div`
+  margin-top: 20vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 22vw;
+  height: 47vh;
+  background-color: white;
+  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const WidgetItem = styled.div`
+  margin: 0 auto;
+  width: 12vw;
+  height: 5vh;
+  color: #253858;
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  box-shadow: 1px 5px 10px -4px rgba(0, 0, 0, 0.07);
+  padding: 50px;
+  transition: 0.25s;
+  vertical-align: center;
+  cursor: default;
+
+  &:hover {
+    background-color: #fcfcfc;
+    color: #3396ff;
+    font-weight: bold;
+    border-left: 4px solid #3396ff;
+  }
+`;
+
+export const styledTable = styled.div`
+  padding: 45px;
+
+  table {
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    th,
+    td {
+      margin: 0;
+      padding: 0.5rem;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+
+      :last-child {
+        border-right: 0;
+      }
+    }
   }
 `;

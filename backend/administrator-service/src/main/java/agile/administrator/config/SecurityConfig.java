@@ -13,6 +13,7 @@ import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.web.authentication.*;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -22,7 +23,7 @@ import java.io.*;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer{
 
     @Autowired
     private AuthenticationEndpoint authenticationEndpoint;
@@ -39,9 +40,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedMethods("*");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.cors();
         http.csrf().disable();
 
         http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser").permitAll()
