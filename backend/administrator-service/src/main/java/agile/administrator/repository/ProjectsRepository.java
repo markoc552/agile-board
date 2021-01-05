@@ -13,4 +13,7 @@ public interface ProjectsRepository extends JpaRepository<ProjectDao, Long> {
     Optional<ProjectDao> findByName(String name);
 
     Optional<List<ProjectDao>> findByManager(String manager);
+
+    @Override
+    List<ProjectDao> findAll();
 }

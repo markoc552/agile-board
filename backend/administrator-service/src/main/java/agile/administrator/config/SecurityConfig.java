@@ -49,12 +49,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser").permitAll()
+/*        http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser").permitAll()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)
                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);*/
     }
 
     @Bean(name = BeanIds.AUTHENTICATION_MANAGER)

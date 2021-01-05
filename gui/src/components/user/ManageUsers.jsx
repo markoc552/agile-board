@@ -9,10 +9,12 @@ import {
 import { Search, Button, Icon, Divider } from "semantic-ui-react";
 import NewUser from "./NewUser";
 import UpdateUsers from "./UpdateUsers";
+import "../../style.css";
 
 const ManageUsers = (props) => {
   const [show, setShow] = useState(false);
-  const [showPage, setShowPage] = useState("updateUsers");
+  const [showPage, setShowPage] = useState("newUser");
+  const [selected, setSelected] = useState("newUser");
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -28,14 +30,23 @@ const ManageUsers = (props) => {
           }}
         >
           <div style={{ marginTop: "5vh", backgroundColor: "#fcfcfc" }}></div>
-          <WidgetItem onClick={() => setShowPage("newUser")}>
+          <WidgetItem
+            className={selected === "newUser" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("newUser");
+              setSelected("newUser");
+            }}
+          >
             <Icon name="user plus" color="blue" size="large" /> New user
           </WidgetItem>
-          <WidgetItem onClick={() => setShowPage("updateUsers")}>
+          <WidgetItem
+            className={selected === "updateUser" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("updateUsers");
+              setSelected("updateUser");
+            }}
+          >
             <Icon name="users" color="blue" size="large" /> Update users
-          </WidgetItem>
-          <WidgetItem onClick={() => setShowPage("deleteUser")}>
-            <Icon name="user times" color="blue" size="large" /> Delete user
           </WidgetItem>
         </div>
         {showPage === "newUser" ? (

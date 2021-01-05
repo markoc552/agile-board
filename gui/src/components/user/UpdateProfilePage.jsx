@@ -13,23 +13,15 @@ import {
   Image,
   Message,
   Divider,
-  Select
 } from "semantic-ui-react";
 import { Formik, Field, ErrorMessage } from "formik";
-import Axios from "axios";
-
-const roles = [
-  { value: "admin", text: "ADMIN" },
-  { value: "user", text: "USER" },
-];
 
 const NewUser = (props) => {
   const [submitting, isSubmitting] = useState(false);
-  const [successfull, setSuccesfull] = useState(false);
 
   return (
     <div>
-      <Headline>Register new user</Headline>
+      <Headline>Update profile</Headline>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ padding: "50px" }}>
           <Formik
@@ -48,18 +40,8 @@ const NewUser = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
-              setTimeout(() => {
-                Axios.post(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
-                  { ...values }
-                )
-                  .then((res) => {
-                    setSubmitting(false);
-                    isSubmitting(false);
-                    setSuccesfull(true);
-                  })
-                  .catch((err) => console.log(err));
-              }, 2000);
+              setSubmitting(false);
+              isSubmitting(false);
             }}
           >
             {({
@@ -70,7 +52,7 @@ const NewUser = (props) => {
               handleBlur,
               handleSubmit,
               isSubmitting,
-              setFieldValue
+              /* and other goodies */
             }) => (
               <Form
                 style={{
@@ -123,38 +105,24 @@ const NewUser = (props) => {
                   onBlur={handleBlur}
                   value={values.email}
                 />
-                <Select
-                  placeholder="Select role"
-                  name="role"
-                  onChange={(value) =>
-                    setFieldValue("role", value.target.innerText)
-                  }
-                  onBlur={handleBlur}
-                  options={roles}
-                />
                 <Button
                   type="submit"
                   color="blue"
                   style={{ marginTop: "25px" }}
                   disabled={isSubmitting}
-                  loading={submitting}
                 >
-                  Register
+                  Update
                 </Button>
               </Form>
             )}
           </Formik>
         </div>
-        {successfull && (
-          <Message color="green" style={{ width: "25vw", height: "10vh" }}>
-            <Message.Header>Successfull</Message.Header>
-            <p
-              style={{ fontSize: "15px", marginTop: "10px", color: "#253858" }}
-            >
-              User has been successfully created! Please authorize this user.
-            </p>
-          </Message>
-        )}
+        <Message color="green" style={{width: "25vw", height: "10vh"}}>
+          <Message.Header>Successfull</Message.Header>
+          <p style={{fontSize: "15px", marginTop: "10px", color: "#253858"}}>
+            Profile has been successfully updated!
+          </p>
+        </Message>
       </div>
     </div>
   );

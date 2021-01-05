@@ -5,6 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
+  StyledLabel,
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -13,44 +14,34 @@ import {
   Image,
   Message,
   Divider,
-  Select
+  Select,
 } from "semantic-ui-react";
 import { Formik, Field, ErrorMessage } from "formik";
-import Axios from "axios";
+import { callProjectService } from "../util/endpoints";
+import Axios from "axios"
 
-const roles = [
-  { value: "admin", text: "ADMIN" },
-  { value: "user", text: "USER" },
+const managerOptions = [
+  { value: "tests", text: "Test" },
+  { value: "oaksd", text: "Koko" },
 ];
 
-const NewUser = (props) => {
+const NewProject = (props) => {
   const [submitting, isSubmitting] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
 
   return (
     <div>
-      <Headline>Register new user</Headline>
+      <Headline>Create new project</Headline>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div style={{ padding: "50px" }}>
           <Formik
-            initialValues={{ email: "", password: "" }}
-            validate={(values) => {
-              const errors = {};
-              if (!values.email) {
-                errors.email = "Required";
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-              ) {
-                errors.email = "Invalid email address";
-              }
-              return errors;
-            }}
+            initialValues={{}}
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
               setTimeout(() => {
                 Axios.post(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
+                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/createProject`,
                   { ...values }
                 )
                   .then((res) => {
@@ -70,7 +61,8 @@ const NewUser = (props) => {
               handleBlur,
               handleSubmit,
               isSubmitting,
-              setFieldValue
+              setFieldValue,
+              /* and other goodies */
             }) => (
               <Form
                 style={{
@@ -82,55 +74,31 @@ const NewUser = (props) => {
                 onSubmit={handleSubmit}
                 size="large"
               >
+                <StyledLabel>Project name</StyledLabel>
                 <input
-                  style={{ margin: "10px 0" }}
-                  name="username"
-                  placeholder="Username"
+                  name="name"
+                  placeholder="Project name"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.username}
+                  value={values.name}
                 />
+                <StyledLabel>Keyword</StyledLabel>
                 <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
+                  name="keyword"
+                  placeholder="Keyword"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.password}
+                  value={values.keyword}
                 />
-                <input
-                  style={{ margin: "10px 0" }}
-                  name="firstname"
-                  placeholder="Firstname"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.firstname}
-                />
-                <input
-                  style={{ margin: "10px 0" }}
-                  name="lastname"
-                  placeholder="Lastname"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.lastname}
-                />
-                <input
-                  style={{ margin: "10px 0" }}
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.email}
-                />
+                <StyledLabel>Manager</StyledLabel>
                 <Select
-                  placeholder="Select role"
-                  name="role"
+                  placeholder="Select manager"
+                  name="manager"
                   onChange={(value) =>
-                    setFieldValue("role", value.target.innerText)
+                    setFieldValue("manager", value.target.innerText)
                   }
                   onBlur={handleBlur}
-                  options={roles}
+                  options={managerOptions}
                 />
                 <Button
                   type="submit"
@@ -139,7 +107,7 @@ const NewUser = (props) => {
                   disabled={isSubmitting}
                   loading={submitting}
                 >
-                  Register
+                  Create
                 </Button>
               </Form>
             )}
@@ -151,7 +119,7 @@ const NewUser = (props) => {
             <p
               style={{ fontSize: "15px", marginTop: "10px", color: "#253858" }}
             >
-              User has been successfully created! Please authorize this user.
+              Project has been successfully created!
             </p>
           </Message>
         )}
@@ -160,4 +128,4 @@ const NewUser = (props) => {
   );
 };
 
-export default NewUser;
+export default NewProject;

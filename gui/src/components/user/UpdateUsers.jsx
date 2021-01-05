@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Headline,
@@ -23,8 +23,18 @@ import {
   useAsyncDebounce,
 } from "react-table";
 import { FormattedMessage } from "react-intl";
+import Axios from "axios";
+import UserModal from "./UserModal";
+import UserCredentialsModal from "./UserCredentialsModal";
 
-const NewUser = (props) => {
+const UpdateUsers = (props) => {
+  const [dataToRender, setDataToRender] = useState([]);
+  const [selectedRowData, setRowData] = useState({});
+  const [show, setShow] = useState(false);
+  const [creating, setCreating] = useState();
+  const [successfull, setSuccesfull] = useState(false);
+  const [showCredentials, setShowCredentials] = useState(false);
+
   function GlobalFilter({
     preGlobalFilteredRows,
     globalFilter,
@@ -34,18 +44,18 @@ const NewUser = (props) => {
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((value) => {
       setGlobalFilter(value || undefined);
-      setLoading(false)
+      setLoading(false);
     }, 500);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     return (
       <Input
         loading={loading}
         placeholder="Search..."
-        style={{marginLeft: "2vw", width: "12vw"}}
+        style={{ marginLeft: "2vw", width: "12vw" }}
         value={value}
         onChange={(e) => {
-          setLoading(true)
+          setLoading(true);
           setValue(e.target.value);
           onChange(e.target.value);
         }}
@@ -53,24 +63,17 @@ const NewUser = (props) => {
     );
   }
 
-  const dataToFilter = [
-    {
-      username: "marko",
-      firstname: "marko2",
-      lastname: "marko3",
-      email: "marko@krko.ss",
-      role: "admin",
-    },
-    {
-      username: "test",
-      firstname: "marko2",
-      lastname: "marko3",
-      email: "marko@krko.ss",
-      role: "admin",
-    },
-  ];
+  useEffect(async () => {
+    const result = await Axios.get(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+    );
 
-  const data = useMemo(() => dataToFilter, []);
+    console.log(result.data);
+
+    setDataToRender(result.data);
+  }, []);
+
+  const data = useMemo(() => [...dataToRender], [dataToRender]);
 
   const columns = useMemo(
     () => [
@@ -111,18 +114,70 @@ const NewUser = (props) => {
         accessor: "actions",
         Cell: ({ row }) => (
           <div>
-            <Button basic color="green" size="mini">
-              <FormattedMessage
-                id="wault.actions.deposit"
-                defaultMessage="Update"
-              />
-            </Button>
-            <Button basic color="red" size="mini">
-              <FormattedMessage
-                id="wault.actions.withdraw"
-                defaultMessage="Delete"
-              />
-            </Button>
+            <Button.Group>
+              <Button
+                basic
+                color="green"
+                size="mini"
+                onClick={() => {
+                  setShow(true);
+                  setRowData(row.original);
+                }}
+              >
+                <FormattedMessage
+                  id="wault.actions.deposit"
+                  defaultMessage="Update"
+                />
+              </Button>
+              <Button
+                basic
+                color="green"
+                size="mini"
+                onClick={() => {
+                  setShowCredentials(true);
+                  setRowData(row.original);
+                }}
+              >
+                <FormattedMessage
+                  id="wault.actions.deposit"
+                  defaultMessage="Credentials"
+                />
+              </Button>
+              <Button
+                basic
+                color="red"
+                size="mini"
+                loading={creating}
+                onClick={() => {
+                  setCreating(true);
+
+                  console.log("Is submitting: ", creating);
+
+                  setTimeout(() => {
+                    Axios.post(
+                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/deleteUser`,
+                      { ...row.original }
+                    )
+                      .then(async (res) => {
+                        Axios.get(
+                          `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+                        )
+                          .then((res) => {
+                            setDataToRender(res.data);
+                            setCreating(false);
+                          })
+                          .catch((err) => console.log(err));
+                      })
+                      .catch((err) => console.log(err));
+                  }, 3000);
+                }}
+              >
+                <FormattedMessage
+                  id="wault.actions.withdraw"
+                  defaultMessage="Delete"
+                />
+              </Button>
+            </Button.Group>
           </div>
         ),
       },
@@ -198,8 +253,28 @@ const NewUser = (props) => {
           </tbody>
         </table>
       </styledTable>
+      {show && (
+        <UserModal
+          show={show}
+          setShow={setShow}
+          submitting={creating}
+          isSubmitting={setCreating}
+          selectedRow={selectedRowData}
+          setDataToRender={setDataToRender}
+        />
+      )}
+      {showCredentials && (
+        <UserCredentialsModal
+          show={showCredentials}
+          setShow={setShowCredentials}
+          submitting={creating}
+          isSubmitting={setCreating}
+          selectedRow={selectedRowData}
+          setDataToRender={setDataToRender}
+        />
+      )}
     </div>
   );
 };
 
-export default NewUser;
+export default UpdateUsers;

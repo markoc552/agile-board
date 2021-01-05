@@ -423,7 +423,6 @@ export const WidgetItem = styled.div`
   margin: 0 auto;
   width: 12vw;
   height: 5vh;
-  color: #253858;
   text-align: left;
   font-family: "Roboto", sans-serif;
   box-shadow: 1px 5px 10px -4px rgba(0, 0, 0, 0.07);
@@ -437,7 +436,24 @@ export const WidgetItem = styled.div`
     color: #3396ff;
     font-weight: bold;
     border-left: 4px solid #3396ff;
+    font-size: 12px;
   }
+`;
+
+export const StyledLabel = styled.div`
+  font-family: "Roboto", sans-serif;
+  color: #253858;
+  padding: 5px;
+  margin: 10px 0;
+`;
+
+export const StyledProfileLabel = styled.div`
+  font-family: "Roboto", sans-serif;
+  color: #253858;
+  padding: 15px;
+  margin: 2px 0;
+  font-size: 17px;
+  font-weight: bold;
 `;
 
 export const styledTable = styled.div`

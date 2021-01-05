@@ -4,52 +4,62 @@ import {
   Headline,
   DashboardNav as Navigation,
   ComponentWidget,
+  WidgetItem,
 } from "../util/AgileStyledComponents";
 import { Search, Button, Icon, Divider } from "semantic-ui-react";
+import NewProject from "./NewProject";
+import UpdateProjects from "./UpdateProjects";
+import "../../style.css";
 
-const ManageProjects = (props) => {
+const ManageUsers = (props) => {
   const [show, setShow] = useState(false);
+  const [showPage, setShowPage] = useState("newProject");
+  const [selected, setSelected] = useState("newProject");
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Headline style={{ width: "11vw", height: "2vh" }}>ManageProjects</Headline>
-      <ComponentWidget>
-        <Navigation
+      <Headline style={{ width: "20vw", height: "2vh" }}>Manage Projects</Headline>
+      <ComponentWidget style={{ flexDirection: "row" }}>
+        <div
           style={{
-            width: "70vw",
-            height: "8vh",
-            borderTopLeftRadius: "10px",
-            borderTopRightRadius: "10px",
-            boxShadow: "none",
-            borderBottom: "2px solid #cfcfcf",
-            padding: "5px",
+            display: "flex",
+            flexDirection: "column",
+            width: "12vw",
+            height: "36.5",
+            boxShadow: "4px 0px 10px -4px rgba(0,0,0,0.15)",
           }}
         >
-          <Headline
-            style={{ fontSize: "15px", margin: "auto auto", width: "12vw", padding: "2px", cursor: "default" }}
-          >
-            <Icon name="numbered list" size="large"></Icon>Active components: 2
-          </Headline>
-          <Search
-            style={{ padding: "4px", margin: "auto", marginLeft: "34vw" }}
-          />
-          <Icon
-            name="plus"
-            size="large"
-            circular
-            style={{
-              padding: "4px",
-              width: "7.5vw",
-              height: "4vh",
-              margin: "auto 10px",
-              cursor: "pointer",
+          <div style={{ marginTop: "5vh", backgroundColor: "#fcfcfc" }}></div>
+          <WidgetItem
+            className={selected === "newProject" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("newProject");
+              setSelected("newProject");
             }}
-            onClick={() => setShow(true)}
-          />
-        </Navigation>
+          >
+            <Icon name="plus circle" color="blue" size="large" /> New project
+          </WidgetItem>
+          <WidgetItem
+            className={selected === "updateProject" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("updateProjects");
+              setSelected("updateProject");
+            }}
+            style={{fontSize: "12px"}}
+          >
+            <Icon name="sitemap" color="blue" size="large" /> Update projects
+          </WidgetItem>
+        </div>
+        {showPage === "newProject" ? (
+          <NewProject />
+        ) : showPage === "updateProjects" ? (
+          <UpdateProjects />
+        ) : (
+          <div>Invalid</div>
+        )}
       </ComponentWidget>
     </div>
   );
 };
 
-export default ManageProjects;
+export default ManageUsers;

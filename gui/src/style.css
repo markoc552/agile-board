@@ -37,3 +37,12 @@
     font-size: 12px !important;
   }
 }
+
+.user-item {
+  background-color: #fcfcfc;
+  color: #3396ff;
+  font-weight: bold;
+  border-left: 4px solid #3396ff;
+  font-size: 12px;
+
+}

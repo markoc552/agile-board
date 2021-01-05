@@ -48,6 +48,15 @@ public class ProjectsController {
         return ResponseEntity.ok("Project successfully deleted");
     }
 
+    @GetMapping("/getAllProjects")
+    public ResponseEntity<Object> getProjects() {
+
+        List<ProjectDao> allProjects = projectService.getAllProjects();
+
+        return ResponseEntity.ok(allProjects);
+    }
+
+
     @GetMapping("/getProject")
     public ResponseEntity<Object> getProject(@NotNull(message = AdministratorConstants.PROJECT_NAME_CAN_T_BE_NULL) @RequestParam(name = "projectName") String projectName) throws ProjectNotFoundException {
 

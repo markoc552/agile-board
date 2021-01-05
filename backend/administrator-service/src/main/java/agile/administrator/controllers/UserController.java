@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.*;
 import javax.validation.constraints.*;
 
+import java.util.*;
+
 import static agile.administrator.util.AdministratorConstants.*;
 
 @RestController
@@ -57,6 +59,14 @@ public class UserController {
         CustomUserDetails userDetails = new CustomUserDetails(user);
 
         return ResponseEntity.ok(userDetails);
+    }
+
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<Object> getAllUsers() {
+
+        List<UserDao> allUsers = userService.getAllUsers();
+
+        return ResponseEntity.ok(allUsers);
     }
 
     @GetMapping("/getUserCredentials")

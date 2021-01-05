@@ -147,6 +147,21 @@ public class UserService implements UserDetailsService {
     }
 
     @Log
+    public List<UserDao> getAllUsers() {
+
+        List<UserDao> all = userRepository.findAll();
+
+        for(UserDao user : all) {
+
+            Optional<UserCredentialsDao> byUsername = userCredentialsRepository.findByUsername(user.getUsername());
+
+            byUsername.ifPresent(userCredentialsDao -> user.setRole(userCredentialsDao.getRole()));
+        }
+
+        return all;
+    }
+
+    @Log
     public UserCredentialsDao getCredentialsByUsername(String username) throws UserNotFoundException {
 
         Optional<UserCredentialsDao> byUsername = userCredentialsRepository.findByUsername(username);

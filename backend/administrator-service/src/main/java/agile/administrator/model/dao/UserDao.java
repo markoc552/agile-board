@@ -28,6 +28,7 @@ public class UserDao implements Serializable {
     @NotNull(message = "Email is mandatory!")
     @Email(message = "Email is not properly formatted!")
     private String email;
+    private String role;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")

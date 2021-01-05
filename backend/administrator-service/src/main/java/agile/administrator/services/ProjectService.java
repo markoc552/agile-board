@@ -58,7 +58,6 @@ public class ProjectService {
             throw new ProjectNotFoundException(AdministratorConstants.PROJECT_NOT_EXISTS);
     }
 
-    @Log
     public void deleteProject(ProjectDto project) throws ProjectNotFoundException {
 
         String projectName = project.getName();
@@ -84,6 +83,12 @@ public class ProjectService {
             return byName.get();
         else
             throw new ProjectNotFoundException();
+    }
+
+    @Log
+    public List<ProjectDao> getAllProjects() {
+
+        return projectsRepository.findAll();
     }
 
     @Log
