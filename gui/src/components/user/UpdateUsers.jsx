@@ -117,7 +117,7 @@ const UpdateUsers = (props) => {
             <Button.Group>
               <Button
                 basic
-                color="green"
+                color="blue"
                 size="mini"
                 onClick={() => {
                   setShow(true);
@@ -131,7 +131,7 @@ const UpdateUsers = (props) => {
               </Button>
               <Button
                 basic
-                color="green"
+                color="orange"
                 size="mini"
                 onClick={() => {
                   setShowCredentials(true);

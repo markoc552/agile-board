@@ -136,6 +136,18 @@ public class UserService implements UserDetailsService {
     }
 
     @Log
+    public List<ProjectDao> getProjectsByUser(String username) throws UserNotFoundException {
+
+        Optional<UserDao> byUsername = userRepository.findByUsername(username);
+
+        if(byUsername.isPresent())
+            return byUsername.get().getEnrolledProjects();
+
+        else
+            throw new UserNotFoundException();
+    }
+
+    @Log
     public UserDao getUserByUsername(String username) throws UserNotFoundException {
 
         Optional<UserDao> byUsername = userRepository.findByUsername(username);

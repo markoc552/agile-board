@@ -5,6 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
+  FormikWrapper
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -22,7 +23,7 @@ const NewUser = (props) => {
   return (
     <div>
       <Headline>Register new user</Headline>
-      <div style={{ paddingLeft: "55px" }}>
+      <FormikWrapper style={{ paddingLeft: "55px" }}>
         <Formik
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
@@ -110,7 +111,7 @@ const NewUser = (props) => {
             </Form>
           )}
         </Formik>
-      </div>
+      </FormikWrapper>
       <Divider style={{ marginLeft: "7vw", height: "35vh" }} vertical>
         And
       </Divider>

@@ -6,6 +6,7 @@ import {
   ComponentWidget,
   WidgetItem,
   StyledLabel,
+  FormikWrapper
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -33,7 +34,7 @@ const NewProject = (props) => {
     <div>
       <Headline>Create new project</Headline>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ padding: "50px" }}>
+        <FormikWrapper style={{ padding: "50px" }}>
           <Formik
             initialValues={{}}
             onSubmit={async (values, { setSubmitting }) => {
@@ -112,7 +113,7 @@ const NewProject = (props) => {
               </Form>
             )}
           </Formik>
-        </div>
+        </FormikWrapper>
         {successfull && (
           <Message color="green" style={{ width: "25vw", height: "10vh" }}>
             <Message.Header>Successfull</Message.Header>

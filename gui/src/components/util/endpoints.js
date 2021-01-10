@@ -15,20 +15,6 @@ export const getToken = async (credentials) => {
   return result;
 };
 
-export const callProjectService = async (values, endpoint) => {
-
-  const result = await
-
-  return result;
-};
-
-export const getProject = async (request, endpoint, param) => {
-
-  const result = await axios.post(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/${endpoint}`, {param: request});
-
-  return result;
-
-}
 
 export const getAllProjects = async () => {
 

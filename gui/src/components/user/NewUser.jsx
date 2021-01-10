@@ -5,6 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
+  FormikWrapper
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -31,7 +32,7 @@ const NewUser = (props) => {
     <div>
       <Headline>Register new user</Headline>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ padding: "50px" }}>
+        <FormikWrapper style={{ padding: "50px" }}>
           <Formik
             initialValues={{ email: "", password: "" }}
             validate={(values) => {
@@ -144,7 +145,7 @@ const NewUser = (props) => {
               </Form>
             )}
           </Formik>
-        </div>
+        </FormikWrapper>
         {successfull && (
           <Message color="green" style={{ width: "25vw", height: "10vh" }}>
             <Message.Header>Successfull</Message.Header>

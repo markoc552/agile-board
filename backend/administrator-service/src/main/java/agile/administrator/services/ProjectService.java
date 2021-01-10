@@ -18,6 +18,9 @@ public class ProjectService {
     @Autowired
     private ProjectsRepository projectsRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Log
     public ProjectDao createProject(ProjectDto project) throws ProjectAlreadyExistsException {
 
@@ -73,6 +76,44 @@ public class ProjectService {
         } else
             throw new ProjectNotFoundException(AdministratorConstants.PROJECT_NOT_EXISTS);
     }
+
+    @Log
+    public void assignUser(UserDto userDto, String projectName) throws ProjectNotFoundException {
+
+        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
+
+        Optional<UserDao> byUsername = userRepository.findByUsername(userDto.getUsername());
+
+        if (byName.isPresent()) {
+
+            ProjectDao projectDao = byName.get();
+
+            UserDao userDao = new UserDao();
+
+            userDao.setUsername(userDto.getUsername());
+            userDao.setFirstname(userDto.getFirstname());
+            userDao.setLastname(userDto.getLastname());
+            userDao.setEmail(userDto.getEmail());
+
+            List<UserDao> participants = projectDao.getParticipants();
+
+            participants.add(userDao);
+
+            projectsRepository.save(projectDao);
+
+            if (byUsername.isPresent()) {
+
+                UserDao user = byUsername.get();
+
+                user.getEnrolledProjects().add(projectDao);
+
+                userRepository.save(user);
+            }
+        }
+        else
+            throw new ProjectNotFoundException();
+    }
+
 
     @Log
     public ProjectDao getProjectByName(String projectName) throws ProjectNotFoundException {

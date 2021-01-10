@@ -85,8 +85,14 @@ public class LoggingAspect {
 
         Object result = jp.proceed();
 
-        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()))
-                .append(String.format(" with result %s", result.toString()));
+        Class returnType = ((MethodSignature) jp.getSignature()).getReturnType();
+
+        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()));
+
+        System.out.println(returnType.getTypeName());
+
+        if (!returnType.getTypeName().equalsIgnoreCase("void"))
+            builder.append(String.format(" with result %s", result.toString()));
 
         logger.info(builder);
 

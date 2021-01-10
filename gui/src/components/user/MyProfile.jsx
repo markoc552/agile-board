@@ -5,6 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
+  SideWidgetMenu,
 } from "../util/AgileStyledComponents";
 import { Search, Button, Icon, Divider } from "semantic-ui-react";
 import ProfilePage from "./ProfilePage";
@@ -20,15 +21,7 @@ const MyProfile = (props) => {
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Headline style={{ width: "20vw", height: "2vh" }}>My profile</Headline>
       <ComponentWidget style={{ flexDirection: "row" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "12vw",
-            height: "36.5",
-            boxShadow: "4px 0px 10px -4px rgba(0,0,0,0.15)",
-          }}
-        >
+        <SideWidgetMenu>
           <div style={{ marginTop: "5vh", backgroundColor: "#fcfcfc" }}></div>
           <WidgetItem
             className={selected === "myProfile" ? "user-item" : ""}
@@ -48,7 +41,7 @@ const MyProfile = (props) => {
           >
             <Icon name="user plus" color="blue" size="large" /> Update profile
           </WidgetItem>
-        </div>
+        </SideWidgetMenu>
         {showPage === "myProfile" ? (
           <ProfilePage />
         ) : showPage === "updateProfiles" ? (

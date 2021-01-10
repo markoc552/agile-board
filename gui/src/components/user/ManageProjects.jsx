@@ -5,6 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
+  SideWidgetMenu
 } from "../util/AgileStyledComponents";
 import { Search, Button, Icon, Divider } from "semantic-ui-react";
 import NewProject from "./NewProject";
@@ -18,17 +19,11 @@ const ManageUsers = (props) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Headline style={{ width: "20vw", height: "2vh" }}>Manage Projects</Headline>
+      <Headline style={{ width: "20vw", height: "2vh" }}>
+        Manage Projects
+      </Headline>
       <ComponentWidget style={{ flexDirection: "row" }}>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "12vw",
-            height: "36.5",
-            boxShadow: "4px 0px 10px -4px rgba(0,0,0,0.15)",
-          }}
-        >
+        <SideWidgetMenu>
           <div style={{ marginTop: "5vh", backgroundColor: "#fcfcfc" }}></div>
           <WidgetItem
             className={selected === "newProject" ? "user-item" : ""}
@@ -45,11 +40,11 @@ const ManageUsers = (props) => {
               setShowPage("updateProjects");
               setSelected("updateProject");
             }}
-            style={{fontSize: "12px"}}
+            style={{ fontSize: "12px" }}
           >
             <Icon name="sitemap" color="blue" size="large" /> Update projects
           </WidgetItem>
-        </div>
+        </SideWidgetMenu>
         {showPage === "newProject" ? (
           <NewProject />
         ) : showPage === "updateProjects" ? (

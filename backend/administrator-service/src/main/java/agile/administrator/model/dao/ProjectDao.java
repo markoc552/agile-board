@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.*;
+import java.util.*;
 
 @Entity
 @Table(name = "projects")
@@ -27,6 +28,9 @@ public class ProjectDao implements Serializable {
     private String keyword;
     @NotNull(message = "Project needs to have a manager!")
     private String manager;
+
+    @OneToMany
+    private List<UserDao> participants;
 
     @Override
     public String toString() {

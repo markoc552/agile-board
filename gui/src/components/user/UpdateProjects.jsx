@@ -31,7 +31,7 @@ import Axios from "axios";
 const UpdateProjects = (props) => {
   const [show, setShow] = useState(false);
   const [dataToRender, setDataToRender] = useState([]);
-  const [creating, setCreating] = useState();
+  const [creating, setCreating] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
   const [selectedRowData, setRowData] = useState({});
 

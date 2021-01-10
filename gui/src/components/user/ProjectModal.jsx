@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import {
   Button,
@@ -17,7 +17,7 @@ import {
   StyledLabel,
 } from "../util/AgileStyledComponents";
 import "../../style.css";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
 
 const managerOptions = [
@@ -26,6 +26,8 @@ const managerOptions = [
 ];
 
 const UserModal = (props) => {
+  const [participants, setParticipants] = useState([]);
+
   return (
     <Modal
       show={props.show}
@@ -41,6 +43,7 @@ const UserModal = (props) => {
             name: props.selectedRow.name,
             keyword: props.selectedRow.keyword,
             manager: props.selectedRow.manager,
+            participants: [],
           }}
           onSubmit={async (values, { setSubmitting }) => {
             props.isSubmitting(true);
@@ -113,6 +116,47 @@ const UserModal = (props) => {
                 onBlur={handleBlur}
                 options={managerOptions}
               />
+              <FieldArray
+                name="participants"
+                style={{ marginTop: "10px" }}
+                render={(arrayHelpers) => (
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    {values.participants && values.participants.length > 0 ? (
+                      values.participants.map((friend, index) => (
+                        <div key={index} style={{ margin: "10px auto" }}>
+                          <Field name={`participants.${index}`} />
+                          <Button
+                            type="button"
+                            color="blue"
+                            onClick={() => arrayHelpers.remove(index)}
+                          >
+                            -
+                          </Button>
+                          <Button
+                            type="button"
+                            color="blue"
+                            onClick={() => arrayHelpers.insert(index, "")}
+                          >
+                            +
+                          </Button>
+                        </div>
+                      ))
+                    ) : (
+                      <Button
+                        type="button"
+                        style={{ margin: "10px auto" }}
+                        color="yellow"
+                        onClick={() => arrayHelpers.push("")}
+                      >
+                        {/* show this when user has removed all participants from the list */}
+                        Add a participant
+                      </Button>
+                    )}
+                    <div></div>
+                  </div>
+                )}
+              />
+
               <Button
                 type="submit"
                 color="blue"

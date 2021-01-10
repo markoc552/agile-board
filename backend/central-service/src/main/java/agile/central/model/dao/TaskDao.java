@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.*;
+import java.sql.Date;
 import java.util.*;
 
 @Entity
@@ -30,6 +31,11 @@ public class TaskDao implements Serializable {
     private Integer priority;
     @NotNull(message = "Description is required!")
     private String description;
+    private Date estimated;
+    @NotNull(message = "Reported is required!")
+    private String reporter;
+
+
     private List<TaskDao> subTasks;
 
 

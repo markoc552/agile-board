@@ -254,6 +254,24 @@ export const DashboardNav = styled.div`
   text-align: center;
   background-color: white;
   box-shadow: 0px 7px 14px 0px rgba(50, 50, 50, 0.41);
+
+  @media only screen and (max-width: 1270px) {
+    flex-direction: column;
+    padding: 50px;
+    width: 100vw;
+    margin-top: 1vh;
+  }
+`;
+
+export const DashboardUserWrapper = styled.div`
+  margin-left: 52vw;
+  display: flex;
+  flex-direction: row;
+
+  @media only screen and (max-width: 1270px) {
+    flex-direction: column;
+    margin: 2vh auto;
+  }
 `;
 
 export const ContentNav = styled.div`
@@ -274,6 +292,50 @@ export const DashboardNavHeadline = styled.div`
   width: 14vw;
   height: 5.5vh;
   z-index: 10;
+
+  @media only screen and (max-width: 1275px) and (min-width: 1270px) {
+    flex-direction: column;
+    width: 22.5vw;
+    height: 5.5vh;
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 1270px) {
+    flex-direction: column;
+    width: 104vw;
+    padding: 10px;
+    margin-left: -6.8vw;
+    margin-top: -5vw;
+    height: 10vh;
+  }
+
+  @media only screen and (max-width: 734px) {
+    width: 100vw;
+    margin-top: -5.9vh;
+    margin-left: -11vw;
+    height: 10vh;
+  }
+`;
+
+export const DashboardNavHeadlineItemWrapper = styled.div`
+  @media only screen and (max-width: 1270px) {
+    margin: 1vh 5vw;
+  }
+`;
+
+export const DashboardNavHeadlineItemContainer = styled.div`
+  display: flex;
+
+  @media only screen and (max-width: 1270px) {
+    margin: 1vh -10vw;
+    flex-direction: row;
+    background-color: white;
+    width: 100vw;
+  }
+
+  @media only screen and (max-width: 734px) {
+    flex-direction: column;
+  }
 `;
 
 export const DashboardNavItem = styled.div`
@@ -291,12 +353,37 @@ export const DashboardNavItem = styled.div`
   &:hover {
     background-color: #63a4ff;
   }
+
+  @media only screen and (max-width: 1270px) {
+    width: 50vw;
+  }
+`;
+
+export const DashboardHeadlineWrapper = styled.div`
+  width: 11vw;
+  height: 7vh;
+  border-radius: 10px;
+  background-color: #a6cbff;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (max-width: 1270px) {
+    width: 50vw;
+    padding: 20px;
+  }
 `;
 
 export const DashboardHeadline = styled.div`
   font-family: "Roboto", sans-serif;
   font-size: 15px;
   margin: 12px 20px;
+
+  @media only screen and (max-width: 1270px) {
+    width: 50vw;
+    margin: -10px 0;
+    padding: 7px;
+  }
 `;
 
 export const WelcomeWidgetHello = styled.div`
@@ -322,6 +409,49 @@ export const Headline = styled.div`
   font-weight: bold;
   font-size: 25px;
   cursor: default;
+
+  @media only screen and (max-width: 1400px) {
+    font-size: 19px;
+  }
+  @media only screen and (max-width: 1150px) {
+    font-size: 15px;
+    margin: 0 auto;
+  }
+  @media only screen and (max-width: 1150px) {
+    font-size: 15px;
+    margin: 2vh auto;
+  }
+
+  @media only screen and (max-width: 980px) {
+    font-size: 12px;
+    margin: 2vh auto;
+  }
+`;
+
+export const SideWidgetMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 12vw;
+  height: 36.5;
+  box-shadow: 4px 0px 10px -4px rgba(0, 0, 0, 0.15);
+
+  @media only screen and (max-width: 1450px) {
+    width: 20vw;
+  }
+
+  @media only screen and (max-width: 785px) {
+    width: 25vw;
+  }
+`;
+
+export const BacklogHeadline = styled.div`
+  padding: 10px;
+  margin-left: 1vw;
+  font-family: "Libre Baskerville", serif;
+  color: #253858;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: default;
 `;
 
 export const SystemDashboardContentWrapper = styled.div`
@@ -334,7 +464,7 @@ export const SystemDashboardContentWrapper = styled.div`
 
 export const ProjectNavigation = styled.div`
   width: 15vw;
-  height: 100vh;
+  height: 94.5vh;
   background-color: #f4f5f7;
 `;
 
@@ -361,6 +491,85 @@ export const ComponentWidget = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+
+  @media only screen and (max-width: 1400px) {
+    margin: 0 auto;
+    width: 80vw;
+  }
+`;
+
+export const FormikWrapper = styled.div`
+  @media only screen and (max-width: 1400px) {
+  }
+`;
+
+export const BacklogWidget = styled.div`
+  width: 80vw;
+  height: 38vh;
+  padding: 10px;
+  background-color: white;
+  margin: 1vh 2vw;
+  display: flex;
+  flex-direction: column;
+  transition: 0.5s;
+`;
+
+export const TaskWidget = styled.div`
+  width: 30vw;
+  height: 95vh;
+  padding: 10px;
+  background-color: white;
+  transition: 0.5s;
+  margin: -7vh -2vw;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 3px 5px 0px rgba(0, 0, 0, 0.27);
+  font-weight: bold;
+  font-family: "Arvo", serif;
+  font-size: 15px;
+  overflow-y: scroll;
+
+  @media only screen and (max-width: 1270px) {
+    width: 50vh;
+  }
+`;
+
+export const ProjectNavigationBar = styled.div`
+  width: 14vw;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (max-width: 1270px) {
+    width: 100vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+    margin-bottom: 1.5vh;
+  }
+
+  @media only screen and (max-width: 1275px) and (min-width: 1270px) {
+    width: 17.3vw;
+  }
+
+  @media only screen and (max-width: 734px) {
+    margin-top: 15vh;
+  }
+`;
+
+export const ProjectBoard = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  @media only screen and (max-width: 1270px) {
+    flex-direction: column;
+  }
+`;
+
+export const TaskSection = styled.div`
+  width: 25vw;
+  padding: 15px;
+  color: #b0b0b0;
+  margin: 10px;
 `;
 
 export const AccountImageWrapper = styled.div`
@@ -438,6 +647,13 @@ export const WidgetItem = styled.div`
     border-left: 4px solid #3396ff;
     font-size: 12px;
   }
+  @media only screen and (max-width: 1450px) {
+    width: 20vw;
+  }
+
+  @media only screen and (max-width: 785px) {
+    width: 25vw;
+  }
 `;
 
 export const StyledLabel = styled.div`
@@ -445,6 +661,10 @@ export const StyledLabel = styled.div`
   color: #253858;
   padding: 5px;
   margin: 10px 0;
+
+  @media only screen and (max-width: 1400px) {
+    font-size: 15px;
+  }
 `;
 
 export const StyledProfileLabel = styled.div`

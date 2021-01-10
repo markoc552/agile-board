@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import Navigation from "../components/dashboard/DashboardNavigation";
-import { DashboardWelcomeWrapper } from "../components/util/AgileStyledComponents";
+import {
+  DashboardWelcomeWrapper,
+  ProjectBoard,
+} from "../components/util/AgileStyledComponents";
 import { Divider, Icon } from "semantic-ui-react";
 import IssuerModal from "../components/dashboard/IssuerModal";
 import ProjectNavigation from "../components/dashboard/ProjectNavigation";
@@ -18,16 +21,27 @@ import ManageProjects from "../components/user/ManageProjects";
 import MyIssues from "../components/user/MyIssues";
 import MyProfile from "../components/user/MyProfile";
 import MyProjects from "../components/user/MyProjects";
+import { useMedia } from "use-media";
 
 const Dashboard = (props) => {
   const [issuerModalShow, setIssuerModalShow] = useState(false);
-  const [showPage, setPage] = useState("manageUsers");
+  const [showPage, setPage] = useState("manageProjects");
+  const [showMenu, isMenuShow] = useState(true);
+
+  const isMobileView = useMedia("(max-width: 1270px)");
+  const isDesktopView = useMedia("(min-width: 1042px)");
+
+
+
+  const handleClickMenu = () => {
+    showMenu ? isMenuShow(false) : isMenuShow(true);
+  };
 
   const isLogged = useSelector((state) => {
     return state.auth.logged;
   });
 
-  console.log("Showing page: ", showPage)
+  console.log("Showing page: ", showPage);
 
   return (
     <>
@@ -35,11 +49,27 @@ const Dashboard = (props) => {
         setShowModal={setIssuerModalShow}
         isLogged={isLogged}
         setShowPage={setPage}
+        onClick={(e) => e.stopPropagation()}
+        handleClickMenu={handleClickMenu}
+        isMobileView={isMobileView}
       />
-      <DashboardWelcomeWrapper>
+      <DashboardWelcomeWrapper
+        style={{
+          height:
+            isMobileView && showMenu
+              ? "190vh"
+              : isMobileView
+              ? "120vh"
+              : "100vh",
+        }}
+      >
         {isLogged === true ? (
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <ProjectNavigation setPage={setPage} />
+          <ProjectBoard>
+            <ProjectNavigation
+              setPage={setPage}
+              onClick={(e) => e.stopPropagation()}
+              showMenu={showMenu}
+            />
             {showPage === "activity" ? (
               <ProjectActivity />
             ) : showPage === "backlog" ? (
@@ -65,7 +95,7 @@ const Dashboard = (props) => {
             ) : (
               <div>Wrong page</div>
             )}
-          </div>
+          </ProjectBoard>
         ) : (
           <RegisterLoginWrapper>Please register or login</RegisterLoginWrapper>
         )}

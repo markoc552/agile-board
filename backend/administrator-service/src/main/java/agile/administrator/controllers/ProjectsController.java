@@ -48,6 +48,14 @@ public class ProjectsController {
         return ResponseEntity.ok("Project successfully deleted");
     }
 
+    @PostMapping("/assignUser/{projectName}")
+    public ResponseEntity<Object> assignUser(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody UserDto user, @NotNull @PathVariable("projectName") String projectName) throws ProjectNotFoundException {
+
+        projectService.assignUser(user, projectName);
+
+        return ResponseEntity.ok("User assigned to project");
+    }
+
     @GetMapping("/getAllProjects")
     public ResponseEntity<Object> getProjects() {
 

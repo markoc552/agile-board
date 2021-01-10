@@ -77,7 +77,15 @@ public class UserController {
         return ResponseEntity.ok(credentials);
     }
 
-    @GetMapping("/changePassword")
+    @GetMapping("/getAllProjectsByUser/{username}")
+    public ResponseEntity<Object> getProjectsByUser(@NotNull @PathVariable("username") String username) throws UserNotFoundException {
+
+        List<ProjectDao> allProjects = userService.getProjectsByUser(username);
+
+        return ResponseEntity.ok(allProjects);
+    }
+
+    @PostMapping("/changePassword")
     public ResponseEntity<Object> changePassword(@NotNull(message = USERNAME_CAN_T_BE_NULL) @RequestParam(name = "password") String password,
                                                  @NotNull(message = USERNAME_CAN_T_BE_NULL) @RequestParam(name = "username") String username ) throws UserNotFoundException {
 
@@ -86,7 +94,7 @@ public class UserController {
         return ResponseEntity.ok("User password successfully changed!");
     }
 
-    @GetMapping("/changeRole")
+    @PostMapping("/changeRole")
     public ResponseEntity<Object> changeRole(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username,
                                              @NotNull(message = ROLE_CAN_T_BE_NULL) @RequestParam(name = "role") String role) throws UserNotFoundException {
 

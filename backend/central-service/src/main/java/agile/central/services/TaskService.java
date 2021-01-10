@@ -48,7 +48,7 @@ public class TaskService {
             TaskDao taskDao = byName.get();
 
             taskDao.setName(taskName);
-            taskDao.setKeyword(task.getKeyword());
+            taskDao.setKeyword(task.getTicket());
             taskDao.setPriority(task.getPriority());
             taskDao.setAssignee(task.getAssignee());
             taskDao.setDescription(task.getDescription());
@@ -126,10 +126,12 @@ public class TaskService {
         TaskDao taskDao = new TaskDao();
 
         taskDao.setName(task.getName());
-        taskDao.setKeyword(task.getKeyword());
+        taskDao.setKeyword(task.getTicket());
         taskDao.setPriority(task.getPriority());
         taskDao.setAssignee(task.getAssignee());
         taskDao.setDescription(task.getDescription());
+        taskDao.setReporter(task.getReporter());
+        taskDao.setEstimated(task.getEstimated());
 
         return taskDao;
     }

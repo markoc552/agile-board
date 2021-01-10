@@ -157,3 +157,7 @@ Yadministrator-service/src/main/java/agile/administrator/config/ApplicationPrope
 Ladministrator-service/src/main/java/agile/administrator/config/JwtToken.java,9/6/96bc4a907dec4af86cbaf0541c64f9ab8a463efe
 Å
 Qadministrator-service/src/main/java/agile/administrator/services/UserService.java,d/3/d360ea716e30aeacd58bbf2d9ef616ac9fb2f98c
+r
+Bcentral-service/src/main/java/agile/central/model/dao/TaskDao.java,2/5/25d85b05537fef9f4358c3f9732c4a75aa12e517
+r
+Bcentral-service/src/main/java/agile/central/model/dto/TaskDto.java,d/9/d94c56772eabfe5791c7864f16accfaa9a393cd4

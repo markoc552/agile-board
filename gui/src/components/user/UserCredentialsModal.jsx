@@ -44,21 +44,40 @@ const UserCredentialsModal = (props) => {
           onSubmit={async (values, { setSubmitting }) => {
             props.isSubmitting(true);
 
+            console.log(values);
+
             setTimeout(() => {
               Axios.post(
-                `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/updateUser`,
-                { ...values }
+                `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changePassword`,
+                {},
+                {
+                  params: {
+                    username: values.username,
+                    password: values.password,
+                  },
+                }
               )
                 .then(() => {
-                  Axios.get(
-                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
-                  )
-                    .then((res) => {
-                      props.setDataToRender(res.data);
-                      props.isSubmitting(false);
-                      props.setShow(false);
-                    })
-                    .catch((err) => console.log(err));
+                  Axios.post(
+                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changeRole`,
+                    {},
+                    {
+                      params: {
+                        username: values.username,
+                        role: values.role,
+                      },
+                    }
+                  ).then(() => {
+                    Axios.get(
+                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+                    )
+                      .then((res) => {
+                        props.setDataToRender(res.data);
+                        props.isSubmitting(false);
+                        props.setShow(false);
+                      })
+                      .catch((err) => console.log(err));
+                  });
                 })
                 .catch((err) => console.log(err));
             }, 3000);

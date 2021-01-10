@@ -23,8 +23,21 @@ import {
   useAsyncDebounce,
 } from "react-table";
 import { FormattedMessage } from "react-intl";
+import Axios from "axios";
 
 const UpdateProjects = (props) => {
+  const username = "Test";
+
+  const [enrolledProjects, setEnrolledProjects] = useState([]);
+
+  useState(() => {
+    Axios.get(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllProjectsByUser/${username}`
+    )
+      .then((res) => setEnrolledProjects(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   function GlobalFilter({
     preGlobalFilteredRows,
     globalFilter,
@@ -34,18 +47,18 @@ const UpdateProjects = (props) => {
     const [value, setValue] = React.useState(globalFilter);
     const onChange = useAsyncDebounce((value) => {
       setGlobalFilter(value || undefined);
-      setLoading(false)
+      setLoading(false);
     }, 500);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     return (
       <Input
         loading={loading}
         placeholder="Search..."
-        style={{marginLeft: "2vw", width: "12vw"}}
+        style={{ marginLeft: "2vw", width: "12vw" }}
         value={value}
         onChange={(e) => {
-          setLoading(true)
+          setLoading(true);
           setValue(e.target.value);
           onChange(e.target.value);
         }}
@@ -53,26 +66,16 @@ const UpdateProjects = (props) => {
     );
   }
 
-  const dataToFilter = [
-    {
-      projectName: "marko",
-      keyword: "marko2",
-      manager: "marko3",
-    },
-    {
-      projectName: "test",
-      keyword: "marko2",
-      manager: "marko3",
-    },
-  ];
-
-  const data = useMemo(() => dataToFilter, []);
+  const data = useMemo(() => [...enrolledProjects], [enrolledProjects]);
 
   const columns = useMemo(
     () => [
       {
         Header: (
-          <FormattedMessage id="wault.table.reason" defaultMessage="Project name" />
+          <FormattedMessage
+            id="wault.table.reason"
+            defaultMessage="Project name"
+          />
         ),
         accessor: "projectName",
       },

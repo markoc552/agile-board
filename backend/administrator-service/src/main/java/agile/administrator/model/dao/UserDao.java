@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.io.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -29,6 +30,9 @@ public class UserDao implements Serializable {
     @Email(message = "Email is not properly formatted!")
     private String email;
     private String role;
+
+    @OneToMany
+    private List<ProjectDao> enrolledProjects;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "credential_id", referencedColumnName = "id")

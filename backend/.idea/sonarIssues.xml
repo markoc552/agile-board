@@ -23,6 +23,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/aspects/LoggingAspect.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/JwtRequestFilter.java">
           <value>
             <set />
@@ -409,6 +414,96 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/controllers/DownloadControllerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/DownloadServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/util/CertificateCreatorTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/blockchain/AbstractPublisher.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/blockchain/CentralPublisher.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/blockchain/Publisher.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/Decryptor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/FSStorage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/IPFSStorage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/Storage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/test/java/de/bdr/core/publishing/blockchain/PublisherTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/test/java/de/bdr/core/publishing/util/CertificateCreatorTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/config/ApplicationProperties.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/DownloadController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/IssuerController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/services/DownloadService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/services/IssuerService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/resources/application.yml">
           <value>
             <set />
           </value>
