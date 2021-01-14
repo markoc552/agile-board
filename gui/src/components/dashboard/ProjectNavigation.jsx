@@ -24,11 +24,16 @@ const ProjectNavigation = (props) => {
     >
       <div style={{ display: !props.showMenu ? "none" : "block" }}>
         <DashboardHeadlineWrapper>
-          <DashboardHeadline>General</DashboardHeadline>
-          <DashboardHeadline style={{ fontSize: "10px", marginTop: "-10px" }}>
-            Dashboards, Projects ...
-          </DashboardHeadline>
+          <DashboardHeadline style={{margin: "auto 1vw"}}>General</DashboardHeadline>
         </DashboardHeadlineWrapper>
+        <NavItem>
+          <div
+            style={{ margin: "auto auto", verticalAlign: "middle" }}
+            onClick={() => props.setPage("dashboard")}
+          >
+            <Icon name="box" size="large" /> Activity
+          </div>
+        </NavItem>
         <NavItem>
           <div
             style={{ margin: "auto auto", verticalAlign: "middle" }}
@@ -37,28 +42,9 @@ const ProjectNavigation = (props) => {
             <Icon name="box" size="large" /> Dashboards
           </div>
         </NavItem>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("projects")}
-          >
-            <Icon name="box" size="large" /> Projects
-          </div>
-        </NavItem>
         <DashboardHeadlineWrapper>
-          <DashboardHeadline>Applications</DashboardHeadline>
-          <DashboardHeadline style={{ fontSize: "10px", marginTop: "-10px" }}>
-            Ready to use
-          </DashboardHeadline>
+          <DashboardHeadline style={{margin: "auto 1vw"}}>Project</DashboardHeadline>
         </DashboardHeadlineWrapper>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("project")}
-          >
-            <Icon name="box" size="large" /> Project
-          </div>
-        </NavItem>
         <NavItem>
           <div
             style={{ margin: "auto auto", verticalAlign: "middle" }}

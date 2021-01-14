@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import {
   DashboardNav as Navigation,
@@ -8,12 +8,14 @@ import {
   DashboardNavHeadlineItemWrapper,
   DashboardNavHeadlineItemContainer,
 } from "../util/AgileStyledComponents";
-import { Image, Search, Dropdown, Icon } from "semantic-ui-react";
+import { Image, Search, Dropdown, Icon, Button } from "semantic-ui-react";
 import { useSelector } from "react-redux";
+import ProjectSelectModal from "./ProjectSelectModal";
 
 const DashboardNav = (props) => {
-  const user = useSelector((state) => state.auth.user);
+  const [showModal, isModalShow] = useState(false);
 
+  const user = useSelector((state) => state.auth.user);
 
   console.log(user);
 
@@ -40,6 +42,17 @@ const DashboardNav = (props) => {
               />
             </DashboardNavHeadlineItemWrapper>
           )}
+          <Button
+            color="orange"
+            basic
+            style={{
+              margin: props.isMobileView ? "1vh 0" : "auto 0",
+              height: props.isMobileView && "5vh",
+            }}
+            onClick={() => isModalShow(true)}
+          >
+            Choose project
+          </Button>
           <DashboardNavHeadlineItemWrapper>
             <Search style={{ margin: "auto 50px" }} />
           </DashboardNavHeadlineItemWrapper>
@@ -48,7 +61,13 @@ const DashboardNav = (props) => {
             <Dropdown
               icon="false"
               trigger={
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    fontFamily: "'Arvo', serif",
+                  }}
+                >
                   <Image
                     src={require("../../assets/images/agile-logo.png")}
                     size="mini"
@@ -111,7 +130,12 @@ const DashboardNav = (props) => {
                 bordered
                 style={{ width: "50px", height: "50px", margin: "0 auto" }}
               />
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
                 <div style={{ margin: "auto 10px" }}>
                   <div>{user.firstname}</div>
                   <div>
@@ -124,6 +148,13 @@ const DashboardNav = (props) => {
           )}
         </DashboardNavHeadlineItemContainer>
       </DashboardUserWrapper>
+      {showModal && (
+        <ProjectSelectModal
+          show={showModal}
+          setShowPage={props.setShowPage}
+          setShow={isModalShow}
+        />
+      )}
     </Navigation>
   );
 };

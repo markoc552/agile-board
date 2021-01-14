@@ -77,12 +77,12 @@ public class TaskService {
     }
 
     @Log
-    public TaskDao getTaskByNumber(String taskName) throws TaskNotFoundException {
+    public TaskDao getTaskByTicket(String ticket) throws TaskNotFoundException {
 
-        Optional<TaskDao> byNumber = taskRepository.findByNumber(taskName);
+        Optional<TaskDao> byTicket = taskRepository.findByTicket(ticket);
 
-        if (byNumber.isPresent())
-            return byNumber.get();
+        if (byTicket.isPresent())
+            return byTicket.get();
         else
             throw new TaskNotFoundException();
     }
@@ -100,9 +100,21 @@ public class TaskService {
     }
 
     @Log
+    public List<TaskDao> getTasksByProject(String projectName) throws TaskNotFoundException {
+
+        Optional<List<TaskDao>> byProjectName = taskRepository.findByProjectName(projectName);
+
+        if (byProjectName.isPresent())
+            return byProjectName.get();
+
+        else
+            throw new TaskNotFoundException();
+    }
+
+    @Log
     public TaskDao addSubtask(String taskNumber, TaskDto task) throws TaskNotFoundException {
 
-        Optional<TaskDao> byNumber = taskRepository.findByNumber(taskNumber);
+        Optional<TaskDao> byNumber = taskRepository.findByTicket(taskNumber);
 
         if (byNumber.isPresent()) {
 
@@ -132,6 +144,9 @@ public class TaskService {
         taskDao.setDescription(task.getDescription());
         taskDao.setReporter(task.getReporter());
         taskDao.setEstimated(task.getEstimated());
+        taskDao.setTicket(task.getTicket());
+        taskDao.setProjectName(task.getProjectName());
+        taskDao.setCreatedAt(task.getCreatedAt());
 
         return taskDao;
     }

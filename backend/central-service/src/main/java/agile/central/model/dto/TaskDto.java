@@ -24,4 +24,6 @@ public class TaskDto implements Serializable {
     private Integer priority;
     private String component;
     private String description;
+    private String projectName;
+    private Date createdAt;
 }

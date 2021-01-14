@@ -50,7 +50,7 @@ public class TaskController {
         return ResponseEntity.ok("Task successfully deleted");
     }
 
-    @PostMapping("/addSubtask/${taskNumber}")
+    @PostMapping("/addSubtask/{taskNumber}")
     public ResponseEntity<Object> addSubtask(@NotNull(message = TASK_CAN_T_BE_NULL) @PathVariable(name = "taskNumber") String taskNumber, @Valid @RequestBody TaskDto task) throws TaskNotFoundException {
 
         TaskDao result = taskService.addSubtask(taskNumber, task);
@@ -58,10 +58,18 @@ public class TaskController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/getTaskByProject")
+    public ResponseEntity<Object> getTaskByProjectName(@NotNull(message = TASK_NUMBER_CAN_T_BE_NULL) @RequestParam(name = "projectName") String projectName) throws TaskNotFoundException {
+
+        List<TaskDao> tasksByProject = taskService.getTasksByProject(projectName);
+
+        return ResponseEntity.ok(tasksByProject);
+    }
+
     @GetMapping("/getTask")
     public ResponseEntity<Object> getTask(@NotNull(message = TASK_NUMBER_CAN_T_BE_NULL) @RequestParam(name = "taskNumber") String taskNumber) throws TaskNotFoundException {
 
-        TaskDao task = taskService.getTaskByNumber(taskNumber);
+        TaskDao task = taskService.getTaskByTicket(taskNumber);
 
         return ResponseEntity.ok(task);
     }

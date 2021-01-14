@@ -22,16 +22,16 @@ import MyIssues from "../components/user/MyIssues";
 import MyProfile from "../components/user/MyProfile";
 import MyProjects from "../components/user/MyProjects";
 import { useMedia } from "use-media";
+import ProjectSelectModal from "../components/dashboard/ProjectSelectModal";
 
 const Dashboard = (props) => {
   const [issuerModalShow, setIssuerModalShow] = useState(false);
-  const [showPage, setPage] = useState("manageProjects");
+  const [showPage, setPage] = useState("issues");
   const [showMenu, isMenuShow] = useState(true);
+  const [showModal, isModalShow] = useState(false);
 
   const isMobileView = useMedia("(max-width: 1270px)");
   const isDesktopView = useMedia("(min-width: 1042px)");
-
-
 
   const handleClickMenu = () => {
     showMenu ? isMenuShow(false) : isMenuShow(true);
@@ -40,6 +40,10 @@ const Dashboard = (props) => {
   const isLogged = useSelector((state) => {
     return state.auth.logged;
   });
+
+  const selectedProject = useSelector(
+    (state) => state.managment.selectedProject
+  );
 
   console.log("Showing page: ", showPage);
 
@@ -52,6 +56,7 @@ const Dashboard = (props) => {
         onClick={(e) => e.stopPropagation()}
         handleClickMenu={handleClickMenu}
         isMobileView={isMobileView}
+        setShowPage={setPage}
       />
       <DashboardWelcomeWrapper
         style={{
@@ -92,6 +97,12 @@ const Dashboard = (props) => {
               <MyProfile />
             ) : showPage === "myProjects" ? (
               <MyProjects />
+            ) : showPage === "selectProjectModal" ? (
+              <ProjectSelectModal
+                show={true}
+                setShow={isModalShow}
+                setShowPage={setPage}
+              />
             ) : (
               <div>Wrong page</div>
             )}

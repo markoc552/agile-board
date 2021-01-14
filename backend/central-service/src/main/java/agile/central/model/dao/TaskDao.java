@@ -31,13 +31,14 @@ public class TaskDao implements Serializable {
     private Integer priority;
     @NotNull(message = "Description is required!")
     private String description;
+    @NotNull(message = "Created date is required!")
+    private Date createdAt;
     private Date estimated;
     @NotNull(message = "Reported is required!")
     private String reporter;
-
-
+    private String ticket;
+    private String projectName;
+    @OneToMany
     private List<TaskDao> subTasks;
-
-
 
 }

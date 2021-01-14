@@ -9,7 +9,7 @@ import java.io.*;
 import java.sql.*;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "components")
 @Getter
 @Setter
 @AllArgsConstructor

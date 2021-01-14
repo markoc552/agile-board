@@ -29,7 +29,7 @@ public class AttachmentController {
     AttachmentService attachmentService;
 
 
-    @PostMapping("/uploadAttachment/${ticket}")
+    @PostMapping("/uploadAttachment/{ticket}")
     public ResponseEntity<Object> uploadAttachment(@Valid @LengthNotNull @RequestBody MultipartFile file, @NotNull @PathVariable String ticket) throws IOException {
 
         byte[] bytes = file.getBytes();

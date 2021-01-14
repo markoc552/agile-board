@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
 import TaskWidget from "./TaskWidget";
@@ -21,24 +21,64 @@ import {
 } from "semantic-ui-react";
 import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import {loadCreatedTasks} from "../../redux/actions"
+import {connect, useSelector} from "react-redux"
 
-const priorities = [
-  { value: "4", text: "Highest" },
-  { value: "3", text: "High" },
-  { value: "2", text: "Medium" },
-  { value: "1", text: "Low" },
-];
-
-const components = [
-  { value: "4", text: "Highest" },
-  { value: "3", text: "High" },
-  { value: "2", text: "Medium" },
-  { value: "1", text: "Low" },
-];
-
-const UserModal = (props) => {
+const TaskModal = (props) => {
   const [activeIndexs, setActiveIndexs] = useState([0, 1, 2, 3, 4, 5]);
   const [sending, isSending] = useState(false);
+
+  const priorities = [
+    { value: "4", text: "Highest" },
+    { value: "3", text: "High" },
+    { value: "2", text: "Medium" },
+    { value: "1", text: "Low" },
+  ];
+
+  const projectName = useSelector((state) => state.managment.selectedProject)
+
+  const components = [];
+  const reporters = [];
+  const assignees = [];
+
+  const loadReportersAndAssignees = () =>
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`)
+      .then((res) =>
+        res.data.map((user) => {
+          reporters.push({
+            value: `${user.firstname} ${user.lastname}`,
+            text: `${user.firstname} ${user.lastname}`,
+          });
+          assignees.push({
+            value: `${user.firstname} ${user.lastname}`,
+            text: `${user.firstname} ${user.lastname}`,
+          });
+        })
+      )
+      .catch((err) => console.log(err));
+
+  const loadComponents = () =>
+    Axios.get(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/getComponents`,
+      { params: { projectName: "test" } }
+    )
+      .then((res) =>
+        res.data.map((component) => {
+          console.log(component);
+          components.push({
+            value: `${component.name}`,
+            text: `${component.name}`,
+          });
+        })
+      )
+      .catch((err) => console.log(err));
+
+  useEffect(() => {
+    loadReportersAndAssignees();
+    loadComponents();
+  });
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
@@ -81,18 +121,37 @@ const UserModal = (props) => {
           />
         ) : (
           <Formik
-            initialValues={{}}
+            initialValues={{ estimated: new Date() }}
             onSubmit={async (values, { setSubmitting }) => {
               isSending(true);
 
               console.log(values);
 
-              // setTimeout(() => {
-              //   Axios.post(
-              //     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/tasks/createTask`,
-              //     { ...values }
-              //   ).then(() => )
-              // }, 3000);
+              setTimeout(() => {
+                Axios.post(
+                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/createTask`,
+                  {
+                    ...values,
+                    priority: 0,
+                    ticket: `${props.selectedProject.toUpperCase()}_${
+                      props.taskNo
+                    }`,
+                    projectName: props.selectedProject,
+                    createdAt:
+                      new Date().getFullYear() +
+                      "-" +
+                      new Date().getMonth() +
+                      1 +
+                      "-" +
+                      new Date().getDate(),
+                  }
+                )
+                  .then(() => {
+                    isSending(false);
+                    props.loadCreatedTasks(projectName);
+                  })
+                  .catch((e) => console.log(e));
+              }, 3000);
             }}
           >
             {({
@@ -153,11 +212,12 @@ const UserModal = (props) => {
                   >
                     Estimated:
                   </div>
-                  <Input
+                  <DatePicker
+                    selected={values.estimated}
                     name="estimated"
-                    onChange={handleChange}
+                    onChange={(date) => setFieldValue("estimated", date)}
                     onBlur={handleBlur}
-                    value={values.estimated}
+                    dateFormat="yyyy-MM-dd"
                   />
                 </div>
                 <div style={{ marginTop: "2vh" }}>
@@ -219,7 +279,7 @@ const UserModal = (props) => {
                         setFieldValue("component", value.target.innerText)
                       }
                       onBlur={handleBlur}
-                      options={components}
+                      options={reporters}
                     />
                   </div>
                 </div>
@@ -253,7 +313,7 @@ const UserModal = (props) => {
                         setFieldValue("reporter", value.target.innerText)
                       }
                       onBlur={handleBlur}
-                      options={priorities}
+                      options={reporters}
                     />
                   </div>
                 </div>
@@ -277,14 +337,14 @@ const UserModal = (props) => {
                       Assignee:
                     </div>
                     <Select
-                      style={{width: "15vw"}}
+                      style={{ width: "15vw" }}
                       placeholder="Select assignee"
                       name="assignee"
                       onChange={(value) =>
                         setFieldValue("assignee", value.target.innerText)
                       }
                       onBlur={handleBlur}
-                      options={priorities}
+                      options={assignees}
                     />
                   </div>
                 </div>
@@ -295,6 +355,11 @@ const UserModal = (props) => {
                 <TextArea
                   placeholder="Input text..."
                   style={{ width: "19vw" }}
+                  name="description"
+                  onChange={(value) =>
+                    setFieldValue("description", value.target.innerText)
+                  }
+                  onBlur={handleBlur}
                 />
                 <div style={{ margin: "2vh 0" }}>
                   <Icon name="file alternate outline" color="blue" />
@@ -342,4 +407,4 @@ const UserModal = (props) => {
   );
 };
 
-export default UserModal;
+export default connect(null, {loadCreatedTasks})(TaskModal);

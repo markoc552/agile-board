@@ -12,7 +12,9 @@ public interface TaskRepository extends JpaRepository<TaskDao, Long> {
 
     Optional<TaskDao> findByName(String name);
 
-    Optional<TaskDao> findByNumber(String number);
+    Optional<TaskDao> findByTicket(String ticket);
 
     Optional<List<TaskDao>> findByAssignee(String assignee);
+
+    Optional<List<TaskDao>> findByProjectName(String projectName);
 }

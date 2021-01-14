@@ -4,52 +4,56 @@ import {
   Headline,
   DashboardNav as Navigation,
   ComponentWidget,
+  WidgetItem,
+  SideWidgetMenu,
 } from "../util/AgileStyledComponents";
 import { Search, Button, Icon, Divider } from "semantic-ui-react";
-import ComponentModal from "./ComponentModal";
+import "../../style.css";
+import NewComponent from "./NewComponent";
+import UpdateComponent from "./UpdateComponent";
+import Spinner from "react-bootstrap/Spinner";
+import { useSelector } from "react-redux";
 
 const Components = (props) => {
   const [show, setShow] = useState(false);
+  const [showPage, setShowPage] = useState("newComponent");
+  const [selected, setSelected] = useState("newComponent");
+
+  const currentProject = useSelector(
+    (state) => state.managment.selectedProject
+  );
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <Headline style={{ width: "11vw", height: "2vh" }}>Components</Headline>
-      <ComponentWidget>
-        <Navigation
-          style={{
-            width: "70vw",
-            height: "8vh",
-            borderTopLeftRadius: "10px",
-            borderTopRightRadius: "10px",
-            boxShadow: "none",
-            borderBottom: "2px solid #cfcfcf",
-            padding: "5px",
-          }}
-        >
-          <Headline
-            style={{ fontSize: "15px", margin: "auto auto", width: "12vw", padding: "2px", cursor: "default" }}
-          >
-            <Icon name="numbered list" size="large"></Icon>Active components: 2
-          </Headline>
-          <Search
-            style={{ padding: "4px", margin: "auto", marginLeft: "34vw" }}
-          />
-          <Icon
-            name="plus"
-            size="large"
-            circular
-            style={{
-              padding: "4px",
-              width: "7.5vw",
-              height: "4vh",
-              margin: "auto 10px",
-              cursor: "pointer",
+      <Headline style={{ width: "20vw", height: "2vh" }}>Components</Headline>
+      <ComponentWidget style={{ flexDirection: "row" }}>
+        <SideWidgetMenu>
+          <div style={{ marginTop: "5vh", backgroundColor: "#fcfcfc" }}></div>
+          <WidgetItem
+            className={selected === "newComponent" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("newComponent");
+              setSelected("newComponent");
             }}
-            onClick={() => setShow(true)}
-          />
-        </Navigation>
+          >
+            <Icon name="plus circle" color="blue" size="large" /> New
+          </WidgetItem>
+          <WidgetItem
+            className={selected === "updateComponent" ? "user-item" : ""}
+            onClick={() => {
+              setShowPage("updateComponents");
+              setSelected("updateComponent");
+            }}
+            style={{ fontSize: "12px" }}
+          >
+            <Icon name="sitemap" color="blue" size="large" /> Components
+          </WidgetItem>
+        </SideWidgetMenu>
+        {showPage === "newComponent" && currentProject !== undefined && (
+          <NewComponent currentProject={currentProject} />
+        )}
+        {showPage === "updateComponents" && <UpdateComponent />}
       </ComponentWidget>
-      {show && <ComponentModal show={show} setShow={setShow} />}
     </div>
   );
 };

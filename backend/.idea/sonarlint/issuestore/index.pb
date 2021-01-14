@@ -161,3 +161,13 @@ r
 Bcentral-service/src/main/java/agile/central/model/dao/TaskDao.java,2/5/25d85b05537fef9f4358c3f9732c4a75aa12e517
 r
 Bcentral-service/src/main/java/agile/central/model/dto/TaskDto.java,d/9/d94c56772eabfe5791c7864f16accfaa9a393cd4
+
+Ocentral-service/src/main/java/agile/central/repository/ComponentRepository.java,a/d/ad24b77e4ab5a4d8d7da826ba1ac5cae4f521b39
+z
+Jcentral-service/src/main/java/agile/central/repository/TaskRepository.java,b/f/bfc0bf2f7bef978a6e4aeba78329f868a5d1b479
+€
+Pcentral-service/src/main/java/agile/central/controllers/ComponentController.java,f/8/f8c86ad34a33c77e9523ac98de3e4e34ebd02814
+w
+Gcentral-service/src/main/java/agile/central/model/dao/ComponentDao.java,0/d/0d4c619a2b58cd2e253c079e886dadcea68b8c83
+w
+Gcentral-service/src/main/java/agile/central/model/dto/ComponentDto.java,a/d/ade8e79f67bf912dbb2f330fe2fbbfa73afd1c6d

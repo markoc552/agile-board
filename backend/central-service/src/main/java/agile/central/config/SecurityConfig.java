@@ -31,31 +31,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired
-    private UserDetailsService userService;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder amb) throws Exception {
-        amb.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors();
         http.csrf().disable();
 
-        http.authorizeRequests()
+/*        http.authorizeRequests()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)
                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);*/
     }
 
     @Bean

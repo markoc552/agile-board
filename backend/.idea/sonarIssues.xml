@@ -418,6 +418,31 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralDownloadController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralIssuerController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralDownloadService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralIssuerService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/controllers/DownloadControllerTest.java">
           <value>
             <set />
@@ -453,12 +478,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/Encryptor.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/FSStorage.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/IPFSStorage.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/PathMapping.java">
           <value>
             <set />
           </value>

@@ -318,6 +318,8 @@ export const DashboardNavHeadline = styled.div`
 `;
 
 export const DashboardNavHeadlineItemWrapper = styled.div`
+  font-family: "Arvo", serif;
+  font-weight: bold;
   @media only screen and (max-width: 1270px) {
     margin: 1vh 5vw;
   }
@@ -480,6 +482,27 @@ export const WelcomeWidget = styled.div`
   background-repeat: no-repeat;
   background-size: 115% 125%;
   box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+`;
+
+export const IssuesList = styled.div`
+  width: 25vw;
+  height: 94.5vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: inset 0px 7px 13px 5px rgba(0, 0, 0, 0.05);
+  border-right: 2px solid #b0b0b0;
+  }
+`;
+
+export const IssueCard = styled.div`
+  width: 70vw;
+  height: 94.5vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 7px 13px 5px rgba(0, 0, 0, 0.05);
+  }
 `;
 
 export const ComponentWidget = styled.div`
