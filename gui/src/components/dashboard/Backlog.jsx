@@ -15,8 +15,11 @@ import { uuid } from "uuidv4";
 import { useSelector } from "react-redux";
 import TaskWidget from "../tasks/TaskWidget";
 import TaskModal from "../tasks/TaskModal";
+import SprintModal from "../tasks/SprintModal";
 import Axios from "axios";
 import _ from "lodash";
+import ProjectSelectModal from "./ProjectSelectModal";
+import AddToSprintModal from "../tasks/AddToSprintModal";
 
 const Backlog = (props) => {
   const [show, setShow] = useState(false);
@@ -25,31 +28,61 @@ const Backlog = (props) => {
   const [taskOpen, setTaskopen] = useState(false);
   const [newIssuerModal, showIssuerModal] = useState(false);
   const [selectedTask, setSelectedTask] = useState();
+  const [sprintTasks, setSprintTasks] = useState([]);
+  const [sprintModal, isSprintModalShow] = useState(false);
+  const [addTaskToSprintModal, setAddTaskToSprintModal] = useState(false);
+  const [taskToSprint, setTaskToSprint] = useState({});
+  const [items, setItems] = useState([]);
 
   const selectedProject = useSelector(
     (state) => state.managment.selectedProject
   );
 
+  const startedSprint = useSelector((state) => state.managment.sprint);
+
   const tasks = useSelector((state) => state.managment.tasks);
 
-  const itemsFromBackend = useSelector(
-    (state) => state.managment.itemsFromBackend
-  );
+  const itemsBackend = useSelector((state) => state.managment.itemsFromBackend);
 
-  const data = useMemo(() => [...tasks], [tasks]);
+  const dinamicDroppables = useMemo(() => [...items], [items]);
+
+  useEffect(() => {
+    setItems(itemsBackend);
+  }, []);
+
+  let filtered = [];
+
+  if (startedSprint !== undefined) {
+    filtered = itemsBackend.filter(
+      ({ id: id1 }) => !startedSprint.tasks.some(({ id: id2 }) => id2 === id1)
+    );
+  }
 
   const columnsFromBackend = {
     0: {
       name: "Sprint",
-      items: [],
+      items: startedSprint !== undefined ? startedSprint.tasks : [],
     },
     1: {
       name: "Backlog",
-      items: itemsFromBackend,
+      items: startedSprint !== undefined ? filtered : itemsBackend,
     },
   };
 
   const [columns, setColumns] = useState(columnsFromBackend);
+
+  const updateTasks = (task) => {
+    setColumns({
+      ...columns,
+      1: {
+        ...columns[1],
+        items: [
+          ...(startedSprint !== undefined ? filtered : itemsBackend),
+          task,
+        ],
+      },
+    });
+  };
 
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
@@ -68,6 +101,13 @@ const Backlog = (props) => {
       const [removed] = sourceItems.splice(source.index, 1);
 
       destItems.splice(destination.index, 0, removed);
+
+      if (destination.droppableId === "0" && startedSprint !== undefined) {
+        const task = tasks.filter((item) => item.id === removed.id);
+        console.log("TASK TO SPRINT", task);
+        setTaskToSprint(task[0]);
+        setAddTaskToSprintModal(true);
+      }
 
       setColumns({
         ...columns,
@@ -99,24 +139,24 @@ const Backlog = (props) => {
     }
   };
 
-  const backlogDiv = document.querySelector("#backlog");
-
-  const handleCloseTaskMenu = () => {
-    setTaskopen(false);
-    backlogDiv.removeEventListener("click", handleCloseTaskMenu);
-  };
-
-  if (taskOpen) {
-    backlogDiv.addEventListener("click", handleCloseTaskMenu);
-  }
+  // const backlogDiv = document.querySelector("#backlog");
+  //
+  // const handleCloseTaskMenu = () => {
+  //   setTaskopen(false);
+  //   backlogDiv.removeEventListener("click", handleCloseTaskMenu);
+  // };
+  //
+  // if (taskOpen) {
+  //   backlogDiv.addEventListener("click", handleCloseTaskMenu);
+  // }
 
   return (
     <div id="backlog">
       {selectedProject === undefined ? (
-        <Spinner
-          animation="border"
-          role="status"
-          style={{ margin: "5vh 15.5vw" }}
+        <ProjectSelectModal
+          show={true}
+          setShow={props.isModalShow}
+          setShowPage={props.setPage}
         />
       ) : (
         <>
@@ -150,16 +190,51 @@ const Backlog = (props) => {
                         >
                           {column.name}
                         </BacklogHeadline>
-                        <div style={{ margin: "auto 10px" }}>10 Issues</div>
+                        <div style={{ margin: "auto 10px" }}>
+                          {column.items.length} Issues
+                        </div>
                         {column.name === "Sprint" && (
                           <Label
-                            color="green"
+                            color={
+                              startedSprint !== undefined ? "green" : "red"
+                            }
                             size="tiny"
                             style={{ margin: "auto 0" }}
                           >
-                            Active
+                            {startedSprint !== undefined
+                              ? "Active"
+                              : "Inactive"}
                           </Label>
                         )}
+                        {column.name === "Sprint" &&
+                          column.items.length !== 0 &&
+                          startedSprint === undefined && (
+                            <Button
+                              color="green"
+                              size="mini"
+                              basic
+                              style={{ margin: "auto 2vw", height: "3vh" }}
+                              onClick={() => {
+                                isSprintModalShow(true);
+
+                                let result = [];
+
+                                const filtered = columns["0"].items.filter(
+                                  (i) => {
+                                    tasks.map((item) => {
+                                      if (item.id === i.id) {
+                                        result = [...result, item.content];
+                                      }
+                                    });
+                                  }
+                                );
+
+                                setSprintTasks(result);
+                              }}
+                            >
+                              Start sprint
+                            </Button>
+                          )}
                         {column.name === "Backlog" && (
                           <Button
                             style={{ margin: "auto 0" }}
@@ -179,12 +254,13 @@ const Backlog = (props) => {
                             flexDirection: "row",
                           }}
                         >
-                          <Icon name="user" rounded />
-                          <Icon name="user" rounded />
-                          <Icon name="user" rounded />
-                          <Icon name="user" rounded />
-
-                          <div>Today . Tomorrow</div>
+                          {startedSprint !== undefined && (
+                            <div>
+                              {startedSprint.from}{" "}
+                              <Icon name="dot circle" size="tiny" />
+                              {startedSprint.to}
+                            </div>
+                          )}
                         </div>
                       )}
                       <Droppable droppableId={id} key={id}>
@@ -281,6 +357,22 @@ const Backlog = (props) => {
                 setShow={showIssuerModal}
                 taskNo={tasks.length}
                 selectedProject={selectedProject}
+                updateTasks={updateTasks}
+              />
+            )}
+            {sprintModal && (
+              <SprintModal
+                show={sprintModal}
+                setShow={isSprintModalShow}
+                sprintTasks={sprintTasks}
+              />
+            )}
+            {addTaskToSprintModal && (
+              <AddToSprintModal
+                show={addTaskToSprintModal}
+                setShow={setAddTaskToSprintModal}
+                task={taskToSprint}
+                sprint={startedSprint}
               />
             )}
           </div>

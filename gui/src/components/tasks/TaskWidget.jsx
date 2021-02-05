@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   TaskWidget as StyledTaskWidget,
@@ -6,9 +6,14 @@ import {
 } from "../util/AgileStyledComponents";
 import { Button, Icon, Label, Accordion } from "semantic-ui-react";
 import Spinner from "react-bootstrap/Spinner";
+import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const TaskWidget = (props) => {
   const [activeIndexs, setActiveIndexs] = useState([0, 1, 2, 3, 4, 5]);
+  const [attachemnts, setAttachments] = useState([]);
+
+  const token = useSelector((state) => state.auth.token);
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
@@ -26,7 +31,57 @@ const TaskWidget = (props) => {
     setActiveIndexs(newIndex);
   };
 
-  console.log(props.selectedTask);
+  const fetchAttachments = () => {
+    Axios.get(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/attachment/getAttachments/${props.selectedTask[0].content.ticket}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    ).then((res) => {
+      setAttachments(res.data);
+    });
+  };
+
+  useEffect(() => {
+    fetchAttachments();
+  }, []);
+
+  const downloadAttachment = (name) => {
+    Axios.get(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/attachment/downloadAttachment`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          filename: name,
+          ticket: `${props.selectedTask[0].content.ticket}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          const attachment = res.data;
+
+          const url = window.URL.createObjectURL(new Blob([attachment]));
+
+          const link = document.createElement("a");
+
+          link.href = url;
+
+          console.log("Downloading file", name);
+
+          link.setAttribute("download", name);
+
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <StyledTaskWidget>
@@ -125,8 +180,7 @@ const TaskWidget = (props) => {
                 Created: {props.selectedTask[0].content.createdAt}
               </div>
               <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
-                Updated:
-                <div style={{ marginLeft: "1vw" }}>Not yet updated</div>
+                Updated: Not updated
               </div>
             </Accordion.Content>
 
@@ -168,11 +222,33 @@ const TaskWidget = (props) => {
               Attachments
             </Accordion.Title>
             <Accordion.Content active={activeIndexs.includes(5)}>
-              <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
-                Created:
-              </div>
-              <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
-                Updated:
+              {console.log(attachemnts)}
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                {attachemnts.map((file) => (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      width: "7vw",
+                      height: "9vh",
+                      border: "1px solid rgb(217, 217, 217)",
+                      cursor: "pointer",
+                      padding: "5px",
+                      marginLeft: "5px",
+                    }}
+                    onClick={() => downloadAttachment(file)}
+                  >
+                    <Icon
+                      style={{ margin: "10px auto", padding: "5px" }}
+                      name="pdf file outline"
+                      size="big"
+                      color="red"
+                    />
+                    <div style={{ margin: "0 auto" }}>
+                      {file.substring(0, 7)}...
+                    </div>
+                  </div>
+                ))}
               </div>
             </Accordion.Content>
           </Accordion>

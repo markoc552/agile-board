@@ -6,9 +6,14 @@ import agile.central.exceptions.*;
 import agile.central.model.dao.*;
 import agile.central.model.dto.*;
 import agile.central.repository.*;
+import agile.central.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
+import javax.annotation.*;
+import java.sql.*;
+import java.sql.Date;
+import java.time.*;
 import java.util.*;
 
 import static agile.central.util.CentralConstants.TASK_ALREADY_EXISTS;
@@ -17,12 +22,21 @@ import static agile.central.util.CentralConstants.TASK_DOES_NOT_EXISTS;
 @Service
 public class TaskService {
 
-
     @Autowired
     private TaskRepository taskRepository;
 
+    @Autowired
+    private ActivityRepository activityRepository;
+
+    private ActivityLogger activityLogger;
+
+    @PostConstruct
+    public void initActivityLogger() {
+        activityLogger = new ActivityLogger(activityRepository);
+    }
+
     @Log
-    public TaskDao createTask(TaskDto task) throws TaskAlreadyExistsException {
+    public TaskDao createTask(TaskDto task, String person) throws TaskAlreadyExistsException {
 
         String taskName = task.getName();
 
@@ -33,11 +47,15 @@ public class TaskService {
 
         TaskDao taskDao = parseTask(task);
 
-        return taskRepository.save(taskDao);
+        TaskDao saved = taskRepository.save(taskDao);
+
+        activityLogger.pushActivity(person, "created task " + taskName, taskDao.getProjectName());
+
+        return saved;
     }
 
     @Log
-    public TaskDao updateTask(TaskDto task) throws TaskNotFoundException {
+    public TaskDao updateTask(TaskDto task, String person) throws TaskNotFoundException {
 
         String taskName = task.getName();
 
@@ -53,14 +71,18 @@ public class TaskService {
             taskDao.setAssignee(task.getAssignee());
             taskDao.setDescription(task.getDescription());
 
-            return taskRepository.save(taskDao);
+            TaskDao saved = taskRepository.save(taskDao);
+
+            activityLogger.pushActivity(person, "updated task " + taskName, taskDao.getProjectName());
+
+            return saved;
 
         } else
             throw new TaskNotFoundException(TASK_DOES_NOT_EXISTS);
     }
 
     @Log
-    public void deleteTask(TaskDto task) throws TaskNotFoundException {
+    public void deleteTask(TaskDto task, String person) throws TaskNotFoundException {
 
         String taskName = task.getName();
 
@@ -71,6 +93,8 @@ public class TaskService {
             TaskDao taskDao = byName.get();
 
             taskRepository.delete(taskDao);
+
+            activityLogger.pushActivity(person, "deleted task " + taskName, taskDao.getProjectName());
 
         } else
             throw new TaskNotFoundException(TASK_DOES_NOT_EXISTS);
@@ -112,24 +136,17 @@ public class TaskService {
     }
 
     @Log
-    public TaskDao addSubtask(String taskNumber, TaskDto task) throws TaskNotFoundException {
+    public TaskDao updateTaskStatus(String ticket, String status, String person) throws TaskNotFoundException {
 
-        Optional<TaskDao> byNumber = taskRepository.findByTicket(taskNumber);
+        TaskDao taskByTicket = getTaskByTicket(ticket);
 
-        if (byNumber.isPresent()) {
+        taskByTicket.setStatus(status);
 
-            TaskDao mainTask = byNumber.get();
+        TaskDao saved = taskRepository.save(taskByTicket);
 
-            List<TaskDao> subTasks = mainTask.getSubTasks();
+        activityLogger.pushActivity(person, "put task " + taskByTicket.getName() + " to " + status, taskByTicket.getProjectName());
 
-            TaskDao newSubtask = parseTask(task);
-
-            subTasks.add(newSubtask);
-
-            return taskRepository.save(mainTask);
-
-        } else
-            throw new TaskNotFoundException();
+        return saved;
     }
 
     @Log
@@ -147,6 +164,7 @@ public class TaskService {
         taskDao.setTicket(task.getTicket());
         taskDao.setProjectName(task.getProjectName());
         taskDao.setCreatedAt(task.getCreatedAt());
+        taskDao.setDndId(task.getDndId());
 
         return taskDao;
     }

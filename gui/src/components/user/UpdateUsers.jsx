@@ -26,6 +26,7 @@ import { FormattedMessage } from "react-intl";
 import Axios from "axios";
 import UserModal from "./UserModal";
 import UserCredentialsModal from "./UserCredentialsModal";
+import { useSelector } from "react-redux";
 
 const UpdateUsers = (props) => {
   const [dataToRender, setDataToRender] = useState([]);
@@ -34,6 +35,8 @@ const UpdateUsers = (props) => {
   const [creating, setCreating] = useState();
   const [successfull, setSuccesfull] = useState(false);
   const [showCredentials, setShowCredentials] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
 
   function GlobalFilter({
     preGlobalFilteredRows,
@@ -65,7 +68,12 @@ const UpdateUsers = (props) => {
 
   useEffect(async () => {
     const result = await Axios.get(
-      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
 
     console.log(result.data);
@@ -156,11 +164,21 @@ const UpdateUsers = (props) => {
                   setTimeout(() => {
                     Axios.post(
                       `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/deleteUser`,
-                      { ...row.original }
+                      { ...row.original },
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
                     )
                       .then(async (res) => {
                         Axios.get(
-                          `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+                          `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
+                          {
+                            headers: {
+                              Authorization: `Bearer ${token}`,
+                            },
+                          }
                         )
                           .then((res) => {
                             setDataToRender(res.data);

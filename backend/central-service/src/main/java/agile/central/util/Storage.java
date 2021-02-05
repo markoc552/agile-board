@@ -13,6 +13,7 @@ import org.bouncycastle.util.encoders.Base64;
 import java.io.*;
 import java.nio.charset.*;
 import java.nio.file.*;
+import java.security.*;
 import java.util.*;
 
 public class Storage {
@@ -33,15 +34,16 @@ public class Storage {
     }
 
     @Log
-    public void uploadAttachment(byte[] file) throws IOException {
+    public void uploadAttachment(byte[] file) throws IOException, StorageException {
 
         String encodedFilename = Base64.toBase64String(filename.getBytes());
 
         Path attachmentPath = Path.of(attachmentFolder, "/", encodedFilename);
 
+        initStorageFolder();
+
         try(OutputStream os = Files.newOutputStream(attachmentPath))
         {
-            initStorageFolder();
 
             Encryptor encryptor = new Encryptor(encryptionKey);
 
@@ -66,7 +68,7 @@ public class Storage {
 
             String encodedPath = file.getPath();
 
-            String attachmentPath = Arrays.toString(Base64.decode(encodedPath));
+            String attachmentPath = new String(Base64.decode(encodedPath), StandardCharsets.UTF_8);
 
             byte[] encryptedData = Files.readAllBytes(Path.of(attachmentPath));
 
@@ -95,6 +97,24 @@ public class Storage {
             throw new FileAlreadyExistsException("File already exists in database!");
 
         fileRepository.save(file, hashed);
+    }
+
+    @Log
+    public List<String> getAttachments() {
+
+        Keccak.Digest256 digest256 = new Keccak.Digest256();
+
+        byte[] hashbytes = digest256.digest(ticket.getBytes(StandardCharsets.UTF_8));
+
+        String hashed = Arrays.toString(Hex.encode(hashbytes));
+
+        Map<String, FileDao> all = fileRepository.getAll(hashed);
+
+        List<String> files = new ArrayList<>();
+
+        all.forEach((k,v) -> files.add(new String(Base64.decode(v.getFilename()), StandardCharsets.UTF_8)));
+
+        return files;
     }
 
     @Log

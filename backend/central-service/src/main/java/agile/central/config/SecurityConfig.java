@@ -37,12 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.csrf().disable();
 
-/*        http.authorizeRequests()
+        http.authorizeRequests()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)
                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);*/
+                   .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

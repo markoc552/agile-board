@@ -20,26 +20,35 @@ import {
 import "../../style.css";
 import { Formik, Field, ErrorMessage } from "formik";
 import Axios from "axios";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   selectCurrentProject,
   loadCreatedTasks,
-} from "../../redux/actions/index.js";
+  loadStartedSprint,
+  fetchProjectData,
+} from "../../redux/actions";
 import { uuid } from "uuidv4";
 
 let countryOptions = [];
 
 const ProjectSelectModal = (props) => {
   const [selectedProject, setSelectedProject] = useState();
+  const [availableProject, setAvailableProjects] = useState([]);
 
-  countryOptions = [];
+  const token = useSelector((state) => state.auth.token);
+
   useEffect(() => {
     Axios.get(
-      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/getAllProjects`
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/getAllProjects`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => {
         res.data.map((project) =>
-          countryOptions.push({
+          availableProject.push({
             key: uuid(),
             value: project.name,
             text: (
@@ -52,7 +61,7 @@ const ProjectSelectModal = (props) => {
         );
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <Modal
@@ -65,12 +74,11 @@ const ProjectSelectModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         <Dropdown
-          clearable
+          value={selectedProject}
           fluid
-          search
           selection
           onChange={(e, { value }) => setSelectedProject(value)}
-          options={countryOptions}
+          options={availableProject}
           placeholder="Select project"
         />
       </Modal.Body>
@@ -79,10 +87,15 @@ const ProjectSelectModal = (props) => {
           color="blue"
           basic
           onClick={() => {
-            props.selectCurrentProject(selectedProject);
-            props.loadCreatedTasks(selectedProject);
             props.setShow(false);
-            props.setShowPage("activity")
+            props.selectCurrentProject(selectedProject);
+            props.loadCreatedTasks(selectedProject, token);
+            props.fetchProjectData(selectedProject, token);
+            setTimeout(
+              () => props.loadStartedSprint(selectedProject, token),
+              1000
+            );
+            props.setShowPage("activity");
           }}
         >
           Select
@@ -92,6 +105,9 @@ const ProjectSelectModal = (props) => {
   );
 };
 
-export default connect(null, { selectCurrentProject, loadCreatedTasks })(
-  ProjectSelectModal
-);
+export default connect(null, {
+  selectCurrentProject,
+  loadCreatedTasks,
+  loadStartedSprint,
+  fetchProjectData,
+})(ProjectSelectModal);

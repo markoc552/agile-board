@@ -133,6 +133,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/aspects/LoggingAspect.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/config/ApplicationProperties.java">
           <value>
             <set />
@@ -198,7 +203,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/SprintController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/TaskController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/ActivityDao.java">
           <value>
             <set />
           </value>
@@ -223,6 +238,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/SprintDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/TaskDao.java">
           <value>
             <set />
@@ -238,7 +258,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dto/SprintDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dto/TaskDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/ActivityRepository.java">
           <value>
             <set />
           </value>
@@ -268,6 +298,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/SprintRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/TaskRepository.java">
           <value>
             <set />
@@ -293,7 +328,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/SprintService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/TaskService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/util/ActivityLogger.java">
           <value>
             <set />
           </value>
@@ -418,12 +463,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralAuthorityController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralDownloadController.java">
           <value>
             <set />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralIssuerController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralStorageController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/exceptions/AddressDecryptionException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralAuthorityService.java">
           <value>
             <set />
           </value>
@@ -438,7 +503,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralStorageService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-test.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/controllers/CentralAuthorityControllerTest.java">
           <value>
             <set />
           </value>
@@ -448,12 +533,32 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/CentralAuthorityServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/CentralIssuerServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/DownloadServiceTest.java">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/VerifyServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/util/CertificateCreatorTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/certificate/StorageRequest.java">
           <value>
             <set />
           </value>
@@ -469,6 +574,21 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/blockchain/Publisher.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/util/CertificateCreator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/util/ElmoReader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/publishing/util/TepConstants.java">
           <value>
             <set />
           </value>
@@ -503,6 +623,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/storage/StorageResponse.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/main/java/de/bdr/core/util/Authority.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/test/java/de/bdr/core/publishing/blockchain/PublisherTest.java">
           <value>
             <set />
@@ -513,7 +643,37 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/core/src/test/java/de/bdr/core/verification/blockchain/VerifierTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/authorization/dto/AuthorizationApplicationConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/config/ApplicationProperties.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/config/authorization/AuthorizationConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/config/authorization/AuthorizationServiceSecurityConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/config/authorization/ResourceConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/AuthorityController.java">
           <value>
             <set />
           </value>
@@ -528,6 +688,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/JwkSetEndpoint.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/StorageController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/controllers/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/services/AuthorityService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/services/DownloadService.java">
           <value>
             <set />
@@ -538,7 +718,72 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/java/de/bdr/local/service/services/StorageService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/resources/application-test.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/main/resources/application.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/test/java/de/bdr/local/service/controllers/AuthorityControllerTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/test/java/de/bdr/local/service/services/AuthorityServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/local-service/src/test/java/de/bdr/local/service/services/IssuerServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/pdf/src/main/java/de/bdr/pdf/PdfCreator.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/pdf/src/test/java/de/bdr/pdf/PdfCreatorTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/blockchain/build/contracts/AbstractProxyAuthority.json">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/data/H2db.mv.db">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/gui/tep-common/src/pages/CreatePDFCert/CreatePDFCert.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/gui/tep-common/src/pages/CreatePDFCert/FormPDFCert.jsx">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/gui/tep-common/src/pages/CreatePDFCert/jsonTemplateTransformations.js">
           <value>
             <set />
           </value>

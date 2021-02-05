@@ -1,4 +1,4 @@
-export default (state = { logged: true }, action) => {
+export default (state = { logged: false }, action) => {
   if (action.type === "SAVE_TOKEN") {
     return {
       ...state,

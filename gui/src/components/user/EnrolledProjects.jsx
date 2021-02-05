@@ -24,15 +24,23 @@ import {
 } from "react-table";
 import { FormattedMessage } from "react-intl";
 import Axios from "axios";
+import {useSelector} from "react-redux"
 
 const UpdateProjects = (props) => {
   const username = "Test";
 
   const [enrolledProjects, setEnrolledProjects] = useState([]);
 
+  const token = useSelector(state => state.auth.token)
+
   useState(() => {
     Axios.get(
-      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllProjectsByUser/${username}`
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllProjectsByUser/${username}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
       .then((res) => setEnrolledProjects(res.data))
       .catch((err) => console.log(err));

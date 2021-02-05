@@ -19,12 +19,15 @@ import {
 import "../../style.css";
 import { Formik, Field, ErrorMessage } from "formik";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const roles = [
   { value: "admin", text: "ADMIN" },
   { value: "user", text: "USER" },
 ];
 const UserCredentialsModal = (props) => {
+  const token = useSelector((state) => state.auth.token);
+
   return (
     <Modal
       show={props.show}
@@ -51,6 +54,9 @@ const UserCredentialsModal = (props) => {
                 `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changePassword`,
                 {},
                 {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
                   params: {
                     username: values.username,
                     password: values.password,
@@ -62,6 +68,9 @@ const UserCredentialsModal = (props) => {
                     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changeRole`,
                     {},
                     {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
                       params: {
                         username: values.username,
                         role: values.role,
@@ -69,7 +78,12 @@ const UserCredentialsModal = (props) => {
                     }
                   ).then(() => {
                     Axios.get(
-                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`
+                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
                     )
                       .then((res) => {
                         props.setDataToRender(res.data);

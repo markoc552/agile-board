@@ -1,6 +1,7 @@
 package agile.central.model.dto;
 
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ import java.util.*;
 public class TaskDto implements Serializable {
 
     private String name;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date estimated;
     private String ticket;
     private String assignee;
@@ -25,5 +27,7 @@ public class TaskDto implements Serializable {
     private String component;
     private String description;
     private String projectName;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    private String dndId;
 }

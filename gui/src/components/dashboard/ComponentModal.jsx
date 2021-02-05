@@ -19,6 +19,7 @@ import {
 import "../../style.css";
 import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
+import {useSelector} from "react-redux"
 
 const managerOptions = [
   { value: "tests", text: "Test" },
@@ -27,6 +28,9 @@ const managerOptions = [
 
 const ComponentModal = (props) => {
   const [participants, setParticipants] = useState([]);
+
+  const token = useSelector(state => state.auth.token)
+
 
   return (
     <Modal

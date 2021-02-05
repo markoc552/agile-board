@@ -252,7 +252,7 @@ export const DashboardNav = styled.div`
   display: flex;
   flex-direction: row;
   text-align: center;
-  background-color: white;
+  background-color: #4289c7;
   box-shadow: 0px 7px 14px 0px rgba(50, 50, 50, 0.41);
 
   @media only screen and (max-width: 1270px) {
@@ -284,13 +284,14 @@ export const ContentNav = styled.div`
 `;
 
 export const DashboardNavHeadline = styled.div`
-  padding: 5px;
   font-family: "Russo One", sans-serif;
   box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.07);
-  font-size: 19px;
-  color: black;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
   width: 14vw;
   height: 5.5vh;
+  margin: auto 0;
   z-index: 10;
 
   @media only screen and (max-width: 1275px) and (min-width: 1270px) {
@@ -344,13 +345,15 @@ export const DashboardNavItem = styled.div`
   padding: 10px;
   font-family: "Roboto", sans-serif;
   color: #253858;
-  font-size: 15px;
+  font-size: 17px;
+  font-weight: bold;
   cursor: default;
   margin: 5px auto;
   width: 11vw;
   height: 5vh;
   border-radius: 10px;
   transition: 0.7s;
+  display: flex;
 
   &:hover {
     background-color: #63a4ff;
@@ -363,7 +366,7 @@ export const DashboardNavItem = styled.div`
 
 export const DashboardHeadlineWrapper = styled.div`
   width: 11vw;
-  height: 7vh;
+  height: 5vh;
   border-radius: 10px;
   background-color: #a6cbff;
   margin: 20px auto;
@@ -386,6 +389,10 @@ export const DashboardHeadline = styled.div`
     margin: -10px 0;
     padding: 7px;
   }
+`;
+
+export const IssueCardItem = styled.div`
+  padding: 30px;
 `;
 
 export const WelcomeWidgetHello = styled.div`
@@ -496,11 +503,14 @@ export const IssuesList = styled.div`
 `;
 
 export const IssueCard = styled.div`
+  font-family: "Arvo", serif;
+  font-weight: bold;
   width: 70vw;
   height: 94.5vh;
   background-color: white;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
   box-shadow: 10px 7px 13px 5px rgba(0, 0, 0, 0.05);
   }
 `;
@@ -614,7 +624,7 @@ export const TodoWidget = styled.div`
 
 export const TimeWidget = styled.div`
   width: 19vw;
-  height: 36.5vh;
+  height: 28vh;
   background-color: white;
   padding: 35px;
   border-radius: 10px;

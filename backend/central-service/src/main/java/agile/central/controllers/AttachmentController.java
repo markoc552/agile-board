@@ -28,7 +28,6 @@ public class AttachmentController {
     @Autowired
     AttachmentService attachmentService;
 
-
     @PostMapping("/uploadAttachment/{ticket}")
     public ResponseEntity<Object> uploadAttachment(@Valid @LengthNotNull @RequestBody MultipartFile file, @NotNull @PathVariable String ticket) throws IOException {
 
@@ -42,10 +41,18 @@ public class AttachmentController {
     }
 
     @GetMapping("/downloadAttachment")
-    public ResponseEntity<Object> downloadAttachment(@NotNull @RequestParam(name = "filename") String filename, @NotNull @RequestParam(name = "ticket") String ticket) throws IOException, StorageException {
+    public ResponseEntity<Object> downloadAttachment(@NotNull @RequestParam(name = "filename") String filename, @NotNull @RequestParam(name = "ticket") String ticket) {
 
         byte[] attachment = attachmentService.downloadAttachment(filename, ticket);
 
         return ResponseEntity.ok(attachment);
+    }
+
+    @GetMapping("/getAttachments/{ticket}")
+    public ResponseEntity<Object> getAttachments(@PathVariable(name = "ticket") String ticket) {
+
+        List<String> attachments = attachmentService.getAttachments(ticket);
+
+        return ResponseEntity.ok(attachments);
     }
 }

@@ -10,7 +10,7 @@ spring:
   jpa:
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     #      default_schema: src/main/resources/create_table.sql
     #      format_sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect

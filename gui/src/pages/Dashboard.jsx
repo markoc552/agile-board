@@ -76,17 +76,17 @@ const Dashboard = (props) => {
               showMenu={showMenu}
             />
             {showPage === "activity" ? (
-              <ProjectActivity />
+              <ProjectActivity setPage={setPage} isModalShow={isModalShow}/>
             ) : showPage === "backlog" ? (
-              <Backlog />
+              <Backlog setPage={setPage} isModalShow={isModalShow} />
             ) : showPage === "issues" ? (
-              <Issues />
+              <Issues setPage={setPage} isModalShow={isModalShow}/>
             ) : showPage === "sprint" ? (
-              <Activesprint />
+              <Activesprint setPage={setPage} isModalShow={isModalShow}/>
             ) : showPage === "components" ? (
-              <Components />
+              <Components setPage={setPage} isModalShow={isModalShow}/>
             ) : showPage === "dashboard" ? (
-              <General />
+              <General setPage={setPage} isModalShow={isModalShow}/>
             ) : showPage === "manageUsers" ? (
               <ManageUsers />
             ) : showPage === "manageProjects" ? (
@@ -99,7 +99,7 @@ const Dashboard = (props) => {
               <MyProjects />
             ) : showPage === "selectProjectModal" ? (
               <ProjectSelectModal
-                show={true}
+                show={false}
                 setShow={isModalShow}
                 setShowPage={setPage}
               />

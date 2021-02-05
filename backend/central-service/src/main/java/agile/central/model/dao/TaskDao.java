@@ -18,7 +18,7 @@ import java.util.*;
 public class TaskDao implements Serializable {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "task_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull(message = "Task name is mandatory!")
@@ -38,7 +38,11 @@ public class TaskDao implements Serializable {
     private String reporter;
     private String ticket;
     private String projectName;
-    @OneToMany
-    private List<TaskDao> subTasks;
+    private String sprint;
+    private String dndId;
+    private String status;
 
+    @ManyToOne
+    @JoinColumn(name = "sprint_id")
+    private SprintDao sprints;
 }

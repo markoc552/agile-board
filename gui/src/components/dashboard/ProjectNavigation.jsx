@@ -24,57 +24,43 @@ const ProjectNavigation = (props) => {
     >
       <div style={{ display: !props.showMenu ? "none" : "block" }}>
         <DashboardHeadlineWrapper>
-          <DashboardHeadline style={{margin: "auto 1vw"}}>General</DashboardHeadline>
+          <DashboardHeadline style={{ margin: "auto 1vw" }}>
+            General
+          </DashboardHeadline>
         </DashboardHeadlineWrapper>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("dashboard")}
-          >
-            <Icon name="box" size="large" /> Activity
+        <NavItem onClick={() => props.setPage("activity")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="adn" color="blue" size="big" /> Activity
           </div>
         </NavItem>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("dashboard")}
-          >
-            <Icon name="box" size="large" /> Dashboards
+        <NavItem onClick={() => props.setPage("dashboard")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="dashboard" color="orange" size="big" /> Dashboards
           </div>
         </NavItem>
         <DashboardHeadlineWrapper>
-          <DashboardHeadline style={{margin: "auto 1vw"}}>Project</DashboardHeadline>
+          <DashboardHeadline style={{ margin: "auto 1vw" }}>
+            Project
+          </DashboardHeadline>
         </DashboardHeadlineWrapper>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("sprint")}
-          >
-            <Icon name="box" size="large" /> Active sprint
+        <NavItem onClick={() => props.setPage("sprint")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="keyboard outline" color="green" size="big" /> Sprint dashboard
           </div>
         </NavItem>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("backlog")}
-          >
-            <Icon name="box" size="large" /> Backlog
+        <NavItem onClick={() => props.setPage("backlog")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="bars" color="teal" size="big" /> Backlog
           </div>
         </NavItem>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("issues")}
-          >
-            <Icon name="box" size="large" /> Issues
+        <NavItem onClick={() => props.setPage("issues")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="clipboard list" color="violet" size="big" /> Issues
           </div>
         </NavItem>
-        <NavItem>
-          <div
-            style={{ margin: "auto auto", verticalAlign: "middle" }}
-            onClick={() => props.setPage("components")}
-          >
-            <Icon name="box" size="large" /> Components
+        <NavItem onClick={() => props.setPage("components")}>
+          <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
+            <Icon name="boxes" color="blue" size="big" /> Components
           </div>
         </NavItem>
       </div>

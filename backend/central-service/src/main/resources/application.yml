@@ -24,4 +24,4 @@ application:
   jwt-secret: ${JWT_SERCRET:secret123}
   token-expiration: ${TOKEN_EXPIRATION:36,000,000L}
   attachment-folder: ${PWD}/storage
-  encryption-key: 2F423F4528482B4D6251655468566D59
+  encryption-key: 4h++HWP9x1Jedx/zz3I/8eEGEmuYkz6gwgLNBjgZUHM=

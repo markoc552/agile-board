@@ -27,35 +27,37 @@ public class TaskController {
 
 
     @PostMapping("/createTask")
-    public ResponseEntity<Object> createTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task) throws TaskAlreadyExistsException {
+    public ResponseEntity<Object> createTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task, @RequestParam(name = "person") String person) throws TaskAlreadyExistsException {
 
-        TaskDao result = taskService.createTask(task);
+        TaskDao result = taskService.createTask(task, person);
 
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/updateTask")
-    public ResponseEntity<Object> updateTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task) throws TaskNotFoundException {
+    public ResponseEntity<Object> updateTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task, @RequestParam(name = "person") String person) throws TaskNotFoundException {
 
-        TaskDao result = taskService.updateTask(task);
+        TaskDao result = taskService.updateTask(task, person);
 
         return ResponseEntity.ok(result);
     }
 
     @PostMapping("/deleteTask")
-    public ResponseEntity<Object> deleteTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task) throws TaskNotFoundException {
+    public ResponseEntity<Object> deleteTask(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody TaskDto task, @RequestParam(name = "person") String person) throws TaskNotFoundException {
 
-        taskService.deleteTask(task);
+        taskService.deleteTask(task, person);
 
         return ResponseEntity.ok("Task successfully deleted");
     }
 
-    @PostMapping("/addSubtask/{taskNumber}")
-    public ResponseEntity<Object> addSubtask(@NotNull(message = TASK_CAN_T_BE_NULL) @PathVariable(name = "taskNumber") String taskNumber, @Valid @RequestBody TaskDto task) throws TaskNotFoundException {
+    @PostMapping("/updateTaskStatus")
+    public ResponseEntity<Object> updateTaskStatus(@RequestParam(name = "ticket") String ticket,
+                                                   @RequestParam(name = "status") String status,
+                                                   @RequestParam(name = "person") String person) throws TaskNotFoundException {
 
-        TaskDao result = taskService.addSubtask(taskNumber, task);
+        TaskDao taskDao = taskService.updateTaskStatus(ticket, status, person);
 
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(taskDao);
     }
 
     @GetMapping("/getTaskByProject")

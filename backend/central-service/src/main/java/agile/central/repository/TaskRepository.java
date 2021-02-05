@@ -17,4 +17,6 @@ public interface TaskRepository extends JpaRepository<TaskDao, Long> {
     Optional<List<TaskDao>> findByAssignee(String assignee);
 
     Optional<List<TaskDao>> findByProjectName(String projectName);
+
+    Optional<List<TaskDao>> findBySprint(String name);
 }

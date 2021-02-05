@@ -39,7 +39,6 @@ public class FileRepository {
         return hashOperations.entries(ticketName);
     }
 
-    @Log
     public FileDao get(String ticketName, String filename) {
 
         LOG.info("Getting file in task {} with filename {}", ticketName, filename);

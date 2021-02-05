@@ -1,4 +1,4 @@
-export default (state = {}, action) => {
+export default (state = { tasks: [] }, action) => {
   if (action.type === "SELECT_PROJECT") {
     return {
       ...state,
@@ -9,6 +9,21 @@ export default (state = {}, action) => {
       ...state,
       tasks: action.payload.tasks,
       itemsFromBackend: action.payload.itemsFromBackend,
+    };
+  } else if (action.type === "STARTED_SPRINT") {
+    return {
+      ...state,
+      sprint: action.payload,
+    };
+  } else if (action.type === "LOAD_SPRINT") {
+    return {
+      ...state,
+      sprint: action.payload,
+    };
+  } else if (action.type === "FETCH_PROJECT") {
+    return {
+      ...state,
+      projectData: action.payload,
     };
   } else {
     return state;

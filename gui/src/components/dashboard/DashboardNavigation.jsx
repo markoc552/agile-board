@@ -22,13 +22,15 @@ const DashboardNav = (props) => {
   return (
     <Navigation>
       <DashboardNavHeadline>
-        <Image
-          src={require("../../assets/images/agile-logo.png")}
-          size="mini"
-          avatar
-          style={{ width: "40px", height: "40px", margin: "0 auto" }}
-        />
-        Agile Board
+        <div style={{ margin: "1vh 0" }}>
+          <Image
+            src={require("../../assets/images/agile-logo.png")}
+            size="mini"
+            avatar
+            style={{ width: "40px", height: "40px" }}
+          />
+          AGILE BOARD
+        </div>
       </DashboardNavHeadline>
       <DashboardUserWrapper>
         <DashboardNavHeadlineItemContainer>
@@ -43,8 +45,8 @@ const DashboardNav = (props) => {
             </DashboardNavHeadlineItemWrapper>
           )}
           <Button
-            color="orange"
-            basic
+            color="teal"
+            circular
             style={{
               margin: props.isMobileView ? "1vh 0" : "auto 0",
               height: props.isMobileView && "5vh",
@@ -54,97 +56,86 @@ const DashboardNav = (props) => {
             Choose project
           </Button>
           <DashboardNavHeadlineItemWrapper>
-            <Search style={{ margin: "auto 50px" }} />
+            <Search style={{ margin: "1vh 50px" }} />
           </DashboardNavHeadlineItemWrapper>
 
-          <div>
-            <Dropdown
-              icon="false"
-              trigger={
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    fontFamily: "'Arvo', serif",
-                  }}
-                >
-                  <Image
-                    src={require("../../assets/images/agile-logo.png")}
-                    size="mini"
-                    avatar
-                    bordered
-                    style={{ width: "50px", height: "50px", margin: "0 auto" }}
-                  />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <div style={{ margin: "auto 10px" }}>
-                      <div>Marko</div>
-                      <div>
-                        <Icon name="circle" color="green" />
-                        Online
+          {user !== undefined && (
+            <div>
+              <Dropdown
+                icon="false"
+                trigger={
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      fontFamily: "'Arvo', serif",
+                      margin: "0.4vh auto",
+                    }}
+                  >
+                    <Image
+                      src={require("../../assets/images/agile-logo.png")}
+                      size="mini"
+                      avatar
+                      bordered
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        margin: "0 auto",
+                      }}
+                    />
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        color: "white",
+                        fontSize: "15.9px",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      <div style={{ margin: "auto 10px" }}>
+                        <div>Marko</div>
+                        <div>
+                          <Icon name="circle" color="green" />
+                          Online
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              }
-            >
-              <Dropdown.Menu>
-                <Dropdown.Header icon="user" content="Administrator" />
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  icon="sitemap"
-                  text="Manage projects"
-                  onClick={() => props.setShowPage("manageProjects")}
-                />
-                <Dropdown.Item
-                  icon="user"
-                  text="Manage users"
-                  onClick={() => props.setShowPage("manageUsers")}
-                />
-                <Dropdown.Header icon="user" content="User" />
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  icon="attention"
-                  text="My profile"
-                  onClick={() => props.setShowPage("myProfile")}
-                />
-                <Dropdown.Item
-                  icon="sitemap"
-                  text="My projects"
-                  onClick={() => props.setShowPage("myProjects")}
-                />
-                <Dropdown.Item
-                  icon="file code"
-                  text="My issues"
-                  onClick={() => props.setShowPage("myIssues")}
-                />
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-
-          {user !== undefined && (
-            <DashboardNavHeadlineItemWrapper>
-              <Image
-                src={require("../../assets/images/agile-logo.png")}
-                size="mini"
-                avatar
-                bordered
-                style={{ width: "50px", height: "50px", margin: "0 auto" }}
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+                }
               >
-                <div style={{ margin: "auto 10px" }}>
-                  <div>{user.firstname}</div>
-                  <div>
-                    <Icon name="circle" color="green" />
-                    Online
-                  </div>
-                </div>
-              </div>
-            </DashboardNavHeadlineItemWrapper>
+                <Dropdown.Menu>
+                  <Dropdown.Header icon="user" content="Administrator" />
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    icon="sitemap"
+                    text="Manage projects"
+                    onClick={() => props.setShowPage("manageProjects")}
+                  />
+                  <Dropdown.Item
+                    icon="user"
+                    text="Manage users"
+                    onClick={() => props.setShowPage("manageUsers")}
+                  />
+                  <Dropdown.Header icon="user" content="User" />
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    icon="attention"
+                    text="My profile"
+                    onClick={() => props.setShowPage("myProfile")}
+                  />
+                  <Dropdown.Item
+                    icon="sitemap"
+                    text="My projects"
+                    onClick={() => props.setShowPage("myProjects")}
+                  />
+                  <Dropdown.Item
+                    icon="file code"
+                    text="My issues"
+                    onClick={() => props.setShowPage("myIssues")}
+                  />
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
           )}
         </DashboardNavHeadlineItemContainer>
       </DashboardUserWrapper>

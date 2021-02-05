@@ -5,7 +5,7 @@ import {
   DashboardNav as Navigation,
   ComponentWidget,
   WidgetItem,
-  FormikWrapper
+  FormikWrapper,
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -14,10 +14,11 @@ import {
   Image,
   Message,
   Divider,
-  Select
+  Select,
 } from "semantic-ui-react";
 import { Formik, Field, ErrorMessage } from "formik";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const roles = [
   { value: "admin", text: "ADMIN" },
@@ -27,6 +28,8 @@ const roles = [
 const NewUser = (props) => {
   const [submitting, isSubmitting] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
+
+  const token = useSelector((state) => state.auth.token);
 
   return (
     <div>
@@ -52,7 +55,12 @@ const NewUser = (props) => {
               setTimeout(() => {
                 Axios.post(
                   `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
-                  { ...values }
+                  { ...values },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
                 )
                   .then((res) => {
                     setSubmitting(false);
@@ -71,7 +79,7 @@ const NewUser = (props) => {
               handleBlur,
               handleSubmit,
               isSubmitting,
-              setFieldValue
+              setFieldValue,
             }) => (
               <Form
                 style={{

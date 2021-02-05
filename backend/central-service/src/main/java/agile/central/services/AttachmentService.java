@@ -9,6 +9,8 @@ import lombok.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
+import java.util.*;
+
 @Service
 public class AttachmentService {
 
@@ -49,5 +51,19 @@ public class AttachmentService {
                                  .build();
 
         return storage.downloadAttachment();
+    }
+
+    @Log
+    public List<String> getAttachments(String ticket) {
+
+        StorageBuilder builder = new StorageBuilder();
+
+        Storage storage = builder.withTicket(ticket)
+                .withAttachmentFolder(applicationProperties.getAttachmentFolder())
+                .withEncryptionKey(applicationProperties.getEncryptionKey())
+                .withFileRepository(fileRepository)
+                .build();
+
+        return storage.getAttachments();
     }
 }

@@ -25,8 +25,8 @@ import {
 } from "react-table";
 import { FormattedMessage } from "react-intl";
 import { getAllProjects, callProjectService } from "../util/endpoints";
-import {useSelector} from "react-redux"
-import ComponentModal from "./ComponentModal"
+import { useSelector } from "react-redux";
+import ComponentModal from "./ComponentModal";
 import Axios from "axios";
 
 const UpdateComponent = (props) => {
@@ -40,10 +40,15 @@ const UpdateComponent = (props) => {
     (state) => state.managment.selectedProject
   );
 
+  const token = useSelector(state => state.auth.token)
+
   useEffect(async () => {
     const result = await Axios.get(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/getComponents`,
       {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         params: {
           projectName: currentProject,
         },

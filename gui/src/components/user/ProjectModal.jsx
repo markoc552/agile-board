@@ -19,6 +19,7 @@ import {
 import "../../style.css";
 import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const managerOptions = [
   { value: "tests", text: "Test" },
@@ -27,6 +28,8 @@ const managerOptions = [
 
 const UserModal = (props) => {
   const [participants, setParticipants] = useState([]);
+
+  const token = useSelector((state) => state.auth.token);
 
   return (
     <Modal
@@ -51,11 +54,21 @@ const UserModal = (props) => {
             setTimeout(() => {
               Axios.post(
                 `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/updateProject`,
-                { ...values }
+                { ...values },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
               )
                 .then(() => {
                   Axios.get(
-                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/getAllProjects`
+                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/getAllProjects`,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
                   )
                     .then((res) => {
                       props.setDataToRender(res.data);

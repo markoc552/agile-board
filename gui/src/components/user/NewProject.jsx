@@ -6,7 +6,7 @@ import {
   ComponentWidget,
   WidgetItem,
   StyledLabel,
-  FormikWrapper
+  FormikWrapper,
 } from "../util/AgileStyledComponents";
 import {
   Button,
@@ -19,7 +19,8 @@ import {
 } from "semantic-ui-react";
 import { Formik, Field, ErrorMessage } from "formik";
 import { callProjectService } from "../util/endpoints";
-import Axios from "axios"
+import Axios from "axios";
+import {useSelector} from "react-redux"
 
 const managerOptions = [
   { value: "tests", text: "Test" },
@@ -29,6 +30,8 @@ const managerOptions = [
 const NewProject = (props) => {
   const [submitting, isSubmitting] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
+
+  const token = useSelector(state => state.auth.token)
 
   return (
     <div>
@@ -43,7 +46,12 @@ const NewProject = (props) => {
               setTimeout(() => {
                 Axios.post(
                   `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/createProject`,
-                  { ...values }
+                  { ...values },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
                 )
                   .then((res) => {
                     setSubmitting(false);

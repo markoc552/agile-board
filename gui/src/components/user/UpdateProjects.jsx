@@ -27,6 +27,7 @@ import { FormattedMessage } from "react-intl";
 import { getAllProjects, callProjectService } from "../util/endpoints";
 import ProjectModal from "./ProjectModal";
 import Axios from "axios";
+import { useSelector } from "react-redux";
 
 const UpdateProjects = (props) => {
   const [show, setShow] = useState(false);
@@ -34,6 +35,8 @@ const UpdateProjects = (props) => {
   const [creating, setCreating] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
   const [selectedRowData, setRowData] = useState({});
+
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(async () => {
     const result = await getAllProjects();
@@ -128,15 +131,20 @@ const UpdateProjects = (props) => {
               onClick={() => {
                 setCreating(true);
 
-                console.log("Is submitting: ", creating)
+                console.log("Is submitting: ", creating);
 
                 setTimeout(() => {
                   Axios.post(
                     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/deleteProject`,
-                    { ...row.original }
+                    { ...row.original },
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
                   )
                     .then(async (res) => {
-                      setDataToRender(await getAllProjects());
+                      setDataToRender(await getAllProjects(token));
                       setCreating(false);
                     })
                     .catch((err) => console.log(err));

@@ -22,10 +22,11 @@ import { callProjectService } from "../util/endpoints";
 import Axios from "axios";
 import { useSelector } from "react-redux";
 
-
 const NewComponent = (props) => {
   const [submitting, isSubmitting] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
+
+  const token = useSelector(state => state.auth.token)
 
   return (
     <div>
@@ -37,12 +38,17 @@ const NewComponent = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
-              console.log(values, props.currentProject)
+              console.log(values, props.currentProject);
 
               setTimeout(() => {
                 Axios.post(
                   `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/createComponent`,
-                  { name: values.name, projectName: props.currentProject }
+                  { name: values.name, projectName: props.currentProject },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
                 )
                   .then((res) => {
                     setSubmitting(false);

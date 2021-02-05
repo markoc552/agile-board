@@ -23,12 +23,17 @@ import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import {loadCreatedTasks} from "../../redux/actions"
-import {connect, useSelector} from "react-redux"
+import { loadCreatedTasks } from "../../redux/actions";
+import { connect, useSelector } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+import { uuid } from "uuidv4";
 
 const TaskModal = (props) => {
   const [activeIndexs, setActiveIndexs] = useState([0, 1, 2, 3, 4, 5]);
   const [sending, isSending] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  const { addToast } = useToasts();
 
   const priorities = [
     { value: "4", text: "Highest" },
@@ -37,14 +42,20 @@ const TaskModal = (props) => {
     { value: "1", text: "Low" },
   ];
 
-  const projectName = useSelector((state) => state.managment.selectedProject)
+  const token = useSelector(state => state.auth.token)
+
+  const projectName = useSelector((state) => state.managment.selectedProject);
 
   const components = [];
   const reporters = [];
   const assignees = [];
 
   const loadReportersAndAssignees = () =>
-    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`)
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) =>
         res.data.map((user) => {
           reporters.push({
@@ -62,7 +73,12 @@ const TaskModal = (props) => {
   const loadComponents = () =>
     Axios.get(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/getComponents`,
-      { params: { projectName: "test" } }
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: { projectName: "test" },
+      }
     )
       .then((res) =>
         res.data.map((component) => {
@@ -96,8 +112,73 @@ const TaskModal = (props) => {
     setActiveIndexs(newIndex);
   };
 
+  const downloadAttachment = (name) => {
+    Axios.get(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/attachment/downloadAttachment`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          filename: name,
+          ticket: `${props.selectedProject.toUpperCase()}_${props.taskNo}`,
+        },
+      }
+    )
+      .then((res) => {
+        if (res.status === 200) {
+          const attachment = res.data;
+
+          const url = window.URL.createObjectURL(new Blob([attachment]));
+
+          const link = document.createElement("a");
+
+          link.href = url;
+
+          console.log("Downloading file", name);
+
+          link.setAttribute("download", name);
+
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
+    acceptedFiles.forEach((file, i) => {
+      const reader = new FileReader();
+
+      reader.onabort = () => {
+        console.log("Reading file aborted!");
+      };
+
+      reader.onerror = () => {
+        console.log("Error while reading a file");
+      };
+
+      reader.onload = () => {
+        const formData = new FormData();
+
+        formData.set("file", file);
+
+        Axios.post(
+          `${
+            window.ENVIRONMENT.AGILE_CENTRAL
+          }/v1/attachment/uploadAttachment/${props.selectedProject.toUpperCase()}_${
+            props.taskNo
+          }`,
+          formData
+        ).then((res) => {
+          uploadedFiles.push(res.data);
+          console.log("Uploaded file: ", res.data);
+        });
+      };
+
+      reader.readAsArrayBuffer(file);
+    });
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -131,6 +212,7 @@ const TaskModal = (props) => {
                 Axios.post(
                   `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/createTask`,
                   {
+                    dndId: uuid(),
                     ...values,
                     priority: 0,
                     ticket: `${props.selectedProject.toUpperCase()}_${
@@ -144,13 +226,44 @@ const TaskModal = (props) => {
                       1 +
                       "-" +
                       new Date().getDate(),
+                  },
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
                   }
                 )
-                  .then(() => {
+                  .then((res) => {
                     isSending(false);
-                    props.loadCreatedTasks(projectName);
+                    const task = res.data;
+                    props.loadCreatedTasks(projectName, token);
+                    props.setShow(false);
+                    props.updateTasks({
+                      id: task.dndId,
+                      content: (
+                        <div>
+                          <Label
+                            color="blue"
+                            basic
+                            style={{ marginRight: "1vw" }}
+                          >
+                            {task.keyword}
+                          </Label>
+                          {task.name}
+                          <Icon name="user" style={{ marginLeft: "1.5vw" }} />
+                        </div>
+                      ),
+                    });
+
+                    addToast("Task has been successfully created!", {
+                      appearance: "success",
+                    });
                   })
-                  .catch((e) => console.log(e));
+                  .catch((e) =>
+                    addToast("Error while creating task", {
+                      appearance: "error",
+                    })
+                  );
               }, 3000);
             }}
           >
@@ -179,12 +292,12 @@ const TaskModal = (props) => {
                   style={{
                     marginTop: 15,
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: "column",
                   }}
                 >
                   <div
                     style={{
-                      margin: "auto 10px",
+                      margin: "5px 10px",
                       width: "5vw",
                     }}
                   >
@@ -201,12 +314,12 @@ const TaskModal = (props) => {
                   style={{
                     marginTop: 15,
                     display: "flex",
-                    flexDirection: "row",
+                    flexDirection: "column",
                   }}
                 >
                   <div
                     style={{
-                      margin: "auto 10px",
+                      margin: "5px 10px",
                       width: "5vw",
                     }}
                   >
@@ -224,20 +337,17 @@ const TaskModal = (props) => {
                   <Icon name="content" color="blue" />
                   Details
                 </div>
-                <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
+                <div style={{ marginLeft: "-0,5vw", marginTop: "10px" }}>
                   <div
                     style={{
-                      marginLeft: 17,
                       marginTop: 15,
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                     }}
                   >
                     <div
                       style={{
-                        margin: "auto 10px",
-                        marginLeft: "-2.5vw",
-                        marginRight: "2vw",
+                        margin: "5px 10px",
                         width: "5vw",
                       }}
                     >
@@ -254,20 +364,18 @@ const TaskModal = (props) => {
                     />
                   </div>
                 </div>
-                <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
+                <div style={{ marginLeft: "-0,5vw", marginTop: "10px" }}>
                   <div
                     style={{
-                      marginLeft: 17,
                       marginTop: 15,
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                     }}
                   >
                     <div
                       style={{
-                        margin: "auto 10px",
+                        margin: "5px 10px",
                         width: "5vw",
-                        marginLeft: "-2.5vw",
                       }}
                     >
                       Component:
@@ -287,20 +395,17 @@ const TaskModal = (props) => {
                   <Icon name="user" color="blue" />
                   People
                 </div>
-                <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
+                <div style={{ marginLeft: "-0,5vw", marginTop: "10px" }}>
                   <div
                     style={{
-                      marginLeft: 17,
                       marginTop: 15,
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                     }}
                   >
                     <div
                       style={{
-                        margin: "auto 10px",
-                        marginLeft: "-2.5vw",
-                        marginRight: "2vw",
+                        margin: "5px 10px",
                         width: "5vw",
                       }}
                     >
@@ -317,27 +422,23 @@ const TaskModal = (props) => {
                     />
                   </div>
                 </div>
-                <div style={{ marginLeft: "2vw", marginTop: "10px" }}>
+                <div style={{ marginLeft: "-0,5vw", marginTop: "10px" }}>
                   <div
                     style={{
-                      marginLeft: 15,
                       marginTop: 15,
                       display: "flex",
-                      flexDirection: "row",
+                      flexDirection: "column",
                     }}
                   >
                     <div
                       style={{
-                        margin: "auto 10px",
-                        marginLeft: "-2.5vw",
-                        marginRight: "2vw",
+                        margin: "5px 10px",
                         width: "5vw",
                       }}
                     >
                       Assignee:
                     </div>
                     <Select
-                      style={{ width: "15vw" }}
                       placeholder="Select assignee"
                       name="assignee"
                       onChange={(value) =>
@@ -364,6 +465,39 @@ const TaskModal = (props) => {
                 <div style={{ margin: "2vh 0" }}>
                   <Icon name="file alternate outline" color="blue" />
                   Attachments
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    margin: "1vh auto",
+                  }}
+                >
+                  {uploadedFiles.map((file) => (
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "5vw",
+                        height: "9vh",
+                        border: "1px solid rgb(217, 217, 217)",
+                        cursor: "pointer",
+                        padding: "5px",
+                        marginLeft: "5px",
+                      }}
+                      onClick={() => downloadAttachment(file)}
+                    >
+                      <Icon
+                        style={{ margin: "10px auto", padding: "5px" }}
+                        name="pdf file outline"
+                        size="big"
+                        color="red"
+                      />
+                      <div style={{ margin: "0 auto" }}>
+                        {file.substring(0, 7)}...
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 <div
                   {...getRootProps()}
@@ -407,4 +541,4 @@ const TaskModal = (props) => {
   );
 };
 
-export default connect(null, {loadCreatedTasks})(TaskModal);
+export default connect(null, { loadCreatedTasks })(TaskModal);

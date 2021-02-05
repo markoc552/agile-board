@@ -65,8 +65,12 @@ public class LoggingAspect {
 
         Object result = jp.proceed();
 
-        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()))
-                .append(String.format("%n With result %s", result));
+        Class returnType = ((MethodSignature) jp.getSignature()).getReturnType();
+
+        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()));
+
+        if (!returnType.getTypeName().equalsIgnoreCase("void"))
+            builder.append(String.format(" with result %s", result.toString()));
 
         logger.debug(builder);
 
@@ -85,8 +89,12 @@ public class LoggingAspect {
 
         Object result = jp.proceed();
 
-        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()))
-                .append(String.format(" with result %s", result.toString()));
+        Class returnType = ((MethodSignature) jp.getSignature()).getReturnType();
+
+        builder.append(String.format("Exiting method %s()", jp.getSignature().getName()));
+
+        if (!returnType.getTypeName().equalsIgnoreCase("void"))
+            builder.append(String.format(" with result %s", result.toString()));
 
         logger.info(builder);
 
