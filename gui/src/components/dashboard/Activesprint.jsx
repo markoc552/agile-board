@@ -22,6 +22,7 @@ import ProjectSelectModal from "./ProjectSelectModal";
 import AddToSprintModal from "../tasks/AddToSprintModal";
 import { useToasts } from "react-toast-notifications";
 import { loadStartedSprint, loadCreatedTasks } from "../../redux/actions";
+import { motion } from "framer-motion";
 
 const ActiveSprint = (props) => {
   const [show, setShow] = useState(false);
@@ -119,6 +120,15 @@ const ActiveSprint = (props) => {
         items: filteredFinishedTasks,
       },
     };
+  };
+
+  const secondVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.45 },
+    },
+    hidden: { opacity: 0 },
   };
 
   const [columns, setColumns] = useState(filterTasksByStatus(startedSprint));
@@ -256,7 +266,11 @@ const ActiveSprint = (props) => {
           setShowPage={props.setPage}
         />
       ) : (
-        <>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={secondVariants}
+        >
           <Headline style={{ width: "20vw", height: "2vh" }}>
             Sprint board
           </Headline>
@@ -498,7 +512,7 @@ const ActiveSprint = (props) => {
               />
             )}
           </div>
-        </>
+        </motion.div>
       )}
     </div>
   );

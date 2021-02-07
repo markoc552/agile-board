@@ -4,6 +4,7 @@ import { Headline } from "../util/AgileStyledComponents";
 import { Feed, Icon, Label, Segment } from "semantic-ui-react";
 import { useSelector } from "react-redux";
 import Axios from "axios";
+import { motion } from "framer-motion";
 
 const ProjectActivity = (props) => {
   const [feed, setFeed] = useState([]);
@@ -15,6 +16,15 @@ const ProjectActivity = (props) => {
   );
 
   const token = useSelector((state) => state.auth.token);
+
+  const secondVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.45 },
+    },
+    hidden: { opacity: 0 },
+  };
 
   useEffect(() => {
     Axios.get(`${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/getActivity`, {
@@ -32,55 +42,57 @@ const ProjectActivity = (props) => {
   return projectData === undefined ? (
     <div></div>
   ) : (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <Headline>Activity</Headline>
-        <div
-          style={{
-            width: "35vw",
-            height: "85vh",
-            margin: "25px",
-            overflowY: "scroll",
-          }}
-        >
-          <Feed>
-            {feed.map((item) => (
-              <Feed.Event>
-                <Feed.Label>
-                  <Icon name="user" color="blue" />
-                </Feed.Label>
-                <Feed.Content>
-                  <Feed.Summary>
-                    <Feed.User>{item.person}</Feed.User> {item.action}
-                    <Feed.Date>{item.timeAt}</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Label basic>Comment</Label>
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-            ))}
-          </Feed>
+    <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Headline>Activity</Headline>
+          <div
+            style={{
+              width: "35vw",
+              height: "85vh",
+              margin: "25px",
+              overflowY: "scroll",
+            }}
+          >
+            <Feed>
+              {feed.map((item) => (
+                <Feed.Event>
+                  <Feed.Label>
+                    <Icon name="user" color="blue" />
+                  </Feed.Label>
+                  <Feed.Content>
+                    <Feed.Summary>
+                      <Feed.User>{item.person}</Feed.User> {item.action}
+                      <Feed.Date>{item.timeAt}</Feed.Date>
+                    </Feed.Summary>
+                    <Feed.Meta>
+                      <Feed.Like>
+                        <Label basic>Comment</Label>
+                      </Feed.Like>
+                    </Feed.Meta>
+                  </Feed.Content>
+                </Feed.Event>
+              ))}
+            </Feed>
+          </div>
         </div>
+        <Segment
+          color="blue"
+          raised
+          style={{ width: "25vw", height: "25vh", margin: "5vh, 5vw" }}
+        >
+          <Headline style={{ margin: "0 0", fontSize: "15px" }}>
+            Project: {selectedProject}
+          </Headline>
+          <Headline style={{ margin: "0 0", fontSize: "15px" }}>
+            Manager: {projectData.manager}
+          </Headline>
+          <Headline style={{ margin: "-50px 0", fontSize: "15px" }}>
+            Ticket: {projectData.keyword}
+          </Headline>
+        </Segment>
       </div>
-      <Segment
-        color="blue"
-        raised
-        style={{ width: "25vw", height: "25vh", margin: "5vh, 5vw" }}
-      >
-        <Headline style={{ margin: "0 0", fontSize: "15px" }}>
-          Project: {selectedProject}
-        </Headline>
-        <Headline style={{ margin: "0 0", fontSize: "15px" }}>
-          Manager: {projectData.manager}
-        </Headline>
-        <Headline style={{ margin: "-50px 0", fontSize: "15px" }}>
-          Ticket: {projectData.keyword}
-        </Headline>
-      </Segment>
-    </div>
+    </motion.div>
   );
 };
 

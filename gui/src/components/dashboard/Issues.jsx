@@ -22,6 +22,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ProjectSelectModal from "./ProjectSelectModal";
 import Axios from "axios";
 import { loadCreatedTasks } from "../../redux/actions";
+import { motion } from "framer-motion";
 
 const Issues = (props) => {
   const tasks = useSelector((state) => state.managment.tasks);

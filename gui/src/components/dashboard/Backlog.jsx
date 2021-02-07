@@ -20,6 +20,8 @@ import Axios from "axios";
 import _ from "lodash";
 import ProjectSelectModal from "./ProjectSelectModal";
 import AddToSprintModal from "../tasks/AddToSprintModal";
+import {motion} from "framer-motion"
+
 
 const Backlog = (props) => {
   const [show, setShow] = useState(false);
@@ -45,6 +47,15 @@ const Backlog = (props) => {
   const itemsBackend = useSelector((state) => state.managment.itemsFromBackend);
 
   const dinamicDroppables = useMemo(() => [...items], [items]);
+
+  const secondVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.45 },
+    },
+    hidden: { opacity: 0 },
+  };
 
   useEffect(() => {
     setItems(itemsBackend);
@@ -159,7 +170,11 @@ const Backlog = (props) => {
           setShowPage={props.setPage}
         />
       ) : (
-        <>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={secondVariants}
+        >
           <Headline style={{ width: "20vw", height: "2vh" }}>Backlog</Headline>
           <div
             style={{ display: "flex", flexDirection: "row" }}
@@ -376,7 +391,7 @@ const Backlog = (props) => {
               />
             )}
           </div>
-        </>
+        </motion.div>
       )}
     </div>
   );
