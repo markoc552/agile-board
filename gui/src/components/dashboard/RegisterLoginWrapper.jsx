@@ -9,9 +9,9 @@ const RegisterLogin = (props) => {
   const useAuthorized = () => {};
 
   return action === "Login" ? (
-    <Login setAction={setAction} />
+    <Login accountModal={props.accountModal} setAction={setAction} />
   ) : action === "Register" ? (
-    <Register setAction={setAction} />
+    <Register accountModal={props.accountModal} setAction={setAction} />
   ) : (
     <div />
   );

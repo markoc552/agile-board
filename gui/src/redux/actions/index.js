@@ -2,10 +2,10 @@ import React from "react";
 import Axios from "axios";
 import { Label, Icon } from "semantic-ui-react";
 
-export const saveToken = (token) => (dispatch) => {
+export const saveToken = (adminToken, centralToken) => (dispatch) => {
   console.log("Saved token");
 
-  dispatch({ type: "SAVE_TOKEN", payload: token });
+  dispatch({ type: "SAVE_TOKEN", payload: { adminToken, centralToken } });
 };
 
 export const login = (logged, user) => (dispatch) => {
@@ -114,7 +114,12 @@ export const loadStartedSprint = (projectName, token) => (dispatch) => {
         },
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dispatch({
+        type: "LOAD_SPRINT",
+        payload: undefined,
+      });
+    });
 };
 
 export const setStartedSprint = (sprint) => (dispatch) => {

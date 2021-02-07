@@ -8,8 +8,7 @@ import java.util.*;
 
 
 @Component
-public interface ActivityRepository extends JpaRepository<ActivityDao, Long> {
+public interface UserCredentialsRepository extends JpaRepository<UserCredentialsDao, Long> {
 
-    Optional<List<ActivityDao>> findByProjectName(String projectName);
-
+    Optional<UserCredentialsDao> findByUsername(String username);
 }

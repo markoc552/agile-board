@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Headline,
@@ -20,7 +20,7 @@ import {
 import { Formik, Field, ErrorMessage } from "formik";
 import { callProjectService } from "../util/endpoints";
 import Axios from "axios";
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux";
 
 const managerOptions = [
   { value: "tests", text: "Test" },
@@ -31,7 +31,29 @@ const NewProject = (props) => {
   const [submitting, isSubmitting] = useState(false);
   const [successfull, setSuccesfull] = useState(false);
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
+
+  const users = [];
+
+  const loadReportersAndAssignees = () =>
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) =>
+        res.data.map((user) => {
+          users.push({
+            value: `${user.firstname} ${user.lastname}`,
+            text: `${user.firstname} ${user.lastname}`,
+          });
+        })
+      )
+      .catch((err) => console.log(err));
+
+  useEffect(() => {
+    loadReportersAndAssignees();
+  }, []);
 
   return (
     <div>
@@ -107,7 +129,7 @@ const NewProject = (props) => {
                     setFieldValue("manager", value.target.innerText)
                   }
                   onBlur={handleBlur}
-                  options={managerOptions}
+                  options={users}
                 />
                 <Button
                   type="submit"

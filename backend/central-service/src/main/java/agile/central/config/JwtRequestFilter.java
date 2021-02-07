@@ -1,29 +1,31 @@
 package agile.central.config;
 
 import agile.central.exceptions.*;
+import agile.central.services.*;
 import lombok.*;
 import org.javatuples.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.context.*;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.web.authentication.*;
 import org.springframework.stereotype.*;
-import org.springframework.web.client.*;
 import org.springframework.web.filter.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import static agile.central.util.RestTemplateUtils.fetchUserDetails;
+import static agile.central.util.RestTemplateUtils.authenticateUser;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtToken jwtToken;
+
+    @Autowired
+    private UserService userService;
 
     public static final Logger LOG = LoggerFactory.getLogger(JwtRequestFilter.class);
 
@@ -37,7 +39,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (parsedToken.getValue0() != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = fetchUserDetails();
+            UserDetails userDetails = userService.loadUserByUsername(parsedToken.getValue0());
 
             if (jwtToken.validateToken(parsedToken.getValue1(), userDetails)) {
 

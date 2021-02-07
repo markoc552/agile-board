@@ -9,15 +9,35 @@ import WelcomeContent from "../components/home/WelcomeContent";
 import TrustedCompanies from "../components/home/TrustedCompanies";
 import Solutions from "../components/home/Solutions";
 import Bottom from "../components/home/Bottom";
-
+import { motion } from "framer-motion";
 
 const Home = (props) => {
+  const variants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.35 },
+    },
+    hidden: { opacity: 0, scale: 1.05 },
+  };
+
+  const secondVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.45 },
+    },
+    hidden: { opacity: 0 },
+  };
+
   return (
     <>
       <MainContainerWrapper>
         <MainContentWrapper>
           <Navigation />
-          <WelcomeContent />
+          <motion.div initial="hidden" animate="visible" variants={variants}>
+            <WelcomeContent />
+          </motion.div>
           <Solutions />
           <Divider horizontal style={{ marginTop: "25vh" }}>
             <Header as="h4">

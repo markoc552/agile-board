@@ -23,7 +23,11 @@ import { Formik, Field, ErrorMessage, FieldArray } from "formik";
 import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { loadCreatedTasks, setStartedSprint } from "../../redux/actions";
+import {
+  loadCreatedTasks,
+  setStartedSprint,
+  loadStartedSprint,
+} from "../../redux/actions";
 import { connect, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 
@@ -34,7 +38,9 @@ const TaskModal = (props) => {
 
   const projectName = useSelector((state) => state.managment.selectedProject);
 
-  const token = useSelector(state => state.auth.token)
+  const user = useSelector((state) => state.auth.user);
+
+  const token = useSelector((state) => state.auth.token);
 
   const handleAddTaskToSprint = (task) => {
     isSending(true);
@@ -47,12 +53,14 @@ const TaskModal = (props) => {
         },
         params: {
           sprintName: `${props.sprint.name}`,
+          person: `${user.firstname} ${user.lastname}`,
         },
       }
     )
       .then((res) => {
         isSending(false);
         props.setShow(false);
+        props.loadStartedSprint(projectName, token);
         addToast("Task has been added to sprint!", {
           appearance: "success",
         });
@@ -103,4 +111,8 @@ const TaskModal = (props) => {
   );
 };
 
-export default connect(null, { loadCreatedTasks, setStartedSprint })(TaskModal);
+export default connect(null, {
+  loadCreatedTasks,
+  setStartedSprint,
+  loadStartedSprint,
+})(TaskModal);

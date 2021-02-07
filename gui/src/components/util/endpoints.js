@@ -9,9 +9,18 @@ export const createAccount = async (values, role) => {
   return result;
 };
 
-export const getToken = async (credentials) => {
+export const getAdminToken = async (credentials) => {
   const result = await axios.post(
     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/jwt/authenticate`,
+    credentials
+  );
+
+  return result;
+};
+
+export const getCentralToken = async (credentials) => {
+  const result = await axios.post(
+    `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/jwt/authenticate`,
     credentials
   );
 
@@ -23,7 +32,7 @@ export const getAllProjects = async (token) => {
     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/projects/getAllProjects`,
     {
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
     }
   );

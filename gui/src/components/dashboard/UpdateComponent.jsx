@@ -40,10 +40,10 @@ const UpdateComponent = (props) => {
     (state) => state.managment.selectedProject
   );
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
-  useEffect(async () => {
-    const result = await Axios.get(
+  useEffect(() => {
+    const result = Axios.get(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/getComponents`,
       {
         headers: {
@@ -53,9 +53,7 @@ const UpdateComponent = (props) => {
           projectName: currentProject,
         },
       }
-    );
-
-    setDataToRender(result);
+    ).then((res) => setDataToRender(res.data));
   }, []);
 
   function GlobalFilter({
@@ -238,6 +236,7 @@ const UpdateComponent = (props) => {
           show={show}
           setShow={setShow}
           currentProject={currentProject}
+          selectedRow={selectedRowData}
         />
       )}
     </div>

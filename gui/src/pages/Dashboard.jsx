@@ -30,7 +30,7 @@ const Dashboard = (props) => {
   const [showMenu, isMenuShow] = useState(true);
   const [showModal, isModalShow] = useState(false);
 
-  const isMobileView = useMedia("(max-width: 1270px)");
+  const isMobileView = useMedia("(max-width: 1410px)");
   const isDesktopView = useMedia("(min-width: 1042px)");
 
   const handleClickMenu = () => {
@@ -99,7 +99,7 @@ const Dashboard = (props) => {
               <MyProjects />
             ) : showPage === "selectProjectModal" ? (
               <ProjectSelectModal
-                show={false}
+                show={showModal}
                 setShow={isModalShow}
                 setShowPage={setPage}
               />

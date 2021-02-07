@@ -255,7 +255,7 @@ export const DashboardNav = styled.div`
   background-color: #4289c7;
   box-shadow: 0px 7px 14px 0px rgba(50, 50, 50, 0.41);
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     flex-direction: column;
     padding: 50px;
     width: 100vw;
@@ -268,7 +268,7 @@ export const DashboardUserWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     flex-direction: column;
     margin: 2vh auto;
   }
@@ -294,14 +294,14 @@ export const DashboardNavHeadline = styled.div`
   margin: auto 0;
   z-index: 10;
 
-  @media only screen and (max-width: 1275px) and (min-width: 1270px) {
+  @media only screen and (max-width: 1420px) and (min-width: 1410px) {
     flex-direction: column;
     width: 22.5vw;
     height: 5.5vh;
     font-size: 15px;
   }
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     flex-direction: column;
     width: 104vw;
     padding: 10px;
@@ -321,7 +321,7 @@ export const DashboardNavHeadline = styled.div`
 export const DashboardNavHeadlineItemWrapper = styled.div`
   font-family: "Arvo", serif;
   font-weight: bold;
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     margin: 1vh 5vw;
   }
 `;
@@ -329,7 +329,7 @@ export const DashboardNavHeadlineItemWrapper = styled.div`
 export const DashboardNavHeadlineItemContainer = styled.div`
   display: flex;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     margin: 1vh -10vw;
     flex-direction: row;
     background-color: white;
@@ -359,7 +359,7 @@ export const DashboardNavItem = styled.div`
     background-color: #63a4ff;
   }
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     width: 50vw;
   }
 `;
@@ -373,7 +373,7 @@ export const DashboardHeadlineWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     width: 50vw;
     padding: 20px;
   }
@@ -384,7 +384,7 @@ export const DashboardHeadline = styled.div`
   font-size: 15px;
   margin: 12px 20px;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     width: 50vw;
     margin: -10px 0;
     padding: 7px;
@@ -562,7 +562,7 @@ export const TaskWidget = styled.div`
   font-size: 15px;
   overflow-y: scroll;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     width: 50vh;
   }
 `;
@@ -573,14 +573,14 @@ export const ProjectNavigationBar = styled.div`
   display: flex;
   flex-direction: column;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     width: 100vw;
     margin: 0 auto;
     margin-top: 5vh;
     margin-bottom: 1.5vh;
   }
 
-  @media only screen and (max-width: 1275px) and (min-width: 1270px) {
+  @media only screen and (max-width: 1420px) and (min-width: 1410px) {
     width: 17.3vw;
   }
 
@@ -593,7 +593,7 @@ export const ProjectBoard = styled.div`
   display: flex;
   flex-direction: row;
 
-  @media only screen and (max-width: 1270px) {
+  @media only screen and (max-width: 1410px) {
     flex-direction: column;
   }
 `;

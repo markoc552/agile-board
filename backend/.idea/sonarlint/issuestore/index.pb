@@ -199,3 +199,11 @@ Gcentral-service/src/main/java/agile/central/services/SprintService.java,7/5/75
 Lcentral-service/src/main/java/agile/central/repository/SprintRepository.java,0/a/0a31c74ef28ef35037af5fd5d306df4bfd9cd428
 u
 Ecentral-service/src/main/java/agile/central/model/dto/ProjectDto.java,e/d/ed1ea7ac7d8a4a02d400b44d8122810d5a743c7b
+r
+Bcentral-service/src/main/java/agile/central/model/dao/UserDao.java,d/f/dffa2e32562c7340fc999307b86f4fd8ec2f3255
+~
+Ncentral-service/src/main/java/agile/central/repository/ActivityRepository.java,8/2/825e9fcc5cfaa146b0f5dd155444b05ceb750f22
+t
+Dcentral-service/src/main/java/agile/central/util/ActivityLogger.java,8/9/8910bd6998e34b5fd4fa1ef81cd9e95388c081e7
+ˆ
+Xcentral-service/src/main/java/agile/central/controllers/JwtAuthenticationController.java,4/a/4a3a51af1f57400eadc65f5bc7bb16c8245b9ff4

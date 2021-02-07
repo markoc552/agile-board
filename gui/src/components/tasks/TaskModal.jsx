@@ -42,9 +42,11 @@ const TaskModal = (props) => {
     { value: "1", text: "Low" },
   ];
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
   const projectName = useSelector((state) => state.managment.selectedProject);
+
+  const user = useSelector((state) => state.auth.user);
 
   const components = [];
   const reporters = [];
@@ -77,7 +79,7 @@ const TaskModal = (props) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        params: { projectName: "test" },
+        params: { projectName },
       }
     )
       .then((res) =>
@@ -230,6 +232,9 @@ const TaskModal = (props) => {
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
+                    },
+                    params: {
+                      person: `${user.firstname} ${user.lastname}`,
                     },
                   }
                 )
@@ -387,7 +392,7 @@ const TaskModal = (props) => {
                         setFieldValue("component", value.target.innerText)
                       }
                       onBlur={handleBlur}
-                      options={reporters}
+                      options={components}
                     />
                   </div>
                 </div>

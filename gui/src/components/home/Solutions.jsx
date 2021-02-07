@@ -11,6 +11,7 @@ import SolutionOne from "./Solution-One";
 import SolutionTwo from "./Solution-Two";
 import SolutionThree from "./Solution-Three";
 import SolutionFour from "./Solution-Four";
+import { motion } from "framer-motion";
 
 const images = [
   "https://www.prunderground.com/wp-content/uploads/2019/02/animation-creator-software-4.png",
@@ -22,6 +23,24 @@ const images = [
 const Solutions = (props) => {
   const [selectedSolution, setSelectedSolution] = useState("solution-1");
   const [selectedImage, setSelectedImage] = useState(0);
+
+  const variants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.35 },
+    },
+    hidden: { opacity: 0, scale: 1.05 },
+  };
+
+  const secondVariants = {
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.45 },
+    },
+    hidden: { opacity: 0 },
+  };
 
   return (
     <>
@@ -65,13 +84,21 @@ const Solutions = (props) => {
             </SolutionOptions>
           </div>
           {selectedSolution === "solution-1" ? (
-            <SolutionOne />
+            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+              <SolutionOne />
+            </motion.div>
           ) : selectedSolution === "solution-2" ? (
-            <SolutionTwo />
+            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+              <SolutionTwo />
+            </motion.div>
           ) : selectedSolution === "solution-3" ? (
-            <SolutionThree />
+            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+              <SolutionThree />
+            </motion.div>
           ) : selectedSolution === "solution-4" ? (
-            <SolutionFour />
+            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+              <SolutionFour />
+            </motion.div>
           ) : (
             <div></div>
           )}

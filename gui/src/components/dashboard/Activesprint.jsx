@@ -42,13 +42,15 @@ const ActiveSprint = (props) => {
     (state) => state.managment.selectedProject
   );
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
   const startedSprint = useSelector((state) => state.managment.sprint);
 
   const tasks = useSelector((state) => state.managment.tasks);
 
   const itemsBackend = useSelector((state) => state.managment.itemsFromBackend);
+
+  const user = useSelector((state) => state.auth.user);
 
   const dinamicDroppables = useMemo(() => [...items], [items]);
 
@@ -132,7 +134,7 @@ const ActiveSprint = (props) => {
   };
 
   const handleUpdateTask = (task, status) => {
-    console.log(task.content.ticket);
+    console.log(task.content);
     Axios.post(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/updateTaskStatus`,
       {},
@@ -140,10 +142,11 @@ const ActiveSprint = (props) => {
         params: {
           ticket: task.content.ticket,
           status: `${status}`,
+          person: `${user.firstname} ${user.lastname}`,
         },
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       }
     )
       .then((res) => {
@@ -190,11 +193,15 @@ const ActiveSprint = (props) => {
       if (destination.droppableId === "2") {
         const task = tasks.filter((item) => item.id === removed.id);
 
+        console.log(task);
+
         handleUpdateTask(task[0], "TO_BE_VERIFIED");
       }
 
       if (destination.droppableId === "3") {
         const task = tasks.filter((item) => item.id === removed.id);
+
+        console.log(task);
 
         handleUpdateTask(task[0], "FINISHED");
       }

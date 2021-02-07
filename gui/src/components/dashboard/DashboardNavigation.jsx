@@ -9,8 +9,9 @@ import {
   DashboardNavHeadlineItemContainer,
 } from "../util/AgileStyledComponents";
 import { Image, Search, Dropdown, Icon, Button } from "semantic-ui-react";
-import { useSelector } from "react-redux";
+import { useSelector, connect } from "react-redux";
 import ProjectSelectModal from "./ProjectSelectModal";
+import { login } from "../../redux/actions";
 
 const DashboardNav = (props) => {
   const [showModal, isModalShow] = useState(false);
@@ -44,98 +45,105 @@ const DashboardNav = (props) => {
               />
             </DashboardNavHeadlineItemWrapper>
           )}
-          <Button
-            color="teal"
-            circular
-            style={{
-              margin: props.isMobileView ? "1vh 0" : "auto 0",
-              height: props.isMobileView && "5vh",
-            }}
-            onClick={() => isModalShow(true)}
-          >
-            Choose project
-          </Button>
-          <DashboardNavHeadlineItemWrapper>
-            <Search style={{ margin: "1vh 50px" }} />
-          </DashboardNavHeadlineItemWrapper>
 
           {user !== undefined && (
-            <div>
-              <Dropdown
-                icon="false"
-                trigger={
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      fontFamily: "'Arvo', serif",
-                      margin: "0.4vh auto",
-                    }}
-                  >
-                    <Image
-                      src={require("../../assets/images/agile-logo.png")}
-                      size="mini"
-                      avatar
-                      bordered
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        margin: "0 auto",
-                      }}
-                    />
+            <>
+              <Button
+                color="teal"
+                circular
+                style={{
+                  margin: props.isMobileView ? "1vh 0" : "auto 0",
+                  height: props.isMobileView && "5vh",
+                }}
+                onClick={() => isModalShow(true)}
+              >
+                Choose project
+              </Button>
+              <DashboardNavHeadlineItemWrapper>
+                <Search style={{ margin: "1vh 50px" }} />
+              </DashboardNavHeadlineItemWrapper>
+              <div>
+                <Dropdown
+                  icon="false"
+                  trigger={
                     <div
                       style={{
                         display: "flex",
-                        flexDirection: "column",
-                        color: "white",
-                        fontSize: "15.9px",
-                        fontWeight: "bold",
+                        flexDirection: "row",
+                        fontFamily: "'Arvo', serif",
+                        margin: "0.4vh auto",
                       }}
                     >
-                      <div style={{ margin: "auto 10px" }}>
-                        <div>Marko</div>
-                        <div>
-                          <Icon name="circle" color="green" />
-                          Online
+                      <Image
+                        src={require("../../assets/images/agile-logo.png")}
+                        size="mini"
+                        avatar
+                        bordered
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          margin: "0 auto",
+                        }}
+                      />
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          color: "white",
+                          fontSize: "15.9px",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        <div style={{ margin: "auto 10px" }}>
+                          <div>{`${user.firstname} ${user.lastname}`}</div>
+                          <div>
+                            <Icon name="circle" color="green" />
+                            Online
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                }
-              >
-                <Dropdown.Menu>
-                  <Dropdown.Header icon="user" content="Administrator" />
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    icon="sitemap"
-                    text="Manage projects"
-                    onClick={() => props.setShowPage("manageProjects")}
-                  />
-                  <Dropdown.Item
-                    icon="user"
-                    text="Manage users"
-                    onClick={() => props.setShowPage("manageUsers")}
-                  />
-                  <Dropdown.Header icon="user" content="User" />
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    icon="attention"
-                    text="My profile"
-                    onClick={() => props.setShowPage("myProfile")}
-                  />
-                  <Dropdown.Item
-                    icon="sitemap"
-                    text="My projects"
-                    onClick={() => props.setShowPage("myProjects")}
-                  />
-                  <Dropdown.Item
-                    icon="file code"
-                    text="My issues"
-                    onClick={() => props.setShowPage("myIssues")}
-                  />
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+                  }
+                >
+                  <Dropdown.Menu>
+                    <Dropdown.Header icon="user" content="Administrator" />
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      icon="sitemap"
+                      text="Manage projects"
+                      onClick={() => props.setShowPage("manageProjects")}
+                    />
+                    <Dropdown.Item
+                      icon="user"
+                      text="Manage users"
+                      onClick={() => props.setShowPage("manageUsers")}
+                    />
+                    <Dropdown.Header icon="user" content="User" />
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      icon="attention"
+                      text="My profile"
+                      onClick={() => props.setShowPage("myProfile")}
+                    />
+                    <Dropdown.Item
+                      icon="sitemap"
+                      text="My projects"
+                      onClick={() => props.setShowPage("myProjects")}
+                    />
+                    <Dropdown.Item
+                      icon="file code"
+                      text="My issues"
+                      onClick={() => props.setShowPage("myIssues")}
+                    />
+                    <Dropdown.Item
+                      icon="sign out"
+                      text="Sign out"
+                      onClick={() => props.login(false, undefined)}
+                    />
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </>
           )}
         </DashboardNavHeadlineItemContainer>
       </DashboardUserWrapper>
@@ -150,4 +158,4 @@ const DashboardNav = (props) => {
   );
 };
 
-export default DashboardNav;
+export default connect(null, { login })(DashboardNav);

@@ -83,4 +83,12 @@ public class TaskController {
 
         return ResponseEntity.ok(tasks);
     }
+
+    @GetMapping("/getActivity")
+    public ResponseEntity<Object> getActivityByProjectName(@NotNull(message = ASSIGNEE_CAN_T_BE_NULL) @RequestParam(name = "projectName") String projectName) {
+
+        List<ActivityDao> activityByProjectName = taskService.getActivityByProjectName(projectName);
+
+        return ResponseEntity.ok(activityByProjectName);
+    }
 }

@@ -39,7 +39,7 @@ const UpdateProjects = (props) => {
   const token = useSelector((state) => state.auth.token);
 
   useEffect(async () => {
-    const result = await getAllProjects();
+    const result = await getAllProjects(token);
 
     setDataToRender(result);
   }, []);

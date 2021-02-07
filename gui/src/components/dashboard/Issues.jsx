@@ -31,7 +31,9 @@ const Issues = (props) => {
 
   const dispatch = useDispatch();
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
+
+  const user = useSelector((state) => state.auth.user);
 
   let backupAttachments = [];
 
@@ -78,6 +80,7 @@ const Issues = (props) => {
     if (selectedTask !== undefined) {
       fetchComments(selectedTask.ticket);
       fetchComments(selectedTask.ticket);
+      fetchAttachments(selectedTask.ticket);
     }
   }, []);
 
@@ -88,6 +91,9 @@ const Issues = (props) => {
         params: {
           filename: name,
           ticket: `${selectedTask.ticket}`,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       }
     )
@@ -140,7 +146,7 @@ const Issues = (props) => {
           }
         ).then((res) => {
           console.log(backupAttachments);
-          setAttachments([...backupAttachments, res.data]);
+          setAttachments([...attachemnts, res.data]);
           console.log("Uploaded file: ", res.data);
         });
       };
@@ -392,7 +398,7 @@ const Issues = (props) => {
                   onClick={() =>
                     publishComment({
                       taskNumber: selectedTask.ticket,
-                      publisher: "pero",
+                      publisher: `${user.firstname} ${user.lastname}`,
                       content: comment,
                       publishTime:
                         new Date().getFullYear() +

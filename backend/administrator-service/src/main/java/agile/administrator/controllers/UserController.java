@@ -8,6 +8,7 @@ import agile.administrator.model.dto.*;
 import agile.administrator.services.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,12 +52,18 @@ public class UserController {
         return ResponseEntity.ok("User successfully deleted");
     }
 
+    @GetMapping("/getUserInfo")
+    public ResponseEntity<Object> getUserInformation(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username) throws UserNotFoundException {
+
+        UserDao userByUsername = userService.getUserByUsername(username);
+
+        return ResponseEntity.ok(userByUsername);
+    }
+
     @GetMapping("/getUser")
     public ResponseEntity<Object> getUser(@NotNull(message = USER_CAN_T_BE_NULL) @RequestParam(name = "username") String username) throws UserNotFoundException {
 
-        UserDao user = userService.getUserByUsername(username);
-
-        CustomUserDetails userDetails = new CustomUserDetails(user);
+        UserDetails userDetails = userService.loadUserByUsername(username);
 
         return ResponseEntity.ok(userDetails);
     }

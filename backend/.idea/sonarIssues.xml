@@ -28,6 +28,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/CorsConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/config/JwtRequestFilter.java">
           <value>
             <set />
@@ -168,6 +173,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/ActivityController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/controllers/AttachmentController.java">
           <value>
             <set />
@@ -213,6 +223,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/CustomUserDetails.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/ActivityDao.java">
           <value>
             <set />
@@ -244,6 +259,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/TaskDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/UserCredentialsDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/model/dao/UserDao.java">
           <value>
             <set />
           </value>
@@ -308,6 +333,16 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/UserCredentialsRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/repository/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/AttachmentService.java">
           <value>
             <set />
@@ -334,6 +369,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/TaskService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/central-service/src/main/java/agile/central/services/UserService.java">
           <value>
             <set />
           </value>

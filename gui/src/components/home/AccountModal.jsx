@@ -1,19 +1,29 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+import RegistrationLoginWrapper from "../dashboard/RegisterLoginWrapper";
 import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
+import { Button, Message } from "semantic-ui-react";
 
 const AccountModal = (props) => {
   return (
-    <Modal show={props.show} onHide={() => props.setShow(false)}>
+    <Modal show={props.show} size="lg" onHide={() => props.setShow(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Log in</Modal.Title>
+        <Modal.Title>Login/Sign up</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Please log in or register</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary">Register</Button>
-        <Button variant="primary">Login</Button>
-      </Modal.Footer>
+      <Modal.Body>
+        {props.user !== undefined ? (
+          <Message style={{fontSize: "15px"}}>
+            <Message.Header>
+              Hello {`${props.user.firstname} ${props.user.lastname}`}
+            </Message.Header>
+            <p>You are logged in and now you can enter dashboard.</p>
+            <Button style={{ margin: "0 auto" }} color="blue">
+              Dashboard
+            </Button>
+          </Message>
+        ) : (
+          <RegistrationLoginWrapper accountModal />
+        )}
+      </Modal.Body>
     </Modal>
   );
 };

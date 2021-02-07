@@ -38,11 +38,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
+                   .antMatchers("/v1/jwt/authenticate").permitAll()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)
                    .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                    .and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

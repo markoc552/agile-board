@@ -40,16 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     }
 
     @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedMethods("*");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser").permitAll()
+        http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser", "/v1/user/getUser").permitAll()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()
                    .and().exceptionHandling().authenticationEntryPoint(authenticationEndpoint)

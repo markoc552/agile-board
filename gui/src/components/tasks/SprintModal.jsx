@@ -38,6 +38,8 @@ const TaskModal = (props) => {
 
   const projectName = useSelector((state) => state.managment.selectedProject);
 
+  const user = useSelector((state) => state.auth.user);
+
   const token = useSelector(state => state.auth.token)
 
   return (
@@ -89,7 +91,9 @@ const TaskModal = (props) => {
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
-                    },
+                    }, params : {
+                      person: `${user.firstname} ${user.lastname}`
+                    }
                   }
                 )
                   .then((res) => {

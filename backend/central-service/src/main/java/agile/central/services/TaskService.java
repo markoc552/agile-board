@@ -112,6 +112,12 @@ public class TaskService {
     }
 
     @Log
+    public List<ActivityDao> getActivityByProjectName(String projectName) {
+
+        return activityLogger.fetchProjectActivity(projectName);
+    }
+
+    @Log
     public List<TaskDao> getTasksByAssignee(String assignee) throws TaskNotFoundException {
 
         Optional<List<TaskDao>> byAssignee = taskRepository.findByAssignee(assignee);
