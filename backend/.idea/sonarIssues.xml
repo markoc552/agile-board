@@ -503,6 +503,26 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/config/BeanConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/config/BeanConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/config/CentralSigningConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/config/LocalSigningConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralAuthorityController.java">
           <value>
             <set />
@@ -518,7 +538,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralSigningController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/CentralStorageController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/controllers/SigningController.java">
           <value>
             <set />
           </value>
@@ -533,7 +563,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralCryptoService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralDownloadService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralElmoSignService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CentralIPdfSignService.java">
           <value>
             <set />
           </value>
@@ -548,7 +593,42 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/CryptoService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/ElmoSignService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/ICryptoService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/java/de/bdr/central/service/services/PdfSignService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-central-dev.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-dev.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/main/resources/application-local-dev.yml">
           <value>
             <set />
           </value>
@@ -584,6 +664,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/DownloadServiceTest.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tep/backend/services/central-service/src/test/java/de/bdr/central/service/services/PDFSignServiceTest.java">
           <value>
             <set />
           </value>
@@ -824,6 +909,186 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../../tep/gui/tep-common/src/pages/CreatePDFCert/jsonTemplateTransformations.js">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/pom.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/MeterUtils.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/aspects/Log.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/aspects/LogIgnore.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/aspects/LoggingAspect.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/config/AppConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/config/ApplicationProperties.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/config/CorsConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/config/SecurityConfiguration.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/config/SpringFoxConfig.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/controllers/ControllerExceptionHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/controllers/MeterController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/controllers/UserController.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/InvalidTypeException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/MeterException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/ReadingsAlreadyExistsException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/ReadingsNotExistsException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/UserAlreadyExistsException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/exceptions/UserNotExistsException.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/model/ExceptionResponse.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/model/dao/MeterDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/model/dao/UserDao.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/model/dto/MeterDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/model/dto/UserDto.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/repositories/MeterRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/repositories/ReadingsRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/repositories/UserRepository.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/services/GeneralService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/services/IService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/services/MeterService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/services/UserService.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/util/MeterConstants.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/util/MeterHandler.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/util/MeterReader.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/java/meter/readings/util/MeterWorker.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../../tq-technical-task/backend/readings/src/main/resources/application.yml">
           <value>
             <set />
           </value>

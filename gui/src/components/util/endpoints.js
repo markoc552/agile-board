@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const createAccount = async (values, role) => {
+  console.log(values)
   const result = await axios.post(
     `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
     { ...values, role: role }

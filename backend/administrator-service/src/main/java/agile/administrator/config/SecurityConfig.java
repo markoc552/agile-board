@@ -44,6 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http.csrf().disable();
 
+        http.requiresChannel().anyRequest().requiresSecure();
+
         http.authorizeRequests().antMatchers("/v1/jwt/authenticate", "/v1/user/createUser", "/v1/user/getUser").permitAll()
                    .antMatchers( "/v1/user/updateUser", "/v1/user/deleteUser").hasAuthority("ADMIN")
                    .anyRequest().authenticated()

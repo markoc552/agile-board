@@ -31,7 +31,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @SneakyThrows
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-
+        
         String requestToken = httpServletRequest.getHeader("Authorization");
 
         Pair<String, String> parsedToken = parseToken(requestToken);
