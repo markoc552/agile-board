@@ -7,6 +7,7 @@ read -s PASSWORD
 
 BUILD_GUI=false
 BUILD_NGINX=false
+BUILD_BACKEND=false
 START_CONTAINERS=false
 STOP_CONTAINERS=false
 PUSH_TO_GIT=false
@@ -25,7 +26,8 @@ do
     --build|-b)
      BUILD_GUI=true
      BUILD_NGINX=true
-     echo "Build gui and nginx set to: $BUILD_GUI"
+     BUILD_BACKEND=true
+     echo "Build gui and backend set to: $BUILD_GUI"
      ;;
     --stop)
      STOP_CONTAINERS=true
@@ -55,33 +57,40 @@ do
  echo
 
  function buildGui() {
+ 
+   docker-compose up -d db #first start db
 
-   cd /home/perajmar/Documents/repos/sba-banking/smart-banking-app/gui
-   docker build -t sba_client .
+   cd ../gui
+   docker build -t agile_gui .
  }
 
  function buildNginx() {
 
-   cd /home/perajmar/Documents/repos/sba-banking/smart-banking-app/deployment/nginx
+   cd ../deployment/nginx
    docker build -t nginx-root .
+ }
+ 
+ function buildBackend() {
+ 
+    cd ../../backend/administrator-service
+    
+    mvn spring-boot:build-image -Dspring-boot.build-image.imageName=agile/administrator-service:latest
+    
+    cd ../central-service
+    
+    mvn spring-boot:build-image -Dspring-boot.build-image.imageName=agile/central-service:latest
  }
 
  function startContainers() {
-
+ 
    docker-compose up -d #start db,gui and nginx
-
-   cd /home/perajmar/Documents/repos/sba-banking/smart-banking-app/deployment
-
-   docker-compose up -d #start blockchain network
  }
 
  function stopContainers() {
+ 
+   cd ../../deployment
 
    docker-compose down #stop db,gui and nginx
-
-   cd /home/perajmar/Documents/repos/sba-banking/smart-banking-app/blockchain-network
-
-   docker-compose down #stop blockchain network
  }
 
  function gitPush() {
@@ -107,6 +116,10 @@ do
 
  if [ $BUILD_NGINX == true ]; then
    buildNginx
+ fi
+ 
+ if [ $BUILD_BACKEND == true ]; then
+   buildBackend
  fi
 
  if [ $START_CONTAINERS == true ]; then

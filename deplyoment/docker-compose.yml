@@ -14,6 +14,32 @@ x-healthcheck:
   retries: 3
 
 services:
+  gui:
+   image: agile_gui:latest
+   restart: on-failure
+   ports:
+     - 3000:3000
+   volumes:
+     - config/configuration.json:/opt/agile/configuration.js
+    networks:
+     - agile-network
+
+  administrator:
+    image: administrator-service:latest
+    restart: on-failure
+    ports:
+      - 9000:9000
+    networks:
+      - agile-network
+
+  central:
+    image: central-service:latest
+    restart: on-failure
+    ports:
+      - 9005:9005
+    networks:
+      - agile-network
+
   db:
    image: postgres:12
    ports:

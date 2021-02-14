@@ -1,4 +1,4 @@
-#Dockerfile for building Smart Banking App production image
+#Dockerfile for building Agile Board App production image
 
 FROM node:10.23 as builder
 
