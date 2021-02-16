@@ -123,6 +123,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/administrator-service/src/main/resources/application-docker.yml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/administrator-service/src/main/resources/application.yml">
           <value>
             <set />

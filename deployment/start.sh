@@ -1,10 +1,5 @@
 #!/bin/bash
 
-echo "Enter you username"
-read USERNAME
-echo "Enter you password"
-read -s PASSWORD
-
 BUILD_GUI=false
 BUILD_NGINX=false
 BUILD_BACKEND=false
@@ -12,11 +7,6 @@ START_CONTAINERS=false
 STOP_CONTAINERS=false
 PUSH_TO_GIT=false
 PUSH_TO_DOCKER=false
-
-if [[ "$USERNAME" != "marko" && "$PASSWORD" != "admin123" ]]; then
-  echo "You did not provide right username and password"
-  exit 1;
-fi
 
 
 while [[ $# -gt 0 ]]
@@ -83,7 +73,7 @@ do
 
  function startContainers() {
  
-   docker-compose up -d #start db,gui and nginx
+   docker-compose up -d --remove-orphans #start db,gui and nginx
  }
 
  function stopContainers() {
