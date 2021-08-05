@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Maurer Electronics d.o.o.
- */
-
 package agile.administrator.config;
 
 import org.springframework.boot.web.servlet.*;
