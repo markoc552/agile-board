@@ -2,7 +2,6 @@ package agile.central.exceptions;
 
 public class TaskAlreadyExistsException extends Exception {
 
-
     public TaskAlreadyExistsException() {
         super();
     }
@@ -10,5 +9,4 @@ public class TaskAlreadyExistsException extends Exception {
     public TaskAlreadyExistsException(String message) {
         super(message);
     }
-
 }

@@ -11,9 +11,7 @@ import java.io.*;
 @Component
 public class AuthenticationEndpoint implements AuthenticationEntryPoint, Serializable {
 
-
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-
+    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, httpServletResponse.toString());
     }
 }

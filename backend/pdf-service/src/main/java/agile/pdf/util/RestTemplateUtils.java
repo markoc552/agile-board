@@ -13,7 +13,6 @@ public class RestTemplateUtils {
 
     @Log
     public static UserDetails fetchUserDetails() {
-
         RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<UserDetails> result = restTemplate.getForEntity("http://localhost:9000" + "/getUser", UserDetails.class);

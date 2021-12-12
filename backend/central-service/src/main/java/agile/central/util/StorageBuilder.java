@@ -10,7 +10,7 @@ public class StorageBuilder {
     private String filename;
     private String attachmentFolder;
     private String encryptionKey;
-    private FileRepository fileRepository;
+    private AttachmentRepository attachmentRepository;
 
     public StorageBuilder withTicket(String ticket) {
 
@@ -40,15 +40,15 @@ public class StorageBuilder {
         return this;
     }
 
-    public StorageBuilder withFileRepository(FileRepository fileRepository) {
+    public StorageBuilder withAttachmentRepository(AttachmentRepository attachmentRepository) {
 
-        this.fileRepository = fileRepository;
+        this.attachmentRepository = attachmentRepository;
 
         return this;
     }
 
     public Storage build() {
 
-        return new Storage(ticket, filename, attachmentFolder, encryptionKey, fileRepository);
+        return new Storage(ticket, filename, attachmentFolder, encryptionKey, attachmentRepository);
     }
 }

@@ -23,9 +23,7 @@ public class PdfCreationService {
 
     @Log
     public byte[] createPdf(Map<String, String> request) throws PdfException {
-
-        try
-        {
+        try {
             PdfRequest pdfRequest = parseRequest(request);
 
             ClassLoader classLoader = this.getClass().getClassLoader();
@@ -35,7 +33,6 @@ public class PdfCreationService {
             pdfDocument = PDDocument.load(template);
 
             return fillPdf(pdfRequest);
-
         } catch (IOException e) {
             throw new PdfException(e.getMessage());
         }
@@ -43,7 +40,6 @@ public class PdfCreationService {
 
     @Log
     private byte[] fillPdf(PdfRequest pdfRequest) throws IOException, PdfException {
-
         acroForm = pdfDocument.getDocumentCatalog().getAcroForm();
 
         fillFormFields("Ticket", pdfRequest);
@@ -66,7 +62,6 @@ public class PdfCreationService {
 
     @Log
     private void fillSpecificField(String name, String value) throws IOException {
-
         PDField field = acroForm.getField(name);
 
         field.setValue(value);
@@ -74,25 +69,19 @@ public class PdfCreationService {
 
     @Log
     private void fillFormFields(String prefix, PdfRequest pdfRequest) throws IOException, PdfException {
-
         List<PDField> fields = acroForm.getFields().stream().filter(pdField -> pdField.getFullyQualifiedName().startsWith(prefix)).collect(Collectors.toList());
 
         List<Task> tasks = pdfRequest.getTasks();
 
-        for (int i=0; i<tasks.size(); i++) {
-
+        for (int i = 0; i < tasks.size(); i++) {
             if ("Ticket".equalsIgnoreCase(prefix))
                 fields.get(i).setValue(tasks.get(i).getTicket());
-
-            else if("Name".equalsIgnoreCase(prefix))
+            else if ("Name".equalsIgnoreCase(prefix))
                 fields.get(i).setValue(tasks.get(i).getName());
-
-            else if("Priority".equalsIgnoreCase(prefix))
+            else if ("Priority".equalsIgnoreCase(prefix))
                 fields.get(i).setValue(convertPriority(tasks.get(i).getPriority()));
-
-            else if("Component".equalsIgnoreCase(prefix))
+            else if ("Component".equalsIgnoreCase(prefix))
                 fields.get(i).setValue(tasks.get(i).getComponent());
-
             else
                 throw new PdfException("Invalid field!");
         }
@@ -100,22 +89,22 @@ public class PdfCreationService {
 
     @Log
     private String convertPriority(Integer priority) throws PdfException {
-
-        if (0 == priority)
-            return "Low";
-        else if (1 == priority)
-            return "Medium";
-        else if (2 == priority)
-            return "High";
-        else if(3 == priority)
-            return "Highest";
-        else
-            throw new PdfException("Invalid task priority!");
+        switch (priority) {
+            case 0:
+                return "Low";
+            case 1:
+                return "Medium";
+            case 2:
+                return "High";
+            case 3:
+                return "Highest";
+            default:
+                throw new PdfException("Invalid task priority!");
+        }
     }
 
     @Log
     private PdfRequest parseRequest(Map<String, String> request) throws IOException {
-
         if (mapper == null)
             initMapper();
 
@@ -124,7 +113,6 @@ public class PdfCreationService {
 
     @Log
     private void initMapper() {
-
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.configure(JsonParser.Feature.IGNORE_UNDEFINED, true);

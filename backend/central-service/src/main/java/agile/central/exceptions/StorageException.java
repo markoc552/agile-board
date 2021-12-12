@@ -2,7 +2,6 @@ package agile.central.exceptions;
 
 public class StorageException extends Exception {
 
-
     public StorageException() {
         super();
     }
@@ -10,5 +9,4 @@ public class StorageException extends Exception {
     public StorageException(String message) {
         super(message);
     }
-
 }

@@ -9,17 +9,13 @@ import javax.servlet.http.*;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-
-    public AuthenticationFilter() throws Exception {
+    public AuthenticationFilter() {
         super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/v1/jwt/authenticate", "POST"));
     }
 
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
-
-
         return super.attemptAuthentication(request, response);
-
     }
 }

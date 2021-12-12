@@ -15,23 +15,21 @@ import java.util.*;
 public class AttachmentService {
 
     @Autowired
-    FileRepository fileRepository;
+    AttachmentRepository attachmentRepository;
 
     @Autowired
     ApplicationProperties applicationProperties;
 
-
     @SneakyThrows
     @Log
     public void uploadAttachment(byte[] file, String fileName, String ticket) {
-
         StorageBuilder builder = new StorageBuilder();
 
         Storage storage = builder.withTicket(ticket)
                                  .withAttachmentFolder(applicationProperties.getAttachmentFolder())
                                  .withEncryptionKey(applicationProperties.getEncryptionKey())
+                                 .withAttachmentRepository(attachmentRepository)
                                  .withFilename(fileName)
-                                 .withFileRepository(fileRepository)
                                  .build();
 
         storage.uploadAttachment(file);
@@ -40,14 +38,13 @@ public class AttachmentService {
     @SneakyThrows
     @Log
     public byte[] downloadAttachment(String fileName, String ticket) {
-
         StorageBuilder builder = new StorageBuilder();
 
         Storage storage = builder.withTicket(ticket)
                                  .withAttachmentFolder(applicationProperties.getAttachmentFolder())
                                  .withEncryptionKey(applicationProperties.getEncryptionKey())
+                                 .withAttachmentRepository(attachmentRepository)
                                  .withFilename(fileName)
-                                 .withFileRepository(fileRepository)
                                  .build();
 
         return storage.downloadAttachment();
@@ -55,13 +52,12 @@ public class AttachmentService {
 
     @Log
     public List<String> getAttachments(String ticket) {
-
         StorageBuilder builder = new StorageBuilder();
 
         Storage storage = builder.withTicket(ticket)
                 .withAttachmentFolder(applicationProperties.getAttachmentFolder())
                 .withEncryptionKey(applicationProperties.getEncryptionKey())
-                .withFileRepository(fileRepository)
+                .withAttachmentRepository(attachmentRepository)
                 .build();
 
         return storage.getAttachments();

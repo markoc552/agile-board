@@ -2,7 +2,6 @@ package agile.administrator.exceptions;
 
 public class ProjectAlreadyExistsException extends Exception {
 
-
     public ProjectAlreadyExistsException() {
         super();
     }
@@ -10,5 +9,4 @@ public class ProjectAlreadyExistsException extends Exception {
     public ProjectAlreadyExistsException(String message) {
         super(message);
     }
-
 }

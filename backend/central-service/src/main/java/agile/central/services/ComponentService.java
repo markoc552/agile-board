@@ -16,14 +16,12 @@ import static agile.central.util.CentralConstants.*;
 @Service
 public class ComponentService {
 
-
     @Autowired
     private ComponentRepository componentRepository;
 
     @Log
-    public ComponentDao createComponent(ComponentDto component) throws ComponentAlreadyExistsException {
-
-        String componentName = component.getName();
+    public ComponentDao createComponent(ComponentDto componentDto) throws ComponentAlreadyExistsException {
+        String componentName = componentDto.getName();
 
         Optional<ComponentDao> byName = componentRepository.findByName(componentName);
 
@@ -33,56 +31,46 @@ public class ComponentService {
         ComponentDao componentDao = new ComponentDao();
 
         componentDao.setName(componentName);
-        componentDao.setProjectName(component.getProjectName());
+        componentDao.setProjectName(componentDto.getProjectName());
 
         return componentRepository.save(componentDao);
     }
 
     @Log
-    public List<ComponentDao> getComponentsByProject(String projectName) throws ComponentNotFoundException {
-
-        Optional<List<ComponentDao>> byProjectName = componentRepository.findByProjectName(projectName);
-
-        if (byProjectName.isPresent())
-            return byProjectName.get();
-        else
-            throw new ComponentNotFoundException(COMPONENT_DOES_NOT_EXISTS);
+    public List<ComponentDao> getComponentsByProject(String projectName) {
+        return componentRepository.findByProjectName(projectName).get();
     }
 
     @Log
-    public ComponentDao updateComponent(ComponentDto component) throws ComponentNotFoundException {
-
-        String componentName = component.getName();
+    public ComponentDao updateComponent(ComponentDto componentDto) throws ComponentNotFoundException {
+        String componentName = componentDto.getName();
 
         Optional<ComponentDao> byName = componentRepository.findByName(componentName);
 
         if (byName.isPresent()) {
-
             ComponentDao componentDao = byName.get();
 
             componentDao.setName(componentName);
-            componentDao.setProjectName(component.getProjectName());
+            componentDao.setProjectName(componentDto.getProjectName());
 
             return componentRepository.save(componentDao);
-
-        } else
+        } else {
             throw new ComponentNotFoundException(COMPONENT_DOES_NOT_EXISTS);
+        }
     }
 
     @Log
-    public void deleteComponent(ComponentDto component) throws ComponentNotFoundException {
-
-        String componentName = component.getName();
+    public void deleteComponent(ComponentDto componentDto) throws ComponentNotFoundException {
+        String componentName = componentDto.getName();
 
         Optional<ComponentDao> byName = componentRepository.findByName(componentName);
 
         if (byName.isPresent()) {
-
             ComponentDao componentDao = byName.get();
 
             componentRepository.delete(componentDao);
-
-        } else
+        } else {
             throw new ComponentNotFoundException(COMPONENT_DOES_NOT_EXISTS);
+        }
     }
 }

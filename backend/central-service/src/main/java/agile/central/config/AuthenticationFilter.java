@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-
     public AuthenticationFilter() throws Exception {
         super.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/v1/jwt/authenticate", "POST"));
     }
@@ -18,6 +17,5 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
         return super.attemptAuthentication(request, response);
-
     }
 }

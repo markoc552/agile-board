@@ -4,7 +4,6 @@ import agile.central.aspects.*;
 import agile.central.model.dao.*;
 import org.slf4j.*;
 import org.springframework.data.redis.core.*;
-import org.springframework.data.repository.*;
 import org.springframework.stereotype.*;
 import org.springframework.stereotype.Repository;
 
@@ -13,13 +12,13 @@ import java.util.*;
 
 @Repository
 @Component
-public class FileRepository {
+public class AttachmentRepository {
 
     private final HashOperations<String, String, FileDao> hashOperations;
 
-    public static final Logger LOG = LoggerFactory.getLogger(FileRepository.class);
+    public static final Logger LOG = LoggerFactory.getLogger(AttachmentRepository.class);
 
-    public FileRepository(RedisTemplate redisTemplate) {
+    public AttachmentRepository(RedisTemplate redisTemplate) {
         this.hashOperations = redisTemplate.opsForHash();
     }
 

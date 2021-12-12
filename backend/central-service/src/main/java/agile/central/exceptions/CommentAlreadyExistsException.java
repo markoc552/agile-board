@@ -2,7 +2,6 @@ package agile.central.exceptions;
 
 public class CommentAlreadyExistsException extends Exception {
 
-
     public CommentAlreadyExistsException() {
         super();
     }
@@ -10,5 +9,4 @@ public class CommentAlreadyExistsException extends Exception {
     public CommentAlreadyExistsException(String message) {
         super(message);
     }
-
 }

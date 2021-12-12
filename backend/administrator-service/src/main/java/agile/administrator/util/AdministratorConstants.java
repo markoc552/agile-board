@@ -14,4 +14,5 @@ public class AdministratorConstants {
     public static final String PROJECT_NAME_CAN_T_BE_NULL = "Project name can't be null";
     public static final String PROJECT_ALREADY_EXISTS = "Project already exists!";
     public static final String ROLE_CAN_T_BE_NULL = "Role can't be null";
+    public static final String USER_ALREADY_EXISTS = "User already exists!";
 }

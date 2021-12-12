@@ -23,69 +23,62 @@ public class CommentService {
     private CommentsRepository commentsRepository;
 
     @Log
-    public CommentDao createComment(CommentDto comment) throws CommentAlreadyExistsException {
-
-        String content = comment.getContent();
+    public CommentDao createComment(CommentDto commentDto) throws CommentAlreadyExistsException {
+        String content = commentDto.getContent();
 
         Optional<CommentDao> byContent = commentsRepository.findByContent(content);
 
         if (byContent.isPresent())
             throw new CommentAlreadyExistsException(COMMENT_ALREADY_EXISTS);
 
-        CommentDao commentDao = new CommentDao();
-
-        commentDao.setTaskNumber(comment.getTaskNumber());
-        commentDao.setContent(content);
-        commentDao.setPublisher(comment.getPublisher());
-        commentDao.setPublishTime(new Date(Timestamp.valueOf(LocalDateTime.now()).getTime()));
-
-        return commentsRepository.save(commentDao);
+        return persistComment(commentDto, content);
     }
 
     @Log
-    public CommentDao updateComment(CommentDto comment) throws CommentNotFoundException {
-
-        String content = comment.getContent();
+    public CommentDao updateComment(CommentDto commentDto) throws CommentNotFoundException {
+        String content = commentDto.getContent();
 
         Optional<CommentDao> byContent = commentsRepository.findByContent(content);
 
         if (byContent.isPresent()) {
-
             CommentDao commentDao = byContent.get();
 
             commentDao.setContent(content);
 
             return commentsRepository.save(commentDao);
-
-        } else
+        } else {
             throw new CommentNotFoundException(TASK_DOES_NOT_EXISTS);
+        }
     }
 
     @Log
-    public void deleteComment(CommentDto comment) throws CommentNotFoundException {
-
-        String content = comment.getContent();
+    public void deleteComment(CommentDto commentDto) throws CommentNotFoundException {
+        String content = commentDto.getContent();
 
         Optional<CommentDao> byName = commentsRepository.findByContent(content);
 
         if (byName.isPresent()) {
-
             CommentDao commentDao = byName.get();
 
             commentsRepository.delete(commentDao);
-
-        } else
+        } else {
             throw new CommentNotFoundException(TASK_DOES_NOT_EXISTS);
+        }
     }
 
     @Log
-    public List<CommentDao> getCommentByTask(String taskNumber) throws CommentNotFoundException {
+    public List<CommentDao> getCommentByTask(String taskNumber) {
+        return commentsRepository.findByTaskNumber(taskNumber).get();
+    }
 
-        Optional<List<CommentDao>> byTaskNumber = commentsRepository.findByTaskNumber(taskNumber);
+    private CommentDao persistComment(CommentDto commentDto, String content) {
+        CommentDao commentDao = new CommentDao();
 
-        if (byTaskNumber.isPresent())
-            return byTaskNumber.get();
-        else
-            throw new CommentNotFoundException();
+        commentDao.setTaskNumber(commentDto.getTaskNumber());
+        commentDao.setContent(content);
+        commentDao.setPublisher(commentDto.getPublisher());
+        commentDao.setPublishTime(new Date(Timestamp.valueOf(LocalDateTime.now()).getTime()));
+
+        return commentsRepository.save(commentDao);
     }
 }

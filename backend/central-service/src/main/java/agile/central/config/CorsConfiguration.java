@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2020. Maurer Electronics d.o.o.
- */
-
 package agile.central.config;
 
 import org.springframework.boot.web.servlet.*;
@@ -16,10 +12,10 @@ import java.util.*;
 public class CorsConfiguration {
 
 	@Bean
-	FilterRegistrationBean<CorsFilter> filterFilterRegistrationBean() 
+	FilterRegistrationBean<CorsFilter> filterFilterRegistrationBean()
 	{
 		org.springframework.web.cors.CorsConfiguration configuration = new org.springframework.web.cors.CorsConfiguration();
-		
+
 		configuration.setAllowedOrigins(Collections.singletonList("*"));
 		configuration.setAllowedHeaders(Collections.singletonList("*"));
 		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "HEAD", "OPTIONS"));
@@ -32,7 +28,7 @@ public class CorsConfiguration {
 
 		bean.setFilter(new CorsFilter(source));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-		
+
 		return bean;
 	}
 }

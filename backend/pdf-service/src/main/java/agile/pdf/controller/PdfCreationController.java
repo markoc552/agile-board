@@ -17,13 +17,11 @@ import java.util.*;
 @RequestMapping("/v1/pdf")
 public class PdfCreationController {
 
-
     @Autowired
     PdfCreationService pdfCreationService;
 
     @PostMapping("/createPdf")
     public ResponseEntity<Object> uploadAttachment(@Valid @RequestBody Map<String, String> request) throws PdfException {
-
         byte[] pdf = pdfCreationService.createPdf(request);
 
         return ResponseEntity.ok(pdf);

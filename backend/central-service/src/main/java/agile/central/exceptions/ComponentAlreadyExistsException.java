@@ -2,7 +2,6 @@ package agile.central.exceptions;
 
 public class ComponentAlreadyExistsException extends Exception {
 
-
     public ComponentAlreadyExistsException() {
         super();
     }
@@ -10,5 +9,4 @@ public class ComponentAlreadyExistsException extends Exception {
     public ComponentAlreadyExistsException(String message) {
         super(message);
     }
-
 }

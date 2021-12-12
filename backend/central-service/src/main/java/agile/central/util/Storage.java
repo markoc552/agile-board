@@ -13,7 +13,6 @@ import org.bouncycastle.util.encoders.Base64;
 import java.io.*;
 import java.nio.charset.*;
 import java.nio.file.*;
-import java.security.*;
 import java.util.*;
 
 public class Storage {
@@ -22,15 +21,15 @@ public class Storage {
     private final String filename;
     private final String attachmentFolder;
     private final String encryptionKey;
-    private final FileRepository fileRepository;
+    private final AttachmentRepository attachmentRepository;
 
-    public Storage(String ticket, String filename, String attachmentFolder, String encryptionKey, FileRepository fileRepository) {
+    public Storage(String ticket, String filename, String attachmentFolder, String encryptionKey, AttachmentRepository attachmentRepository) {
 
         this.ticket = ticket;
         this.filename = filename;
         this.attachmentFolder = attachmentFolder;
         this.encryptionKey = encryptionKey;
-        this.fileRepository = fileRepository;
+        this.attachmentRepository = attachmentRepository;
     }
 
     @Log
@@ -62,7 +61,7 @@ public class Storage {
 
         String encodedFilename = Base64.toBase64String(filename.getBytes());
 
-        FileDao file = fileRepository.get(hashedTicket, encodedFilename);
+        FileDao file = attachmentRepository.get(hashedTicket, encodedFilename);
 
         if (file != null) {
 
@@ -91,12 +90,12 @@ public class Storage {
 
         String hashed = hashTicketName();
 
-        FileDao fileDao = fileRepository.get(hashed, filename);
+        FileDao fileDao = attachmentRepository.get(hashed, filename);
 
         if (fileDao != null)
             throw new FileAlreadyExistsException("File already exists in database!");
 
-        fileRepository.save(file, hashed);
+        attachmentRepository.save(file, hashed);
     }
 
     @Log
@@ -108,7 +107,7 @@ public class Storage {
 
         String hashed = Arrays.toString(Hex.encode(hashbytes));
 
-        Map<String, FileDao> all = fileRepository.getAll(hashed);
+        Map<String, FileDao> all = attachmentRepository.getAll(hashed);
 
         List<String> files = new ArrayList<>();
 

@@ -18,5 +18,4 @@ public class ProjectDto implements Serializable {
     private String keyword;
     @NotNull
     private String manager;
-
 }

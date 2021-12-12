@@ -1,23 +1,18 @@
 package agile.central.controllers;
 
-
-import agile.central.exceptions.*;
-import agile.central.model.dao.*;
-import agile.central.model.dto.*;
-import agile.central.services.*;
-import agile.central.util.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
-import org.springframework.validation.annotation.*;
+import agile.central.services.AttachmentService;
+import agile.central.util.LengthNotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.*;
-import javax.validation.constraints.*;
-import java.io.*;
-import java.util.*;
-
-import static agile.central.util.CentralConstants.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @Validated
@@ -30,7 +25,6 @@ public class AttachmentController {
 
     @PostMapping("/uploadAttachment/{ticket}")
     public ResponseEntity<Object> uploadAttachment(@Valid @LengthNotNull @RequestBody MultipartFile file, @NotNull @PathVariable String ticket) throws IOException {
-
         byte[] bytes = file.getBytes();
 
         String filename = file.getOriginalFilename();
@@ -42,7 +36,6 @@ public class AttachmentController {
 
     @GetMapping("/downloadAttachment")
     public ResponseEntity<Object> downloadAttachment(@NotNull @RequestParam(name = "filename") String filename, @NotNull @RequestParam(name = "ticket") String ticket) {
-
         byte[] attachment = attachmentService.downloadAttachment(filename, ticket);
 
         return ResponseEntity.ok(attachment);
@@ -50,7 +43,6 @@ public class AttachmentController {
 
     @GetMapping("/getAttachments/{ticket}")
     public ResponseEntity<Object> getAttachments(@PathVariable(name = "ticket") String ticket) {
-
         List<String> attachments = attachmentService.getAttachments(ticket);
 
         return ResponseEntity.ok(attachments);

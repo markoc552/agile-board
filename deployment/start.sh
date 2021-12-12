@@ -47,7 +47,7 @@ do
  echo
 
  function buildGui() {
- 
+
    docker-compose up -d db #first start db
 
    cd ../gui
@@ -59,25 +59,25 @@ do
    cd ../deployment/nginx
    docker build -t nginx-root .
  }
- 
+
  function buildBackend() {
  
     cd ../../backend/administrator-service
-    
-    mvn spring-boot:build-image -Dspring-boot.build-image.imageName=agile/administrator-service:latest
-    
+
+    ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=agile/administrator-service:latest
+
     cd ../central-service
-    
-    mvn spring-boot:build-image -Dspring-boot.build-image.imageName=agile/central-service:latest
+
+    ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=agile/central-service:latest
  }
 
  function startContainers() {
- 
+
    docker-compose up -d --remove-orphans #start db,gui and nginx
  }
 
  function stopContainers() {
- 
+
    cd ../../deployment
 
    docker-compose down #stop db,gui and nginx
@@ -107,7 +107,7 @@ do
  if [ $BUILD_NGINX == true ]; then
    buildNginx
  fi
- 
+
  if [ $BUILD_BACKEND == true ]; then
    buildBackend
  fi

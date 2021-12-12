@@ -28,10 +28,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     public static final Logger LOG = LoggerFactory.getLogger(JwtRequestFilter.class);
 
-
     @SneakyThrows
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        
         String requestToken = httpServletRequest.getHeader("Authorization");
 
         Pair<String, String> parsedToken = parseToken(requestToken);
@@ -41,30 +39,31 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             UserDetails userDetails = userService.loadUserByUsername(parsedToken.getValue0());
 
             if (jwtToken.validateToken(parsedToken.getValue1(), userDetails)) {
-
-                UsernamePasswordAuthenticationToken userPasswordAuthToken = jwtToken.getUserPasswordAuthToken(userDetails);
-
-                userPasswordAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-
-                SecurityContextHolder.getContext().setAuthentication(userPasswordAuthToken);
+                validateToken(httpServletRequest, userDetails);
             }
         }
+
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    private Pair<String,String> parseToken(String requestToken) {
+    private void validateToken(HttpServletRequest httpServletRequest, UserDetails userDetails) {
+        UsernamePasswordAuthenticationToken userPasswordAuthToken = jwtToken.getUserPasswordAuthToken(userDetails);
 
+        userPasswordAuthToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+
+        SecurityContextHolder.getContext().setAuthentication(userPasswordAuthToken);
+    }
+
+    private Pair<String,String> parseToken(String requestToken) {
         String username;
         String token;
 
         if (requestToken != null && requestToken.startsWith("Bearer")) {
-
             try {
                 token = requestToken.substring(7);
                 username = jwtToken.getUsernameFromToken(token);
 
                 return new Pair<>(username, token);
-
             } catch (JwtAuthenticationException e) {
                 LOG.info("Unable to get username from token!");
             }

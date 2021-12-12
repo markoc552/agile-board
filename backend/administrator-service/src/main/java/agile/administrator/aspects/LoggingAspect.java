@@ -27,7 +27,6 @@ public class LoggingAspect {
     @SneakyThrows
     @Around("@annotation(log) && execution(* *.*(..))")
     public Object aroundLog(ProceedingJoinPoint joinPoint, Log log) throws Throwable {
-
         logger = LogManager.getLogger(log.loggerName());
         jp = joinPoint;
 
@@ -53,7 +52,6 @@ public class LoggingAspect {
     }
 
     private Object logDebug() throws Throwable {
-
         builder.append(String.format("Entering method %s", jp.getSignature().getName()))
                 .append("with arguments ");
 
@@ -76,7 +74,6 @@ public class LoggingAspect {
     }
 
     private Object logInfo() throws Throwable {
-
         builder.append(String.format("Entering method %s()", jp.getSignature().getName()));
 
         logger.info(builder);
@@ -102,7 +99,6 @@ public class LoggingAspect {
     }
 
     private void appendParameters(StringBuilder builder) {
-
         Method method = ((MethodSignature) jp.getSignature()).getMethod();
 
         Parameter[] parameters = method.getParameters();

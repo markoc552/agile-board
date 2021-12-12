@@ -18,7 +18,6 @@ public class JwtToken implements Serializable {
     private ApplicationProperties applicationProperties;
 
     public String generateToken(UserDetails userDetails) {
-
         Map<String, Object> claims = new HashMap<>();
 
         return Jwts.builder().setClaims(claims)
@@ -30,7 +29,6 @@ public class JwtToken implements Serializable {
     }
 
     public boolean validateToken(String token, UserDetails userDetails) {
-
         String secret = applicationProperties.getJwtSecret();
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
@@ -46,7 +44,6 @@ public class JwtToken implements Serializable {
     }
 
     public String getUsernameFromToken(String token) throws JwtAuthenticationException {
-
         String secret = applicationProperties.getJwtSecret();
 
         Claims claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
@@ -60,8 +57,6 @@ public class JwtToken implements Serializable {
     }
 
     public UsernamePasswordAuthenticationToken getUserPasswordAuthToken(UserDetails userDetails) {
-
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }
-
 }

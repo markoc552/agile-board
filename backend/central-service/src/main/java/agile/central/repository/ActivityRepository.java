@@ -11,5 +11,4 @@ import java.util.*;
 public interface ActivityRepository extends JpaRepository<ActivityDao, Long> {
 
     Optional<List<ActivityDao>> findByProjectName(String projectName);
-
 }

@@ -41,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.csrf().disable();
 
         http.requiresChannel().anyRequest().requiresSecure();
@@ -65,7 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     }
 
     public UsernamePasswordAuthenticationFilter getAuthenticationFilter() throws Exception {
-
         AuthenticationFilter authenticationFilter = new AuthenticationFilter();
 
         authenticationFilter.setAuthenticationManager(authenticationManagerBean());

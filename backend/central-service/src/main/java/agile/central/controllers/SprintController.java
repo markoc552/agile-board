@@ -23,8 +23,7 @@ public class SprintController {
     SprintService sprintService;
 
     @PostMapping("/createSprint")
-    public ResponseEntity<Object> createSprint(@Valid @NotNull(message = "Sprint can't be null") @RequestBody SprintDto sprint, @RequestParam(name = "person") String person) throws SprintAlreadyExistsException {
-
+    public ResponseEntity<Object> createSprint(@Valid @NotNull(message = "Sprint can't be null") @RequestBody SprintDto sprint, @RequestParam(name = "person") String person) throws SprintAlreadyExistsException, TaskNotFoundException {
         SprintDao result = sprintService.createSprint(sprint, person);
 
         return ResponseEntity.ok(result);
@@ -32,7 +31,6 @@ public class SprintController {
 
     @PostMapping("/updateSprint")
     public ResponseEntity<Object> updateSprint(@Valid @NotNull(message = "Sprint can't be null") @RequestBody SprintDto sprint, @RequestParam(name = "person") String person) throws SprintNotFoundException {
-
         SprintDao result = sprintService.updateSprint(sprint, person);
 
         return ResponseEntity.ok(result);
@@ -40,7 +38,6 @@ public class SprintController {
 
     @PostMapping("/deleteSprint")
     public ResponseEntity<Object> deleteSprint(@Valid @NotNull(message = "Sprint can't be null") @RequestBody SprintDto sprint, @RequestParam(name = "person") String person) throws SprintNotFoundException {
-
         sprintService.deleteSprint(sprint, person);
 
         return ResponseEntity.ok("Sprint successfully deleted");
@@ -48,7 +45,6 @@ public class SprintController {
 
     @GetMapping("/getSprint")
     public ResponseEntity<Object> getSprint(@Valid @NotNull @RequestParam(name = "projectName") String projectName) throws SprintNotFoundException {
-
         SprintDao sprint = sprintService.getSprint(projectName);
 
         return ResponseEntity.ok(sprint);
@@ -56,7 +52,6 @@ public class SprintController {
 
     @PostMapping("/addTaskToSprint")
     public ResponseEntity<Object> addTaskToSprint(@RequestParam(name = "sprintName") String sprintName, @RequestBody TaskDto task, @RequestParam(name = "person") String person) throws TaskNotFoundException {
-
         TaskDao taskDao = sprintService.addTaskToSprint(sprintName, task, person);
 
         return ResponseEntity.ok(taskDao);

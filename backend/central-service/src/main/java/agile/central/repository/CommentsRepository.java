@@ -13,5 +13,4 @@ public interface CommentsRepository extends JpaRepository<CommentDao, Long> {
     Optional<CommentDao> findByContent(String content);
 
     Optional<List<CommentDao>> findByTaskNumber(String taskNumber);
-
 }

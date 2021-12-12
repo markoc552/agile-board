@@ -2,7 +2,6 @@ package agile.administrator.exceptions;
 
 public class UserAlreadyExistsException extends Exception {
 
-
     public UserAlreadyExistsException() {
         super();
     }
@@ -10,5 +9,4 @@ public class UserAlreadyExistsException extends Exception {
     public UserAlreadyExistsException(String message) {
         super(message);
     }
-
 }

@@ -21,10 +21,10 @@ public class SprintService {
     private SprintRepository sprintsRepository;
 
     @Autowired
-    private TaskRepository taskRepository;
+    private ActivityRepository activityRepository;
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private TaskService taskService;
 
     private ActivityLogger activityLogger;
 
@@ -34,144 +34,113 @@ public class SprintService {
     }
 
     @Log
-    public SprintDao createSprint(SprintDto sprint, String person) throws SprintAlreadyExistsException {
-
-        Optional<SprintDao> byName = sprintsRepository.findByName(sprint.getName());
+    public SprintDao createSprint(SprintDto sprintDto, String person) throws SprintAlreadyExistsException, TaskNotFoundException {
+        Optional<SprintDao> byName = sprintsRepository.findByName(sprintDto.getName());
 
         if (byName.isPresent())
             throw new SprintAlreadyExistsException("Sprint already exists!");
 
-        SprintDao sprintDao = new SprintDao();
+        SprintDao sprintDao = persistSprint(sprintDto);
 
-        sprintDao.setName(sprint.getName());
-        sprintDao.setFrom(new Date(sprint.getFrom().getTime()));
-        sprintDao.setTo(new Date(sprint.getTo().getTime()));
-        sprintDao.setProjectName(sprint.getProjectName());
+        List<TaskDao> sprintTasks = taskService.getTasksBySprint(sprintDto.getName());
 
-        sprint.getTasks().forEach(item -> {
-            Optional<TaskDao> optionalTask = taskRepository.findByName(item.getName());
+        sprintDao.setTasks(sprintTasks);
 
-            if(optionalTask.isPresent()) {
+        activityLogger.pushActivity(person, "started sprint " + sprintDto.getName(), sprintDto.getProjectName());
 
-                TaskDao taskDao = optionalTask.get();
-
-                taskDao.setStatus("TODO");
-                taskDao.setSprint(sprint.getName());
-                taskRepository.save(taskDao);
-            }
-
-        });
-
-        SprintDao save = sprintsRepository.save(sprintDao);
-
-        Optional<List<TaskDao>> byProjectName = taskRepository.findBySprint(sprint.getName());
-
-        byProjectName.ifPresent(save::setTasks);
-
-        activityLogger.pushActivity(person, "started sprint " + sprint.getName(), sprint.getProjectName());
-
-        return save;
+        return sprintDao;
     }
 
     @Log
     public SprintDao updateSprint(SprintDto sprint, String person) throws SprintNotFoundException {
-
         Optional<SprintDao> byName = sprintsRepository.findByName(sprint.getName());
 
         if (byName.isPresent()) {
-
             SprintDao sprintDao = byName.get();
 
-            sprintDao.setName(sprint.getName());
-            sprintDao.setFrom(new Date(sprint.getFrom().getTime()));
-            sprintDao.setTo(new Date(sprint.getTo().getTime()));
-            List<TaskDao> tasks = new ArrayList<>();
-            sprint.getTasks().forEach(item -> tasks.add(parseTask(item)));
-
-            SprintDao saved = sprintsRepository.save(sprintDao);
+            SprintDao newSprintDao = persistSprint(sprint, sprintDao);
 
             activityLogger.pushActivity(person, "updated sprint " + sprint.getName(), sprint.getProjectName());
 
-            return saved;
-
-        } else
+            return newSprintDao;
+        } else {
             throw new SprintNotFoundException("Sprint doesn't exists!");
+        }
     }
 
     @Log
     public void deleteSprint(SprintDto sprint, String person) throws SprintNotFoundException {
-
         Optional<SprintDao> byName = sprintsRepository.findByName(sprint.getName());
 
         if (byName.isPresent()) {
-
             SprintDao sprintDao = byName.get();
 
             sprintsRepository.delete(sprintDao);
 
             activityLogger.pushActivity(person, "deleted sprint " + sprint.getName(), sprint.getProjectName());
-
-        } else
+        } else {
             throw new SprintNotFoundException("Sprint doesn't exists!");
+        }
     }
 
     @Log
     public SprintDao getSprint(String projectName) throws SprintNotFoundException {
-
         Optional<SprintDao> byName = sprintsRepository.findByProjectName(projectName);
 
-        if(byName.isPresent()) {
+        if (byName.isPresent()) {
             SprintDao sprintDao = byName.get();
 
-            Optional<List<TaskDao>> byProjectName = taskRepository.findBySprint(sprintDao.getName());
+            List<TaskDao> sprintTasks = taskService.getTasksBySprint(sprintDao.getName());
 
-            byProjectName.ifPresent(sprintDao::setTasks);
+            sprintDao.setTasks(sprintTasks);
 
             return sprintDao;
-        }
-        else
+        } else {
             throw new SprintNotFoundException();
+        }
     }
 
     @Log
-    public TaskDao addTaskToSprint(String sprintName, TaskDto task, String person) throws TaskNotFoundException {
+    public TaskDao addTaskToSprint(String sprintName, TaskDto taskDto, String person) throws TaskNotFoundException {
+        TaskDao taskDao = taskService.persistTask(taskDto, sprintName);
 
-        Optional<TaskDao> byName = taskRepository.findByName(task.getName());
-
-        if(byName.isPresent()) {
-
-            TaskDao taskDao = byName.get();
-
-            taskDao.setSprint(sprintName);
-            taskDao.setStatus("TODO");
-
-            taskRepository.save(taskDao);
-
-            activityLogger.pushActivity(person, "added task " + taskDao.getName() + " to sprint " + sprintName, taskDao.getProjectName());
-
-            return taskDao;
-
-        } else
-            throw new TaskNotFoundException();
-    }
-
-    @Log
-    private TaskDao parseTask(TaskDto task) {
-
-        TaskDao taskDao = new TaskDao();
-
-        taskDao.setName(task.getName());
-        taskDao.setKeyword(task.getTicket());
-        taskDao.setPriority(task.getPriority());
-        taskDao.setAssignee(task.getAssignee());
-        taskDao.setDescription(task.getDescription());
-        taskDao.setReporter(task.getReporter());
-        taskDao.setEstimated(task.getEstimated());
-        taskDao.setTicket(task.getTicket());
-        taskDao.setProjectName(task.getProjectName());
-        taskDao.setCreatedAt(task.getCreatedAt());
-        taskDao.setDndId(task.getDndId());
+        activityLogger.pushActivity(person, "added task " + taskDao.getName() + " to sprint " + sprintName, taskDao.getProjectName());
 
         return taskDao;
+    }
+
+    private SprintDao persistSprint(SprintDto sprintDto) {
+        SprintDao sprintDao = new SprintDao();
+
+        sprintDao.setName(sprintDto.getName());
+        sprintDao.setFrom(new Date(sprintDto.getFrom().getTime()));
+        sprintDao.setTo(new Date(sprintDto.getTo().getTime()));
+        sprintDao.setProjectName(sprintDto.getProjectName());
+
+        persistSprintTasks(sprintDto);
+
+        return sprintsRepository.save(sprintDao);
+    }
+
+    private SprintDao persistSprint(SprintDto sprint, SprintDao sprintDao) {
+        sprintDao.setName(sprint.getName());
+        sprintDao.setFrom(new Date(sprint.getFrom().getTime()));
+        sprintDao.setTo(new Date(sprint.getTo().getTime()));
+
+        List<TaskDao> tasks = new ArrayList<>();
+
+        sprint.getTasks().forEach(taskDto -> tasks.add(taskService.getTaskDao(taskDto)));
+
+        return sprintsRepository.save(sprintDao);
+    }
+
+    private void persistSprintTasks(SprintDto sprintDto) {
+        sprintDto.getTasks().forEach(taskDto -> {
+            try {
+                taskService.persistTask(taskDto, sprintDto.getName());
+            } catch (TaskNotFoundException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

@@ -6,11 +6,12 @@ import agile.administrator.exceptions.*;
 import agile.administrator.model.dao.*;
 import agile.administrator.model.dto.*;
 import agile.administrator.repository.*;
-import agile.administrator.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
+import static agile.administrator.util.AdministratorConstants.PROJECT_ALREADY_EXISTS;
+import static agile.administrator.util.AdministratorConstants.PROJECT_NOT_EXISTS;
 
 @Service
 public class ProjectService {
@@ -19,105 +20,67 @@ public class ProjectService {
     private ProjectsRepository projectsRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Log
-    public ProjectDao createProject(ProjectDto project) throws ProjectAlreadyExistsException {
+    public ProjectDao createProject(ProjectDto projectDto) throws ProjectAlreadyExistsException {
+        String projectName = projectDto.getName();
 
+        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
+
+        if (byName.isPresent())
+            throw new ProjectAlreadyExistsException(PROJECT_ALREADY_EXISTS);
+
+        return persistProject(projectDto);
+    }
+
+    @Log
+    public ProjectDao updateProject(ProjectDto projectDto) throws ProjectNotFoundException {
+        String projectName = projectDto.getName();
+
+        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
+
+        if (byName.isPresent()) {
+            ProjectDao projectDao = byName.get();
+
+            return persistProject(projectDto, projectDao);
+        } else {
+            throw new ProjectNotFoundException(PROJECT_NOT_EXISTS);
+        }
+    }
+
+    public void deleteProject(ProjectDto project) throws ProjectNotFoundException {
         String projectName = project.getName();
 
         Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
 
         if (byName.isPresent())
-            throw new ProjectAlreadyExistsException(AdministratorConstants.PROJECT_ALREADY_EXISTS);
-
-        ProjectDao projectDao = new ProjectDao();
-
-        projectDao.setName(project.getName());
-        projectDao.setKeyword(project.getKeyword());
-        projectDao.setManager(project.getManager());
-
-        return projectsRepository.save(projectDao);
-    }
-
-    @Log
-    public ProjectDao updateProject(ProjectDto project) throws ProjectNotFoundException {
-
-        String projectName = project.getName();
-
-        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
-
-        if (byName.isPresent()) {
-
-            ProjectDao projectDao = byName.get();
-
-            projectDao.setManager(project.getManager());
-            projectDao.setKeyword(project.getKeyword());
-            projectDao.setName(project.getName());
-
-            return projectsRepository.save(projectDao);
-
-        } else
-            throw new ProjectNotFoundException(AdministratorConstants.PROJECT_NOT_EXISTS);
-    }
-
-    public void deleteProject(ProjectDto project) throws ProjectNotFoundException {
-
-        String projectName = project.getName();
-
-        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
-
-        if (byName.isPresent()) {
-
-            ProjectDao projectDao = byName.get();
-
-            projectsRepository.delete(projectDao);
-
-        } else
-            throw new ProjectNotFoundException(AdministratorConstants.PROJECT_NOT_EXISTS);
-    }
-
-    @Log
-    public void assignUser(UserDto userDto, String projectName) throws ProjectNotFoundException {
-
-        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
-
-        Optional<UserDao> byUsername = userRepository.findByUsername(userDto.getUsername());
-
-        if (byName.isPresent()) {
-
-            ProjectDao projectDao = byName.get();
-
-            UserDao userDao = new UserDao();
-
-            userDao.setUsername(userDto.getUsername());
-            userDao.setFirstname(userDto.getFirstname());
-            userDao.setLastname(userDto.getLastname());
-            userDao.setEmail(userDto.getEmail());
-
-            List<UserDao> participants = projectDao.getParticipants();
-
-            participants.add(userDao);
-
-            projectsRepository.save(projectDao);
-
-            if (byUsername.isPresent()) {
-
-                UserDao user = byUsername.get();
-
-                user.getEnrolledProjects().add(projectDao);
-
-                userRepository.save(user);
-            }
-        }
+            projectsRepository.delete(byName.get());
         else
-            throw new ProjectNotFoundException();
+            throw new ProjectNotFoundException(PROJECT_NOT_EXISTS);
     }
 
+    @Log
+    public void assignUser(UserDto userDto, String projectName) throws ProjectNotFoundException, UserNotFoundException {
+        Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
+
+        UserDao userToEnroll = userService.getUserByUsername(userDto.getUsername());
+
+        if (byName.isPresent()) {
+            ProjectDao projectDao = byName.get();
+
+            UserDao userDao = userService.getUserDao(userDto);
+
+            persistParticipants(projectDao, userDao);
+
+            userService.enrollUserToProject(userToEnroll, projectDao);
+        } else {
+            throw new ProjectNotFoundException();
+        }
+    }
 
     @Log
     public ProjectDao getProjectByName(String projectName) throws ProjectNotFoundException {
-
         Optional<ProjectDao> byName = projectsRepository.findByName(projectName);
 
         if (byName.isPresent())
@@ -128,19 +91,38 @@ public class ProjectService {
 
     @Log
     public List<ProjectDao> getAllProjects() {
-
         return projectsRepository.findAll();
     }
 
     @Log
-    public List<ProjectDao> getProjectsByManager(String manager) throws ProjectNotFoundException {
+    public List<ProjectDao> getProjectsByManager(String manager) {
+        return projectsRepository.findByManager(manager).get();
+    }
 
-        Optional<List<ProjectDao>> byManager = projectsRepository.findByManager(manager);
 
-        if (byManager.isPresent())
-            return byManager.get();
+    private ProjectDao persistProject(ProjectDto projectDto) {
+        ProjectDao projectDao = new ProjectDao();
 
-        else
-            throw new ProjectNotFoundException();
+        projectDao.setName(projectDto.getName());
+        projectDao.setKeyword(projectDto.getKeyword());
+        projectDao.setManager(projectDto.getManager());
+
+        return projectsRepository.save(projectDao);
+    }
+
+    private ProjectDao persistProject(ProjectDto project, ProjectDao projectDao) {
+        projectDao.setManager(project.getManager());
+        projectDao.setKeyword(project.getKeyword());
+        projectDao.setName(project.getName());
+
+        return projectsRepository.save(projectDao);
+    }
+
+    private void persistParticipants(ProjectDao projectDao, UserDao userDao) {
+        List<UserDao> participants = projectDao.getParticipants();
+
+        participants.add(userDao);
+
+        projectsRepository.save(projectDao);
     }
 }

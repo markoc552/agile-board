@@ -15,7 +15,6 @@ public class ControllerExceptionHandler {
                                 ProjectAlreadyExistsException.class,
                                 ProjectNotFoundException.class })
     protected ResponseEntity<Object> handleUserException(Exception ex) {
-
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

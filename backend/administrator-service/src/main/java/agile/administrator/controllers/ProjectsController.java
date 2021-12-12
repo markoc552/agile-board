@@ -26,7 +26,6 @@ public class ProjectsController {
 
     @PostMapping("/createProject")
     public ResponseEntity<Object> createProject(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody ProjectDto project) throws ProjectAlreadyExistsException {
-
         ProjectDao result = projectService.createProject(project);
 
         return ResponseEntity.ok(result);
@@ -34,7 +33,6 @@ public class ProjectsController {
 
     @PostMapping("/updateProject")
     public ResponseEntity<Object> updateProject(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody ProjectDto project) throws ProjectNotFoundException {
-
         ProjectDao result = projectService.updateProject(project);
 
         return ResponseEntity.ok(result);
@@ -42,15 +40,13 @@ public class ProjectsController {
 
     @PostMapping("/deleteProject")
     public ResponseEntity<Object> deleteProject(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody ProjectDto project) throws ProjectNotFoundException {
-
         projectService.deleteProject(project);
 
         return ResponseEntity.ok("Project successfully deleted");
     }
 
     @PostMapping("/assignUser/{projectName}")
-    public ResponseEntity<Object> assignUser(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody UserDto user, @NotNull @PathVariable("projectName") String projectName) throws ProjectNotFoundException {
-
+    public ResponseEntity<Object> assignUser(@Valid @NotNull(message = AdministratorConstants.PROJECT_CAN_T_BE_NULL) @RequestBody UserDto user, @NotNull @PathVariable("projectName") String projectName) throws ProjectNotFoundException, UserNotFoundException {
         projectService.assignUser(user, projectName);
 
         return ResponseEntity.ok("User assigned to project");
@@ -58,7 +54,6 @@ public class ProjectsController {
 
     @GetMapping("/getAllProjects")
     public ResponseEntity<Object> getProjects() {
-
         List<ProjectDao> allProjects = projectService.getAllProjects();
 
         return ResponseEntity.ok(allProjects);
@@ -67,7 +62,6 @@ public class ProjectsController {
 
     @GetMapping("/getProject")
     public ResponseEntity<Object> getProject(@NotNull(message = AdministratorConstants.PROJECT_NAME_CAN_T_BE_NULL) @RequestParam(name = "projectName") String projectName) throws ProjectNotFoundException {
-
         ProjectDao project = projectService.getProjectByName(projectName);
 
         return ResponseEntity.ok(project);
@@ -75,7 +69,6 @@ public class ProjectsController {
 
     @GetMapping("/getProjects")
     public ResponseEntity<Object> getProjectsByManager(@NotNull(message = AdministratorConstants.PROJECT_NAME_CAN_T_BE_NULL) @RequestParam(name = "manager") String manager) throws ProjectNotFoundException {
-
         List<ProjectDao> projects = projectService.getProjectsByManager(manager);
 
         return ResponseEntity.ok(projects);

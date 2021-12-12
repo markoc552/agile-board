@@ -2,7 +2,6 @@ package agile.administrator.exceptions;
 
 public class RequestException extends Exception {
 
-
     public RequestException() {
         super();
     }
@@ -10,5 +9,4 @@ public class RequestException extends Exception {
     public RequestException(String message) {
         super(message);
     }
-
 }

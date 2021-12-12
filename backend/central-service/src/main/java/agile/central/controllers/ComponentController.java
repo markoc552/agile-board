@@ -28,7 +28,6 @@ public class ComponentController {
 
     @PostMapping("/createComponent")
     public ResponseEntity<Object> createComponent(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody ComponentDto component) throws ComponentAlreadyExistsException {
-
         ComponentDao result = componentService.createComponent(component);
 
         return ResponseEntity.ok(result);
@@ -36,7 +35,6 @@ public class ComponentController {
 
     @PostMapping("/updateComponent")
     public ResponseEntity<Object> updateComponent(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody ComponentDto component) throws ComponentNotFoundException {
-
         ComponentDao result = componentService.updateComponent(component);
 
         return ResponseEntity.ok(result);
@@ -44,7 +42,6 @@ public class ComponentController {
 
     @PostMapping("/deleteComponent")
     public ResponseEntity<Object> deleteComponent(@Valid @NotNull(message = TASK_CAN_T_BE_NULL) @RequestBody ComponentDto component) throws ComponentNotFoundException {
-
         componentService.deleteComponent(component);
 
         return ResponseEntity.ok("Component successfully deleted");
@@ -52,7 +49,6 @@ public class ComponentController {
 
     @GetMapping("/getComponents")
     public ResponseEntity<Object> getComponentsByProjectName(@RequestParam(name = "projectName") String projectName) throws ComponentNotFoundException {
-
         List<ComponentDao> components = componentService.getComponentsByProject(projectName);
 
         return ResponseEntity.ok(components);

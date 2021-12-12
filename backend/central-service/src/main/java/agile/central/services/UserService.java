@@ -21,28 +21,29 @@ public class UserService {
 
     @Log
     public UserDetails loadUserByUsername(String username) {
-
         if (username == null)
             throw new SecurityException("Username can't be null!");
 
         Optional<UserDao> userDao = userRepository.findByUsername(username);
 
         if (userDao.isPresent()) {
-
             UserDao user = userDao.get();
 
-            Optional<UserCredentialsDao> userCredentials = userCredentialsRepository.findByUsername(user.getUsername());
-
-            if (userCredentials.isPresent()) {
-
-                user.setCredentials(userCredentials.get());
-
-                return new CustomUserDetails(user);
-            }
-
-            return null;
+            return getCustomUserDetails(user);
         }
-        else
+        else {
             throw new SecurityException("User not found!");
+        }
+    }
+
+    private CustomUserDetails getCustomUserDetails(UserDao user) {
+        Optional<UserCredentialsDao> userCredentials = userCredentialsRepository.findByUsername(user.getUsername());
+
+        if (userCredentials.isPresent()) {
+            user.setCredentials(userCredentials.get());
+
+            return new CustomUserDetails(user);
+        }
+        return null;
     }
 }

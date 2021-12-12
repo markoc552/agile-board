@@ -30,7 +30,6 @@ public class JwtAuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<Object> generateJwtToken(@Valid @NotNull(message = "Jwt request can't be null!") @RequestBody JwtRequest jwtRequest) {
-
         UserDetails userDetails = userService.loadUserByUsername(jwtRequest.getUsername());
 
         String token = jwtToken.generateToken(userDetails);
