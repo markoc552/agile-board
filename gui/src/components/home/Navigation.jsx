@@ -6,6 +6,7 @@ import {
   NavItem,
   AccountsWrapper,
   NavAccountsItem,
+  HeadlineNameWrapper,
 } from "../util/AgileStyledComponents";
 import { Image, Button, Icon } from "semantic-ui-react";
 import ProductsMenu from "./ProductsMenu";
@@ -13,11 +14,14 @@ import ResourcesMenu from "./ResourcesMenu";
 import AccountModal from "./AccountModal";
 import history from "../../history";
 import { useSelector } from "react-redux";
+import useMediaQuery from "use-mediaquery";
 
 const Navigation = (props) => {
   const [showProducts, setShowProducts] = useState(false);
   const [showResources, setShowResources] = useState(false);
   const [accountShow, setAccountShow] = useState(false);
+
+  const isTabletOnly = useMediaQuery("only screen and (max-width: 845px)");
 
   const user = useSelector((state) => state.auth.user);
 
@@ -38,12 +42,15 @@ const Navigation = (props) => {
 
   return (
     <NavigationWrapper>
-      <Image
-        src={require("../../assets/images/agile-logo.png")}
-        size="mini"
-        style={{ width: "45px", height: "45px", margin: "auto 0" }}
-      />
-      <HeadlineWrapper>AGILE BOARD</HeadlineWrapper>
+      <HeadlineWrapper>
+        <Image
+          verticalAlign="middle"
+          avatar
+          src={require("../../assets/images/agile-logo.png")}
+          size="mini"
+        />
+        <HeadlineNameWrapper>AGILE BOARD</HeadlineNameWrapper>
+      </HeadlineWrapper>
       <NavItemWrapper>
         <NavItem onClick={() => setShowProducts(true)}>Products</NavItem>
         <NavItem onClick={() => setShowResources(true)}>For teams</NavItem>
@@ -51,7 +58,7 @@ const Navigation = (props) => {
       </NavItemWrapper>
       <AccountsWrapper>
         <NavItem>
-          <Button color="blue" onClick={() => history.push("/dashboard")}>
+          <Button circular color="blue" size={isTabletOnly ? "mini" : "medium"} onClick={() => history.push("/dashboard")}>
             Dashboard
           </Button>
         </NavItem>

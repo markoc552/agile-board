@@ -11,7 +11,7 @@ import Solutions from "../components/home/Solutions";
 import Bottom from "../components/home/Bottom";
 import { motion } from "framer-motion";
 
-const Home = (props) => {
+const Home = () => {
   const variants = {
     visible: {
       opacity: 1,
@@ -21,35 +21,30 @@ const Home = (props) => {
     hidden: { opacity: 0, scale: 1.05 },
   };
 
-  const secondVariants = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.45 },
-    },
-    hidden: { opacity: 0 },
-  };
-
   return (
-    <>
-      <MainContainerWrapper>
-        <MainContentWrapper>
-          <Navigation />
-          <motion.div initial="hidden" animate="visible" variants={variants}>
-            <WelcomeContent />
-          </motion.div>
-          <Solutions />
-          <Divider horizontal style={{ marginTop: "25vh" }}>
-            <Header as="h4">
-              <Icon name="bar chart" />
-              Business
-            </Header>
-          </Divider>
-          <TrustedCompanies />
-        </MainContentWrapper>
-        <Bottom />
-      </MainContainerWrapper>
-    </>
+    <MainContainerWrapper>
+      <MainContentWrapper>
+        <Navigation />
+        <motion.div initial="hidden" animate="visible" variants={variants}>
+          <WelcomeContent />
+        </motion.div>
+        <Solutions />
+        <Divider horizontal style={{marginTop: "27vh"}}>
+          <Header as="h4">
+            <Icon name="bar chart" />
+            Business
+          </Header>
+        </Divider>
+        <TrustedCompanies />
+        <Divider horizontal style={{marginTop: "5vh"}}>
+          <Header as="h4">
+            <Icon name="bar chart" />
+            Info
+          </Header>
+        </Divider>
+        <Bottom/>
+      </MainContentWrapper>
+    </MainContainerWrapper>
   );
 };
 

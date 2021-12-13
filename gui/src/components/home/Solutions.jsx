@@ -45,8 +45,8 @@ const Solutions = (props) => {
   return (
     <>
       <div>
-        <SolutionsWrapper>Our solutions</SolutionsWrapper>
         <AgileWrapper>
+          <SolutionsWrapper>Our solutions</SolutionsWrapper>
           <div
             style={{ display: "flex", flexDirection: "row", padding: "25px 0" }}
           >
@@ -84,19 +84,35 @@ const Solutions = (props) => {
             </SolutionOptions>
           </div>
           {selectedSolution === "solution-1" ? (
-            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={secondVariants}
+            >
               <SolutionOne />
             </motion.div>
           ) : selectedSolution === "solution-2" ? (
-            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={secondVariants}
+            >
               <SolutionTwo />
             </motion.div>
           ) : selectedSolution === "solution-3" ? (
-            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={secondVariants}
+            >
               <SolutionThree />
             </motion.div>
           ) : selectedSolution === "solution-4" ? (
-            <motion.div initial="hidden" animate="visible" variants={secondVariants}>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={secondVariants}
+            >
               <SolutionFour />
             </motion.div>
           ) : (

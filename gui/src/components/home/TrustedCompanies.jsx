@@ -2,15 +2,17 @@ import React from "react";
 import {
   SolutionsWrapper,
   AgileWrapper,
-  SoftwareName,
-  SolutionOptions,
+  TrustedCompanyWrapper,
   TrustedCompany,
   TrustedCompanyDescription,
 } from "../util/AgileStyledComponents";
 import { Grid, Image } from "semantic-ui-react";
 import { motion } from "framer-motion";
+import useMediaQuery from "use-mediaquery";
 
-const TrustedCompanies = (props) => {
+const TrustedCompanies = (pops) => {
+  const isTabletOnly = useMediaQuery("only screen and (max-width: 1010px)");
+
   const secondVariants = {
     visible: {
       opacity: 1,
@@ -21,36 +23,40 @@ const TrustedCompanies = (props) => {
   };
 
   return (
-    <AgileWrapper>
-      <div style={{ marginTop: "35px" }}>
+    <TrustedCompanyWrapper>
+      <div>
         <SolutionsWrapper>Trusted Companies</SolutionsWrapper>
-        <div style={{ marginTop: "15px", width: "35vw" }}>
+        <div style={{ marginTop: "15px", width: "75vw" }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris.
         </div>
       </div>
       <motion.div initial="hidden" animate="visible" variants={secondVariants}>
-        <div style={{ display: "flex", flexDirection: "row", width: "70vw" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: isTabletOnly ? "column" : "row",
+            width: "70vw",
+          }}
+        >
           <TrustedCompany style={{ backgroundColor: "#172b4d" }}>
             <Grid>
               <Grid.Row>
                 <Image
-                  src={require("../../assets/images/company-four.png")}
+                  src={require("../../assets/images/company-five.png")}
                   size="mini"
-                  floated="left"
+                  centered
                   style={{
                     width: "125px",
                     height: "125px",
-                    marginLeft: "25px",
-                    marginTop: "25px",
+                    margin: "0 auto",
                   }}
                 />
               </Grid.Row>
               <Grid.Row>
                 <div
                   style={{
-                    width: "12vw",
                     margin: "0 auto",
                     fontSize: "17px",
                     color: "white",
@@ -72,24 +78,22 @@ const TrustedCompanies = (props) => {
             <Grid>
               <Grid.Row>
                 <Image
-                  src={require("../../assets/images/company-five.png")}
+                  src={require("../../assets/images/company-seven.png")}
                   size="mini"
-                  floated="left"
+                  centered
                   style={{
                     width: "125px",
                     height: "125px",
-                    marginLeft: "25px",
-                    marginTop: "25px",
+                    margin: "0 auto",
                   }}
                 />
               </Grid.Row>
               <Grid.Row>
                 <div
                   style={{
-                    width: "12vw",
                     margin: "0 auto",
                     fontSize: "17px",
-                    color: "#172b4d",
+                    color: "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -97,7 +101,7 @@ const TrustedCompanies = (props) => {
                 </div>
               </Grid.Row>
               <Grid.Row>
-                <TrustedCompanyDescription style={{ color: "#172b4d" }}>
+                <TrustedCompanyDescription>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </TrustedCompanyDescription>
@@ -108,24 +112,22 @@ const TrustedCompanies = (props) => {
             <Grid>
               <Grid.Row>
                 <Image
-                  src={require("../../assets/images/company-six.png")}
+                  src={require("../../assets/images/company-four.png")}
                   size="mini"
-                  floated="left"
+                  centered
                   style={{
                     width: "125px",
                     height: "125px",
-                    marginLeft: "25px",
-                    marginTop: "25px",
+                    margin: "0 auto",
                   }}
                 />
               </Grid.Row>
               <Grid.Row>
                 <div
                   style={{
-                    width: "12vw",
                     margin: "0 auto",
                     fontSize: "17px",
-                    color: "#172b4d",
+                    color: "white",
                     fontWeight: "bold",
                   }}
                 >
@@ -133,7 +135,7 @@ const TrustedCompanies = (props) => {
                 </div>
               </Grid.Row>
               <Grid.Row>
-                <TrustedCompanyDescription style={{ color: "#172b4d" }}>
+                <TrustedCompanyDescription>
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </TrustedCompanyDescription>
@@ -144,21 +146,19 @@ const TrustedCompanies = (props) => {
             <Grid>
               <Grid.Row>
                 <Image
-                  src={require("../../assets/images/company-seven.png")}
+                  src={require("../../assets/images/company-five.png")}
                   size="mini"
-                  floated="left"
+                  centered
                   style={{
                     width: "125px",
                     height: "125px",
-                    marginLeft: "25px",
-                    marginTop: "25px",
+                    margin: "0vh auto",
                   }}
                 />
               </Grid.Row>
               <Grid.Row>
                 <div
                   style={{
-                    width: "12vw",
                     margin: "0 auto",
                     fontSize: "17px",
                     color: "white",
@@ -178,7 +178,7 @@ const TrustedCompanies = (props) => {
           </TrustedCompany>
         </div>
       </motion.div>
-    </AgileWrapper>
+    </TrustedCompanyWrapper>
   );
 };
 

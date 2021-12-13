@@ -9,6 +9,7 @@ export const MainContainerWrapper = styled.div`
   background-image: url(${HomeBackground});
   background-repeat: no-repeat;
   background-size: 115% 125%;
+  background-position: center;
 `;
 
 export const MainContentWrapper = styled.div`
@@ -17,6 +18,10 @@ export const MainContentWrapper = styled.div`
   margin-right: 15vw;
   margin-left: 15vw;
   padding-down: 10vh;
+
+  @media only screen and (max-width: 768px) {
+    margin: 0 auto;
+  }
 `;
 
 export const NavigationWrapper = styled.div`
@@ -24,6 +29,11 @@ export const NavigationWrapper = styled.div`
   flex-direction: row;
   width: 80vw;
   height: 8vh;
+  margin: 0 auto;
+
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const HeadlineWrapper = styled.div`
@@ -34,15 +44,24 @@ export const HeadlineWrapper = styled.div`
   font-size: 25px;
   color: #2185d0;
   cursor: default;
+  display: flex;
+  flex-direction: row;
+
+  @media only screen and (max-width: 768px) {
+    margin: auto auto;
+  }
 `;
 
 export const NavItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding-left: 50px;
-  margin: auto 0;
+  margin: auto 1vw;
   font-size: 10px;
   font-family: "Libre Baskerville", serif;
+
+  @media only screen and (max-width: 768px) {
+    margin: auto auto;
+  }
 `;
 
 export const NavItem = styled.div`
@@ -56,6 +75,21 @@ export const NavItem = styled.div`
   &:hover {
     text-decoration: underline;
     transition: 1s;
+  }
+
+  @media only screen and (max-width: 845px) {
+    font-size: 13px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 0.5vh 2vw;
+  }
+`;
+
+export const HeadlineNameWrapper = styled.div`
+  margin: auto 0;
+  @media only screen and (max-width: 845px) {
+    font-size: 13px;
   }
 `;
 
@@ -73,20 +107,27 @@ export const NavAccountsItem = styled.div`
     background-color: #dbdbdb;
     transition: 0.5s;
   }
+
+  @media only screen and (max-width: 768px) {
+    margin: 0 auto;
+    padding: 1vh 2vw;
+  }
 `;
 
 export const AccountsWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  padding-left: 50px;
-  padding-right: 5px;
   margin: auto 0;
-  margin-left: 25vw;
+
+  @media only screen and (max-width: 768px) {
+    margin: 2vh auto;
+    padding: 1vh 2vw;
+  }
 `;
 
 export const WelcomeDialog = styled.div`
   color: #253858;
-  font-size: 40px;
+  font-size: 32px;
   font-family: "Josefin Sans", sans-serif;
   padding-left: 10vw;
   padding-right: 10vw;
@@ -95,16 +136,51 @@ export const WelcomeDialog = styled.div`
   padding-down: 2vh;
   height: 35vh;
   cursor: default;
+
+  @media only screen and (max-width: 1300px) {
+    font-size: 28px;
+  }
+
+  @media only screen and (max-width: 1020px) {
+    font-size: 25px;
+  }
+
+  @media only screen and (max-width: 845px) {
+    font-size: 22px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 20px;
+    margin: 2vh auto;
+    width: 80vw;
+  }
 `;
 
 export const WelcomeDivWrapper = styled.div`
   display: flex;
   width: 45vw;
   height: 15vh;
-  margin: 70px auto;
+  margin: 12vh auto;
   box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.17);
   background-color: #f4f5f7;
   font-family: "Libre Baskerville", serif;
+
+  @media only screen and (max-width: 1300px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (max-width: 1020px) {
+    font-size: 12px;
+    width: 55vw;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 8px;
+  }
 `;
 
 export const SolutionsWrapper = styled.div`
@@ -112,15 +188,34 @@ export const SolutionsWrapper = styled.div`
   font-size: 25px;
   font-weight: bold;
   color: #253858;
+  margin-top: 1vh;
+
+  @media only screen and (max-width: 845px) {
+    font-size: 17px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 15px;
+  }
 `;
 
 export const BottomHeadline = styled.div`
   font-family: "Libre Baskerville", serif;
-  margin-top: 20px;
-  font-size: 25px;
+  margin: 3vh 2vw;
+  font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
   color: white;
+  width: 35vw;
+
+
+  @media only screen and (max-width: 1020px) {
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 587px) {
+    font-size: 8px;
+  }
 `;
 
 export const BottomSublineHeader = styled.div`
@@ -136,16 +231,43 @@ export const BottomSubline = styled.div`
   font-family: "Libre Baskerville", serif;
   font-size: 11.5px;
   color: #bfbfbf;
+  margin: 0 auto;
 `;
 
 export const BottomModal = styled.div`
-  width: 20vw;
-  height: 40vh;
+  width: 70vw;
+  height: 45vh;
   background-color: white;
   margin: 5vh 10vw;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 1220px) {
+    display: none;
+  }
+`;
+
+export const TrustedCompanyWrapper = styled.div`
+  width: 75vw;
+  height: 35vh;
+  margin: 25px auto;
+  color: #253858;
+  font-family: "Libre Baskerville", serif;
+  margin: 20vh auto;
+
+  @media only screen and (max-width: 1009px) {
+    height: 85vh;
+    overflow-y: scroll;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 587px) {
+    font-size: 8px;
+  }
 `;
 
 export const AgileWrapper = styled.div`
@@ -154,6 +276,19 @@ export const AgileWrapper = styled.div`
   margin: 25px auto;
   color: #253858;
   font-family: "Libre Baskerville", serif;
+  margin: 20vh auto;
+
+  @media only screen and (max-width: 1009px) {
+    height: 85vh;
+  }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 587px) {
+    font-size: 8px;
+  }
 `;
 
 export const SolutionOptions = styled.div`
@@ -170,6 +305,14 @@ export const SolutionOptions = styled.div`
 
     transition: 0.7s;
   }
+
+  @media only screen and (max-width: 768px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 550px) {
+    font-size: 10px;
+  }
 `;
 
 export const SoftwareName = styled.div`
@@ -179,10 +322,21 @@ export const SoftwareName = styled.div`
 `;
 
 export const TrustedCompany = styled.div`
-  width: 15vw;
-  height: 40vh;
-  margin: 20px auto;
+  width: 18vw;
+  height: 45vh;
+  margin: 2vh 0.2vw;
   border-radius: 9px;
+
+  @media only screen and (max-width: 1010px) {
+    margin: 2vh auto;
+    width: 30vw;
+    height: 45vh;
+  }
+
+  @media only screen and (max-width: 850px) {
+    width: 40vw;
+    height: 50vh;
+  }
 `;
 
 export const TrustedCompanyDescription = styled.div`
@@ -191,17 +345,28 @@ export const TrustedCompanyDescription = styled.div`
   color: white;
   margin: 0 auto;
   font-weight: bold;
+
+  @media only screen and (max-width: 1345px) {
+    font-size: 12px;
+  }
+
+  @media only screen and (max-width: 1130px) {
+    font-size: 10px;
+  }
+
+  @media only screen and (max-width: 850px) {
+    font-size: 9px;
+  }
 `;
 
 export const HomeBottom = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100vw;
-  height: 50vh;
-  margin-top: 110vh;
-  margin-left: auto;
-  margin-right: auto;
   background-color: #001a3f;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 export const MenuTitle = styled.div`
@@ -234,10 +399,14 @@ export const MenuBoard = styled.div`
 export const HomeBottomModalHeadline = styled.div`
   font-family: "Libre Baskerville", serif;
   margin: 15px auto;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   word-wrap: break-word;
   background-color: #f4f5f7;
+
+  @media only screen and (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 export const SolutionImageWrapper = styled.div`

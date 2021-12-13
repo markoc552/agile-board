@@ -39,6 +39,7 @@
     "semantic-ui-react": "^0.88.2",
     "styled-components": "^5.2.1",
     "use-media": "^1.4.0",
+    "use-mediaquery": "^1.0.1",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.6",
     "web-vitals": "^0.2.4"

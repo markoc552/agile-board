@@ -142,8 +142,8 @@ const Login = (props) => {
                   value={values.password}
                 />
                 <Button.Group
-                  size="large"
-                  style={{ width: "12vw", margin: "10px auto" }}
+                  size="mini"
+                  style={{ margin: "10px auto" }}
                 >
                   <Button
                     color="orange"

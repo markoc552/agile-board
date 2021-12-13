@@ -25,7 +25,7 @@ const Register = (props) => {
   return (
     <RegisterLoginWrapper
       style={{
-        height: "62vh",
+        height: "65vh",
         marginTop: props.accountModal !== undefined && "0vh",
         boxShadow: props.accountModal !== undefined && "none",
       }}
@@ -165,8 +165,8 @@ const Register = (props) => {
                   value={values.email}
                 />
                 <Button.Group
-                  size="large"
-                  style={{ width: "12vw", margin: "10px auto" }}
+                  size="mini"
+                  style={{ margin: "0px auto" }}
                 >
                   <Button
                     color="orange"

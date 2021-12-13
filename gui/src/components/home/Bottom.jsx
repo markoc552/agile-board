@@ -13,10 +13,8 @@ import { Grid, Image, Divider, Button } from "semantic-ui-react";
 const Bottom = (props) => {
   return (
     <HomeBottom>
-      <div style={{ width: "45vw", marginTop: "5vh" }}>
         <Grid>
           <Grid.Row columns={4}>
-            <Grid.Column></Grid.Column>
             <Grid.Column width={10}>
               <BottomHeadline>
                 Powering innovation at 180,000+ companies worldwide
@@ -76,7 +74,6 @@ const Bottom = (props) => {
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </div>
       <BottomModal>
         <Image
           style={{ margin: "15px auto" }}
@@ -87,7 +84,7 @@ const Bottom = (props) => {
           The best development process for your team
         </HomeBottomModalHeadline>
         <Divider />
-        <Button style={{ width: "250px", margin: "0 auto" }} color="instagram">
+        <Button style={{ padding: "10px", margin: "auto auto" }} color="instagram">
           See offers
         </Button>
       </BottomModal>
