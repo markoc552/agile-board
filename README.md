@@ -29,4 +29,4 @@ Features
  Application should be running at http://localhost:3000
 
 
-© Marko Perajica 2021.
+© Marko Perajica 2020.
