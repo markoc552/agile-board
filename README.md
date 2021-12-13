@@ -2,6 +2,8 @@
 
 #### Mockup application of Jira board
 
+![Agile_board](/assets/cover-image.png)
+
 Features
 
  * **1.** Create a ticket
