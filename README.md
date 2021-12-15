@@ -2,13 +2,20 @@
 
 #### Mockup application of Jira board
 
-Features
+![Agile_board](/assets/cover-image.png)
 
- * **1.** Create a ticket
- * **2.** Add a ticket to sprint and start a sprint
- * **3.** Search issues
- * **4.** Supports multiple companies
+**Features**
 
+ * Create a ticket
+ * Add a ticket to sprint and start a sprint
+ * Search issues
+ * Supports multiple companies
+
+**Technologies**
+ * FE: React and Redux
+ * BE: Microservice architecture created with Java and Spring Boot
+ * DB: PostgreSQL
+ Communication between services is encripted with SSL.
 
 ## Guide to installation
 
