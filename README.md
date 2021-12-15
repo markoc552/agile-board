@@ -3,6 +3,7 @@
 #### Mockup application of Jira board
 
 ![Agile_board](/assets/cover-image.png)
+![Agile_board](/assets/board-image.png)
 
 **Features**
 
