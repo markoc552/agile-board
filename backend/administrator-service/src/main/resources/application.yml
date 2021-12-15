@@ -3,13 +3,11 @@ server:
     key-store-type: PKCS12
     key-store: classpath:ssl_keys.p12
     key-store-password: Start123
-    key-alias: ssl_keys
     enabled: true
   port: 9000
 
 keystore:
   path: classpath:ssl_keys.p12
-  alias: ssl_keys
   storePassword: Start123
   keyPassword: Start123
 

@@ -6,12 +6,13 @@ import {
   SystemDashboardContentWrapper,
   ContentNav,
   DashboardNavItem as NavItem,
+  DashboardNavHeadline,
   ProjectNavigationItem,
   DashboardHeadline,
   ProjectNavigationBar,
   DashboardHeadlineWrapper,
 } from "../util/AgileStyledComponents";
-import { Divider, Icon } from "semantic-ui-react";
+import { Divider, Icon, Image } from "semantic-ui-react";
 
 const ProjectNavigation = (props) => {
   return (
@@ -22,6 +23,14 @@ const ProjectNavigation = (props) => {
         transition: "0.5s",
       }}
     >
+      <DashboardNavHeadline>
+          <Image
+            src={require("../../assets/images/agile-logo.png")}
+            size="mini"
+            avatar
+          />
+          AGILE BOARD
+      </DashboardNavHeadline>
       <div style={{ display: !props.showMenu ? "none" : "block" }}>
         <DashboardHeadlineWrapper>
           <DashboardHeadline style={{ margin: "auto 1vw" }}>

@@ -23,6 +23,7 @@ import AddToSprintModal from "../tasks/AddToSprintModal";
 import { useToasts } from "react-toast-notifications";
 import { loadStartedSprint, loadCreatedTasks } from "../../redux/actions";
 import { motion } from "framer-motion";
+import { useMedia } from "use-media";
 
 const ActiveSprint = (props) => {
   const [show, setShow] = useState(false);
@@ -54,6 +55,9 @@ const ActiveSprint = (props) => {
   const user = useSelector((state) => state.auth.user);
 
   const dinamicDroppables = useMemo(() => [...items], [items]);
+
+  const isMobile = useMedia("only screen and (max-width: 768px)");
+  const isTablet = useMedia("only screen and (max-width: 968px)");
 
   let filtered = [];
 
@@ -284,8 +288,10 @@ const ActiveSprint = (props) => {
             <div
               style={{
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: isMobile ? "column" : "row",
+                height: isMobile && "102vh",
                 padding: "25px",
+                margin: isMobile && "auto",
               }}
             >
               <DragDropContext
@@ -295,9 +301,9 @@ const ActiveSprint = (props) => {
                   return (
                     <BacklogWidget
                       style={{
-                        width: !taskOpen ? "20vw" : "50vw",
+                        width: isMobile ? "70vw" : "20vw",
                         height: "75vh",
-                        margin: "0 0.5vw",
+                        margin: isMobile ? "3vh 0.5vw" : "0 0.5vw",
                       }}
                       onClick={(e) => e.stopPropagation()}
                     >
@@ -307,7 +313,12 @@ const ActiveSprint = (props) => {
                         >
                           {column.name}
                         </BacklogHeadline>
-                        <div style={{ margin: "auto 10px" }}>
+                        <div
+                          style={{
+                            margin: "auto 10px",
+                            fontSize: isTablet && "10px",
+                          }}
+                        >
                           {column.items.length} Issues
                         </div>
                         {column.name === "Sprint" && (
@@ -404,7 +415,7 @@ const ActiveSprint = (props) => {
                                 transition: "0.5s",
                                 padding: 4,
                                 marginTop: "4vh",
-                                width: !taskOpen ? "17vw" : "5vw",
+                                width: !isMobile ? "17vw" : "68vw",
                                 height: "72vh",
                                 overflowY: "scroll",
                                 margin: "0 auto",

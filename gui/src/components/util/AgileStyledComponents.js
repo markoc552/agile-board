@@ -208,7 +208,6 @@ export const BottomHeadline = styled.div`
   color: white;
   width: 35vw;
 
-
   @media only screen and (max-width: 1020px) {
     text-align: center;
   }
@@ -235,14 +234,15 @@ export const BottomSubline = styled.div`
 `;
 
 export const BottomModal = styled.div`
-  width: 70vw;
+  width: 75vw;
   height: 45vh;
+  padding: 10px;
   background-color: white;
   margin: 5vh 10vw;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-
+  display: none;
   @media only screen and (max-width: 1220px) {
     display: none;
   }
@@ -251,14 +251,13 @@ export const BottomModal = styled.div`
 export const TrustedCompanyWrapper = styled.div`
   width: 75vw;
   height: 35vh;
-  margin: 25px auto;
+  margin: 15px auto;
   color: #253858;
   font-family: "Libre Baskerville", serif;
   margin: 20vh auto;
 
   @media only screen and (max-width: 1009px) {
-    height: 85vh;
-    overflow-y: scroll;
+    height: 190vh;
   }
 
   @media only screen and (max-width: 768px) {
@@ -277,10 +276,6 @@ export const AgileWrapper = styled.div`
   color: #253858;
   font-family: "Libre Baskerville", serif;
   margin: 20vh auto;
-
-  @media only screen and (max-width: 1009px) {
-    height: 85vh;
-  }
 
   @media only screen and (max-width: 768px) {
     font-size: 12px;
@@ -417,7 +412,7 @@ export const SolutionImageWrapper = styled.div`
 
 export const DashboardNav = styled.div`
   width: 100vw;
-  height: 5.5vh;
+  height: 7vh;
   display: flex;
   flex-direction: row;
   text-align: center;
@@ -428,14 +423,14 @@ export const DashboardNav = styled.div`
     flex-direction: column;
     padding: 50px;
     width: 100vw;
-    margin-top: 1vh;
   }
 `;
 
 export const DashboardUserWrapper = styled.div`
-  margin-left: 52vw;
   display: flex;
   flex-direction: row;
+  padding: 10px;
+  margin-left: 60vw;
 
   @media only screen and (max-width: 1410px) {
     flex-direction: column;
@@ -454,44 +449,18 @@ export const ContentNav = styled.div`
 
 export const DashboardNavHeadline = styled.div`
   font-family: "Russo One", sans-serif;
-  box-shadow: 0px 7px 13px 5px rgba(0, 0, 0, 0.07);
-  font-size: 24px;
+  font-size: 12px;
   font-weight: bold;
-  color: white;
-  width: 14vw;
   height: 5.5vh;
-  margin: auto 0;
-  z-index: 10;
-
-  @media only screen and (max-width: 1420px) and (min-width: 1410px) {
-    flex-direction: column;
-    width: 22.5vw;
-    height: 5.5vh;
-    font-size: 15px;
-  }
-
-  @media only screen and (max-width: 1410px) {
-    flex-direction: column;
-    width: 104vw;
-    padding: 10px;
-    margin-left: -6.8vw;
-    margin-top: -5vw;
-    height: 10vh;
-  }
-
-  @media only screen and (max-width: 734px) {
-    width: 100vw;
-    margin-top: -5.9vh;
-    margin-left: -11vw;
-    height: 10vh;
-  }
+  margin: 10px auto;
 `;
 
 export const DashboardNavHeadlineItemWrapper = styled.div`
-  font-family: "Arvo", serif;
-  font-weight: bold;
-  @media only screen and (max-width: 1410px) {
-    margin: 1vh 5vw;
+  color: black;
+  margin: auto auto;
+
+  @media only screen and (max-width: 645px) {
+    width: 20px;
   }
 `;
 
@@ -499,22 +468,19 @@ export const DashboardNavHeadlineItemContainer = styled.div`
   display: flex;
 
   @media only screen and (max-width: 1410px) {
-    margin: 1vh -10vw;
     flex-direction: row;
     background-color: white;
-    width: 100vw;
-  }
-
-  @media only screen and (max-width: 734px) {
-    flex-direction: column;
+    width: 90vw;
+    border-radius: 30px;
+    margin: 4vh auto;
   }
 `;
 
 export const DashboardNavItem = styled.div`
   padding: 10px;
-  font-family: "Roboto", sans-serif;
+  font-family: "Russo One", sans-serif;
   color: #253858;
-  font-size: 17px;
+  font-size: 11px;
   font-weight: bold;
   cursor: default;
   margin: 5px auto;
@@ -549,14 +515,12 @@ export const DashboardHeadlineWrapper = styled.div`
 `;
 
 export const DashboardHeadline = styled.div`
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  margin: 12px 20px;
+  font-family: "Russo One", sans-serif;
+  margin: auto 20px;
+  font-size: 13px;
 
   @media only screen and (max-width: 1410px) {
     width: 50vw;
-    margin: -10px 0;
-    padding: 7px;
   }
 `;
 
@@ -630,6 +594,14 @@ export const BacklogHeadline = styled.div`
   font-weight: bold;
   font-size: 17px;
   cursor: default;
+
+  @media only screen and (max-width: 1240px) {
+    font-size: 13px;
+  }
+
+  @media only screen and (max-width: 1083px) {
+    font-size: 10px;
+  }
 `;
 
 export const SystemDashboardContentWrapper = styled.div`
@@ -641,8 +613,8 @@ export const SystemDashboardContentWrapper = styled.div`
 `;
 
 export const ProjectNavigation = styled.div`
-  width: 15vw;
-  height: 94.5vh;
+  width: 17vw;
+  height: 97vh;
   background-color: #f4f5f7;
 `;
 
@@ -737,7 +709,7 @@ export const TaskWidget = styled.div`
 `;
 
 export const ProjectNavigationBar = styled.div`
-  width: 14vw;
+  width: 17vw;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -745,16 +717,12 @@ export const ProjectNavigationBar = styled.div`
   @media only screen and (max-width: 1410px) {
     width: 100vw;
     margin: 0 auto;
-    margin-top: 5vh;
+    margin-top: 10vh;
     margin-bottom: 1.5vh;
   }
 
   @media only screen and (max-width: 1420px) and (min-width: 1410px) {
     width: 17.3vw;
-  }
-
-  @media only screen and (max-width: 734px) {
-    margin-top: 15vh;
   }
 `;
 
@@ -828,6 +796,10 @@ export const RegisterLoginWrapper = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (max-width: 942px) {
+    width: 50vw;
+  }
 `;
 
 export const WidgetItem = styled.div`

@@ -29,14 +29,14 @@ const Home = () => {
           <WelcomeContent />
         </motion.div>
         <Solutions />
-        <Divider horizontal style={{marginTop: "27vh"}}>
+        <Divider horizontal style={{paddingTop: "27vh"}}>
           <Header as="h4">
             <Icon name="bar chart" />
             Business
           </Header>
         </Divider>
         <TrustedCompanies />
-        <Divider horizontal style={{marginTop: "5vh"}}>
+        <Divider horizontal style={{padding: 50}}>
           <Header as="h4">
             <Icon name="bar chart" />
             Info

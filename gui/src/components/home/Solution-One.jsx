@@ -46,7 +46,6 @@ const SolutionOne = (props) => {
                 src={require("../../assets/images/company-three.png")}
                 size="mini"
                 centered
-                style={{ width: "75px", height: "75px" }}
               />
             </Grid.Column>
             <Grid.Column>

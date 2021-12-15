@@ -165,6 +165,7 @@ public class UserService implements UserDetailsService {
 
     @Log
     public UserDao persistUser(UserDto userDto, UserDao userDao) {
+        userDao.setUsername(userDto.getUsername());
         userDao.setFirstname(userDto.getFirstname());
         userDao.setLastname(userDto.getLastname());
         userDao.setEmail(userDto.getEmail());

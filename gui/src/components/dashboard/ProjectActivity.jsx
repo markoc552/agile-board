@@ -79,15 +79,15 @@ const ProjectActivity = (props) => {
         <Segment
           color="blue"
           raised
-          style={{ width: "25vw", height: "25vh", margin: "5vh, 5vw" }}
+          style={{ width: "25vw", height: "35vh", margin: "2vh, 8vw" }}
         >
-          <Headline style={{ margin: "0 0", fontSize: "15px" }}>
+          <Headline style={{ margin: "0 0", fontSize: "12px" }}>
             Project: {selectedProject}
           </Headline>
-          <Headline style={{ margin: "0 0", fontSize: "15px" }}>
+          <Headline style={{ margin: "0 0", fontSize: "12px" }}>
             Manager: {projectData.manager}
           </Headline>
-          <Headline style={{ margin: "-50px 0", fontSize: "15px" }}>
+          <Headline style={{ margin: "-50px 0", fontSize: "12px" }}>
             Ticket: {projectData.keyword}
           </Headline>
         </Segment>

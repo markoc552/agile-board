@@ -12,27 +12,19 @@ import { Image, Search, Dropdown, Icon, Button } from "semantic-ui-react";
 import { useSelector, connect } from "react-redux";
 import ProjectSelectModal from "./ProjectSelectModal";
 import { login } from "../../redux/actions";
+import { useMedia } from "use-media";
 
 const DashboardNav = (props) => {
   const [showModal, isModalShow] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
+  const isMobile = useMedia("only screen and (max-width: 645px)")
+
   console.log(user);
 
   return (
     <Navigation>
-      <DashboardNavHeadline>
-        <div style={{ margin: "1vh 0" }}>
-          <Image
-            src={require("../../assets/images/agile-logo.png")}
-            size="mini"
-            avatar
-            style={{ width: "40px", height: "40px" }}
-          />
-          AGILE BOARD
-        </div>
-      </DashboardNavHeadline>
       <DashboardUserWrapper>
         <DashboardNavHeadlineItemContainer>
           {props.isMobileView && (
@@ -51,16 +43,13 @@ const DashboardNav = (props) => {
               <Button
                 color="teal"
                 circular
-                style={{
-                  margin: props.isMobileView ? "1vh 0" : "auto 0",
-                  height: props.isMobileView && "5vh",
-                }}
+                style={{margin: "auto 0"}}
                 onClick={() => isModalShow(true)}
               >
                 Choose project
               </Button>
               <DashboardNavHeadlineItemWrapper>
-                <Search style={{ margin: "1vh 50px" }} />
+                <Search style={{ margin: "auto 50px", display: isMobile && "none" }} />
               </DashboardNavHeadlineItemWrapper>
               <div>
                 <Dropdown
@@ -78,12 +67,6 @@ const DashboardNav = (props) => {
                         src={require("../../assets/images/agile-logo.png")}
                         size="mini"
                         avatar
-                        bordered
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          margin: "0 auto",
-                        }}
                       />
                       <div
                         style={{
@@ -94,7 +77,7 @@ const DashboardNav = (props) => {
                           fontWeight: "bold",
                         }}
                       >
-                        <div style={{ margin: "auto 10px" }}>
+                        <div style={{fontSize: 14}}>
                           <div>{`${user.firstname} ${user.lastname}`}</div>
                           <div>
                             <Icon name="circle" color="green" />

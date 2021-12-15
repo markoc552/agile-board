@@ -44,82 +44,80 @@ const Solutions = (props) => {
 
   return (
     <>
-      <div>
-        <AgileWrapper>
-          <SolutionsWrapper>Our solutions</SolutionsWrapper>
-          <div
-            style={{ display: "flex", flexDirection: "row", padding: "25px 0" }}
+      <AgileWrapper>
+        <SolutionsWrapper>Our solutions</SolutionsWrapper>
+        <div
+          style={{ display: "flex", flexDirection: "row", padding: "25px 0" }}
+        >
+          <SolutionOptions
+            onClick={() => {
+              setSelectedSolution("solution-1");
+              setSelectedImage(0);
+            }}
           >
-            <SolutionOptions
-              onClick={() => {
-                setSelectedSolution("solution-1");
-                setSelectedImage(0);
-              }}
-            >
-              Solution 1
-            </SolutionOptions>
-            <SolutionOptions
-              onClick={() => {
-                setSelectedSolution("solution-2");
-                setSelectedImage(1);
-              }}
-            >
-              Solution 2
-            </SolutionOptions>
-            <SolutionOptions
-              onClick={() => {
-                setSelectedSolution("solution-3");
-                setSelectedImage(2);
-              }}
-            >
-              Solution 3
-            </SolutionOptions>
-            <SolutionOptions
-              onClick={() => {
-                setSelectedSolution("solution-4");
-                setSelectedImage(3);
-              }}
-            >
-              Solution 4
-            </SolutionOptions>
-          </div>
-          {selectedSolution === "solution-1" ? (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={secondVariants}
-            >
-              <SolutionOne />
-            </motion.div>
-          ) : selectedSolution === "solution-2" ? (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={secondVariants}
-            >
-              <SolutionTwo />
-            </motion.div>
-          ) : selectedSolution === "solution-3" ? (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={secondVariants}
-            >
-              <SolutionThree />
-            </motion.div>
-          ) : selectedSolution === "solution-4" ? (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={secondVariants}
-            >
-              <SolutionFour />
-            </motion.div>
-          ) : (
-            <div></div>
-          )}
-        </AgileWrapper>
-      </div>
+            Solution 1
+          </SolutionOptions>
+          <SolutionOptions
+            onClick={() => {
+              setSelectedSolution("solution-2");
+              setSelectedImage(1);
+            }}
+          >
+            Solution 2
+          </SolutionOptions>
+          <SolutionOptions
+            onClick={() => {
+              setSelectedSolution("solution-3");
+              setSelectedImage(2);
+            }}
+          >
+            Solution 3
+          </SolutionOptions>
+          <SolutionOptions
+            onClick={() => {
+              setSelectedSolution("solution-4");
+              setSelectedImage(3);
+            }}
+          >
+            Solution 4
+          </SolutionOptions>
+        </div>
+        {selectedSolution === "solution-1" ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={secondVariants}
+          >
+            <SolutionOne />
+          </motion.div>
+        ) : selectedSolution === "solution-2" ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={secondVariants}
+          >
+            <SolutionTwo />
+          </motion.div>
+        ) : selectedSolution === "solution-3" ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={secondVariants}
+          >
+            <SolutionThree />
+          </motion.div>
+        ) : selectedSolution === "solution-4" ? (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={secondVariants}
+          >
+            <SolutionFour />
+          </motion.div>
+        ) : (
+          <div></div>
+        )}
+      </AgileWrapper>
       <SolutionImageWrapper>
         <Image size="big" src={images[selectedImage]} />
       </SolutionImageWrapper>
