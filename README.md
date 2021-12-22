@@ -26,7 +26,7 @@
  * **3.** Open terminal in deployment folder
  * **4.** After that build and start up application with following command: ./start.sh --build --start
 
- If you attend problems with running the shell script run the following command to make it executable: **chmod +rwx start.sh**
+ If you attend problems with running the shell script run the following command to make it executable: **chmod +x start.sh**
 
 
  When you do all the steps application should be running on http://localhost:3000
