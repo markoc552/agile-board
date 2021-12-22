@@ -30,12 +30,6 @@
 
 
  When you do all the steps application should be running on http://localhost:3000
-
- **Notice**
- If you don't want to run application via Docker then run following commands:
-  * **1.** Run command: yarn install
-  * **2.** After it finishes run following command: yarn start 
- Application should be running at http://localhost:3000
-
+ 
 
 © Marko Perajica 2020.
