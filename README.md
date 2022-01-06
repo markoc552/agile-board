@@ -16,8 +16,7 @@
  * FE: React and Redux
  * BE: Microservice architecture created with Java and Spring Boot
  * DB: PostgreSQL
- 
- Communication between services is encripted with SSL.
+ * SSL encryption between services
 
 ## Guide to installation
 
