@@ -449,10 +449,10 @@ const ActiveSprint = (props) => {
                                               column.name === "Todo"
                                                 ? "4px solid #3396ff"
                                                 : column.name === "In progress"
-                                                ? "4px solid #ffae00"
+                                                ? "4px solid #f2bd4b"
                                                 : column.name ===
                                                   "To be verified"
-                                                ? "4px solid #a880ff"
+                                                ? "4px solid #80e1ff"
                                                 : column.name === "Finished"
                                                 ? "4px solid #0dff00"
                                                 : "4px solid #3396ff",

@@ -27,6 +27,9 @@
 
  If you attend problems with running the shell script run the following command to make it executable: **chmod +x start.sh**
 
+ **Note:** This app uses SSL for communication between services. If you didn't do this already make sure you past the following command in the place where you put url inside chrome and press enter.
+
+ The command: ***chrome://flags/#allow-insecure-localhost***. This will enabling SSL certificates for localhost. Otherwise you won't be able to properly run application.
 
  When you do all the steps application should be running on http://localhost:3000
  
