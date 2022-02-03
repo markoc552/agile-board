@@ -1,35 +1,16 @@
+import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import {
-  Button,
-  Dropdown,
-  Divider,
-  Input,
-  TextArea,
-  Form,
-  Select,
-  Icon,
-} from "semantic-ui-react";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  StyledLabel,
-} from "../util/AgileStyledComponents";
-import "../../style.css";
-import { Formik, Field, ErrorMessage } from "formik";
-import Axios from "axios";
 import { connect, useSelector } from "react-redux";
+import { Button, Dropdown, Icon } from "semantic-ui-react";
+import { uuid } from "uuidv4";
 import {
-  selectCurrentProject,
+  fetchProjectData,
   loadCreatedTasks,
   loadStartedSprint,
-  fetchProjectData,
+  selectCurrentProject,
 } from "../../redux/actions";
-import { uuid } from "uuidv4";
-
-let countryOptions = [];
+import "../../style.css";
 
 const ProjectSelectModal = (props) => {
   const [selectedProject, setSelectedProject] = useState();

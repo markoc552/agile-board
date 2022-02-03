@@ -1,29 +1,23 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  BacklogWidget,
-  BacklogHeadline,
-  WidgetItem,
-  TaskSection,
-} from "../util/AgileStyledComponents";
-import { Button, Icon, Label, Accordion } from "semantic-ui-react";
-import Spinner from "react-bootstrap/Spinner";
-
-import { uuid } from "uuidv4";
-import { useSelector, connect } from "react-redux";
-import TaskWidget from "../tasks/TaskWidget";
-import TaskModal from "../tasks/TaskModal";
-import SprintModal from "../tasks/SprintModal";
 import Axios from "axios";
-import _ from "lodash";
-import ProjectSelectModal from "./ProjectSelectModal";
-import AddToSprintModal from "../tasks/AddToSprintModal";
-import { useToasts } from "react-toast-notifications";
-import { loadStartedSprint, loadCreatedTasks } from "../../redux/actions";
 import { motion } from "framer-motion";
+import React, { useMemo, useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { connect, useSelector } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+import { Button, Icon, Label } from "semantic-ui-react";
 import { useMedia } from "use-media";
+import { loadCreatedTasks, loadStartedSprint } from "../../redux/actions";
+import AddToSprintModal from "../tasks/AddToSprintModal";
+import SprintModal from "../tasks/SprintModal";
+import TaskModal from "../tasks/TaskModal";
+import TaskWidget from "../tasks/TaskWidget";
+import {
+  BacklogHeadline,
+  BacklogWidget,
+  Headline,
+} from "../util/AgileStyledComponents";
+import { secondVariants } from "../util/animations";
+import ProjectSelectModal from "./ProjectSelectModal";
 
 const ActiveSprint = (props) => {
   const [show, setShow] = useState(false);
@@ -124,15 +118,6 @@ const ActiveSprint = (props) => {
         items: filteredFinishedTasks,
       },
     };
-  };
-
-  const secondVariants = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.45 },
-    },
-    hidden: { opacity: 0 },
   };
 
   const [columns, setColumns] = useState(filterTasksByStatus(startedSprint));

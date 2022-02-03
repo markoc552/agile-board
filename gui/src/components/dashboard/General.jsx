@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Clock from "react-clock";
+import "react-clock/dist/Clock.css";
+import { Calendar } from "react-modern-calendar-datepicker";
+import "react-modern-calendar-datepicker/lib/DatePicker.css";
+import { Divider, Image } from "semantic-ui-react";
+import "../../style.css";
 import {
-  ProjectNavigation,
-  ProjectNavigationItem,
+  AccountImageWrapper,
   Headline,
-  ContentNav,
-  SystemDashboardContentWrapper,
-  DashboardNavItem as NavItem,
-  WelcomeWidget,
   TimeWidget,
   TodoWidget,
-  AccountImageWrapper,
+  WelcomeWidget,
   WelcomeWidgetHello,
 } from "../util/AgileStyledComponents";
-import { Icon, Divider, Image } from "semantic-ui-react";
-import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import DatePicker, { Calendar } from "react-modern-calendar-datepicker";
-//import {OpenWeatherMap} from "react-weather";
-import "../../style.css";
-import "react-clock/dist/Clock.css";
-import Clock from "react-clock";
 
-const General = (props) => {
+const General = () => {
   const [selectedDay, setSelectedDay] = useState(null);
 
   const [value, setValue] = useState(new Date());
@@ -45,14 +39,22 @@ const General = (props) => {
     >
       <Headline>System Dashboard</Headline>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <div style={{ display: "flex", flexDirection: "column", margin: "0 auto"}}>
+        <div
+          style={{ display: "flex", flexDirection: "column", margin: "0 auto" }}
+        >
           <WelcomeWidget>
             <AccountImageWrapper>
               <Image src={require("../../assets/images/company-two.png")} />
             </AccountImageWrapper>
             <WelcomeWidgetHello>Good morning, Marko</WelcomeWidgetHello>
           </WelcomeWidget>
-          <div style={{display: "flex", flexDirection: "row", margin: "2vh auto"}}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              margin: "2vh auto",
+            }}
+          >
             <div style={{ margin: "0 auto" }}>
               <Calendar
                 value={selectedDay}

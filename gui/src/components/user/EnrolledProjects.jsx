@@ -1,37 +1,22 @@
-import React, { useState, useMemo } from "react";
-import PropTypes from "prop-types";
+import Axios from "axios";
+import React, { useMemo, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
 import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  styledTable,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-  Input,
-} from "semantic-ui-react";
-import {
-  useTable,
+  useAsyncDebounce,
   useFilters,
   useGlobalFilter,
-  useAsyncDebounce,
+  useTable,
 } from "react-table";
-import { FormattedMessage } from "react-intl";
-import Axios from "axios";
-import {useSelector} from "react-redux"
+import { Button, Input } from "semantic-ui-react";
+import { Headline } from "../util/AgileStyledComponents";
 
 const UpdateProjects = (props) => {
   const username = "Test";
 
   const [enrolledProjects, setEnrolledProjects] = useState([]);
 
-  const token = useSelector(state => state.auth.token)
+  const token = useSelector((state) => state.auth.token);
 
   useState(() => {
     Axios.get(

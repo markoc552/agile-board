@@ -1,13 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-  TaskWidget as StyledTaskWidget,
-  TaskSection,
-} from "../util/AgileStyledComponents";
-import { Button, Icon, Label, Accordion } from "semantic-ui-react";
-import Spinner from "react-bootstrap/Spinner";
 import Axios from "axios";
+import React, { useEffect, useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import { useSelector } from "react-redux";
+import { Accordion, Icon, Label } from "semantic-ui-react";
+import { TaskWidget as StyledTaskWidget } from "../util/AgileStyledComponents";
 
 const TaskWidget = (props) => {
   const [activeIndexs, setActiveIndexs] = useState([0, 1, 2, 3, 4, 5]);

@@ -1,27 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  StyledProfileLabel,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-  Select,
-  Icon,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
+import React from "react";
+import { Icon, Image, Message } from "semantic-ui-react";
+import { Headline, StyledProfileLabel } from "../util/AgileStyledComponents";
 
-const NewProject = (props) => {
-  const [submitting, isSubmitting] = useState(false);
-
+const NewProject = () => {
   return (
     <div>
       <Headline>My profile</Headline>

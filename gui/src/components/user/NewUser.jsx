@@ -1,24 +1,9 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  FormikWrapper,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-  Select,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
 import Axios from "axios";
+import { Formik } from "formik";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Button, Form, Message, Select } from "semantic-ui-react";
+import { FormikWrapper, Headline } from "../util/AgileStyledComponents";
 
 const roles = [
   { value: "admin", text: "ADMIN" },

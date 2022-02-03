@@ -1,32 +1,24 @@
-import React, { useState, useCallback, useEffect } from "react";
+import Axios from "axios";
+import { Formik } from "formik";
+import React, { useCallback, useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
-import TaskWidget from "./TaskWidget";
-import { useDropzone } from "react-dropzone";
-import {
-  TaskWidget as StyledTaskWidget,
-  TaskSection,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Icon,
-  Label,
-  Accordion,
-  Input,
-  Form,
-  Select,
-  TextArea,
-  Segment,
-  Header,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage, FieldArray } from "formik";
-import Axios from "axios";
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { loadCreatedTasks } from "../../redux/actions";
+import "react-datepicker/dist/react-datepicker.css";
+import { useDropzone } from "react-dropzone";
 import { connect, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
+import {
+  Button,
+  Form,
+  Icon,
+  Input,
+  Label,
+  Select,
+  TextArea,
+} from "semantic-ui-react";
 import { uuid } from "uuidv4";
+import { loadCreatedTasks } from "../../redux/actions";
 
 const TaskModal = (props) => {
   const [activeIndexs, setActiveIndexs] = useState([0, 1, 2, 3, 4, 5]);

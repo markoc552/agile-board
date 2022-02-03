@@ -1,25 +1,11 @@
+import Axios from "axios";
+import { Field, FieldArray, Formik } from "formik";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import {
-  Button,
-  Dropdown,
-  Divider,
-  Input,
-  TextArea,
-  Form,
-  Select,
-} from "semantic-ui-react";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  StyledLabel,
-} from "../util/AgileStyledComponents";
-import "../../style.css";
-import { Formik, Field, ErrorMessage, FieldArray } from "formik";
-import Axios from "axios";
 import { useSelector } from "react-redux";
+import { Button, Form, Input, Select } from "semantic-ui-react";
+import "../../style.css";
+import { StyledLabel } from "../util/AgileStyledComponents";
 
 const managerOptions = [
   { value: "tests", text: "Test" },

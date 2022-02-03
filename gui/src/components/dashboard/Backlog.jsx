@@ -1,27 +1,19 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
+import React, { useEffect, useMemo, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  BacklogWidget,
-  BacklogHeadline,
-  WidgetItem,
-  TaskSection,
-} from "../util/AgileStyledComponents";
-import { Button, Icon, Label, Accordion } from "semantic-ui-react";
-import Spinner from "react-bootstrap/Spinner";
-
-import { uuid } from "uuidv4";
 import { useSelector } from "react-redux";
-import TaskWidget from "../tasks/TaskWidget";
-import TaskModal from "../tasks/TaskModal";
-import SprintModal from "../tasks/SprintModal";
-import Axios from "axios";
-import _ from "lodash";
-import ProjectSelectModal from "./ProjectSelectModal";
+import { Button, Icon, Label } from "semantic-ui-react";
 import AddToSprintModal from "../tasks/AddToSprintModal";
-import {motion} from "framer-motion"
-
+import SprintModal from "../tasks/SprintModal";
+import TaskModal from "../tasks/TaskModal";
+import TaskWidget from "../tasks/TaskWidget";
+import {
+  BacklogHeadline,
+  BacklogWidget,
+  Headline,
+} from "../util/AgileStyledComponents";
+import { secondVariants } from "../util/animations";
+import ProjectSelectModal from "./ProjectSelectModal";
 
 const Backlog = (props) => {
   const [show, setShow] = useState(false);
@@ -47,15 +39,6 @@ const Backlog = (props) => {
   const itemsBackend = useSelector((state) => state.managment.itemsFromBackend);
 
   const dinamicDroppables = useMemo(() => [...items], [items]);
-
-  const secondVariants = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.45 },
-    },
-    hidden: { opacity: 0 },
-  };
 
   useEffect(() => {
     setItems(itemsBackend);

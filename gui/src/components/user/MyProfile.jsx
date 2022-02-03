@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { Icon } from "semantic-ui-react";
+import "../../style.css";
 import {
-  Headline,
-  DashboardNav as Navigation,
   ComponentWidget,
-  WidgetItem,
+  Headline,
   SideWidgetMenu,
+  WidgetItem,
 } from "../util/AgileStyledComponents";
-import { Search, Button, Icon, Divider } from "semantic-ui-react";
 import ProfilePage from "./ProfilePage";
 import UpdateProfilePage from "./UpdateProfilePage";
-import "../../style.css";
 
 const MyProfile = (props) => {
   const [show, setShow] = useState(false);

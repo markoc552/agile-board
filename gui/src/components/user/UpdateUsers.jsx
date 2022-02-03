@@ -1,32 +1,17 @@
-import React, { useState, useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
+import Axios from "axios";
+import React, { useEffect, useMemo, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
 import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  styledTable,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-  Input,
-} from "semantic-ui-react";
-import {
-  useTable,
+  useAsyncDebounce,
   useFilters,
   useGlobalFilter,
-  useAsyncDebounce,
+  useTable,
 } from "react-table";
-import { FormattedMessage } from "react-intl";
-import Axios from "axios";
-import UserModal from "./UserModal";
+import { Button, Input } from "semantic-ui-react";
+import { Headline } from "../util/AgileStyledComponents";
 import UserCredentialsModal from "./UserCredentialsModal";
-import { useSelector } from "react-redux";
+import UserModal from "./UserModal";
 
 const UpdateUsers = (props) => {
   const [dataToRender, setDataToRender] = useState([]);

@@ -1,15 +1,15 @@
-import React from "react";
-import {
-  MainContentWrapper,
-  MainContainerWrapper,
-} from "../components/util/AgileStyledComponents";
-import { Header, Divider, Icon } from "semantic-ui-react";
-import Navigation from "../components/home/Navigation";
-import WelcomeContent from "../components/home/WelcomeContent";
-import TrustedCompanies from "../components/home/TrustedCompanies";
-import Solutions from "../components/home/Solutions";
-import Bottom from "../components/home/Bottom";
 import { motion } from "framer-motion";
+import React from "react";
+import { Divider, Header, Icon } from "semantic-ui-react";
+import Bottom from "../components/home/Bottom";
+import Navigation from "../components/home/Navigation";
+import Solutions from "../components/home/Solutions.jsx";
+import TrustedCompanies from "../components/home/TrustedCompanies";
+import WelcomeContent from "../components/home/WelcomeContent";
+import {
+  MainContainerWrapper,
+  MainContentWrapper,
+} from "../components/util/AgileStyledComponents";
 
 const Home = () => {
   const variants = {
@@ -29,20 +29,20 @@ const Home = () => {
           <WelcomeContent />
         </motion.div>
         <Solutions />
-        <Divider horizontal style={{paddingTop: "27vh"}}>
+        <Divider horizontal style={{ paddingTop: "27vh" }}>
           <Header as="h4">
             <Icon name="bar chart" />
             Business
           </Header>
         </Divider>
         <TrustedCompanies />
-        <Divider horizontal style={{padding: 50}}>
+        <Divider horizontal style={{ padding: 50, margin: "5vh auto" }}>
           <Header as="h4">
             <Icon name="bar chart" />
             Info
           </Header>
         </Divider>
-        <Bottom/>
+        <Bottom />
       </MainContentWrapper>
     </MainContainerWrapper>
   );

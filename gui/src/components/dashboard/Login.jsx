@@ -1,17 +1,15 @@
+import axios from "axios";
+import { Formik } from "formik";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import Spinner from "react-bootstrap/Spinner";
+import { connect } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+import { Button, Form, Image } from "semantic-ui-react";
+import { login, saveToken } from "../../redux/actions";
 import {
   RegisterLoginWrapper,
   WelcomeWidgetHello,
 } from "../util/AgileStyledComponents";
-import { Button, Checkbox, Form, Image, Message } from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
-import { getAdminToken, getCentralToken } from "../util/endpoints";
-import { saveToken, login } from "../../redux/actions";
-import Spinner from "react-bootstrap/Spinner";
-import { useToasts } from "react-toast-notifications";
-import axios from "axios";
-import { connect } from "react-redux";
 
 const Login = (props) => {
   const [submitting, isSubmitting] = useState(false);
@@ -84,7 +82,7 @@ const Login = (props) => {
                   `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getUserInfo`,
                   {
                     headers: {
-                      Authorization: `Bearer ${adminToken.data.token}`
+                      Authorization: `Bearer ${adminToken.data.token}`,
                     },
                     params: {
                       username: values.username,
@@ -141,10 +139,7 @@ const Login = (props) => {
                   onBlur={handleBlur}
                   value={values.password}
                 />
-                <Button.Group
-                  size="mini"
-                  style={{ margin: "10px auto" }}
-                >
+                <Button.Group size="mini" style={{ margin: "10px auto" }}>
                   <Button
                     color="orange"
                     onClick={() => props.setAction("Register")}

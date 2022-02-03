@@ -5,6 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="426fdf7c-42e6-434d-b200-6ae889a72dfe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/administrator-service/src/main/resources/certificate.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/administrator-service/src/main/resources/csr.csr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/administrator-service/src/main/resources/key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../deployment/certs/cert.pem" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
@@ -307,7 +312,9 @@
       <change beforePath="$PROJECT_DIR$/central-service/src/main/resources/ssl_keys.p12" beforeDir="false" afterPath="$PROJECT_DIR$/central-service/src/main/resources/ssl_keys.p12" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../deployment/certs/ssl_keys.p12" beforeDir="false" afterPath="$PROJECT_DIR$/../deployment/certs/ssl_keys.p12" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/components/dashboard/Activesprint.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/dashboard/Activesprint.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gui/src/components/dashboard/DashboardNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/dashboard/DashboardNavigation.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gui/src/components/dashboard/ProjectActivity.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/dashboard/ProjectActivity.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gui/src/components/dashboard/ProjectNavigation.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/dashboard/ProjectNavigation.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gui/src/components/home/Solution-One.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/home/Solution-One.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../gui/src/components/home/Solutions.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../gui/src/components/home/Solutions.jsx" afterDir="false" />
@@ -376,7 +383,7 @@
       <option name="presentableId" value="Default" />
       <updated>1639512995661</updated>
       <workItem from="1639512998372" duration="2578000" />
-      <workItem from="1639595264443" duration="705000" />
+      <workItem from="1639595264443" duration="871000" />
     </task>
     <servers />
   </component>

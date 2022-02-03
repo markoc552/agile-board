@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { Icon } from "semantic-ui-react";
+import "../../style.css";
 import {
-  Headline,
-  DashboardNav as Navigation,
   ComponentWidget,
+  Headline,
+  SideWidgetMenu,
   WidgetItem,
-  SideWidgetMenu
 } from "../util/AgileStyledComponents";
-import { Search, Button, Icon, Divider } from "semantic-ui-react";
 import NewProject from "./NewProject";
 import UpdateProjects from "./UpdateProjects";
-import "../../style.css";
 
 const ManageUsers = (props) => {
   const [show, setShow] = useState(false);

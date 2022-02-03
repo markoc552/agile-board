@@ -212,8 +212,10 @@ export const BottomHeadline = styled.div`
     text-align: center;
   }
 
-  @media only screen and (max-width: 587px) {
-    font-size: 8px;
+  @media only screen and (max-width: 700px) {
+    font-size: 12px;
+    width: 50vw;
+    margin-left: 4vw;
   }
 `;
 
@@ -355,8 +357,6 @@ export const TrustedCompanyDescription = styled.div`
 `;
 
 export const HomeBottom = styled.div`
-  display: flex;
-  flex-direction: row;
   background-color: #001a3f;
 
   @media only screen and (max-width: 768px) {

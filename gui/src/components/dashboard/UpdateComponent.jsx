@@ -1,39 +1,23 @@
-import React, { useState, useMemo, useEffect } from "react";
-import PropTypes from "prop-types";
+import Axios from "axios";
+import React, { useEffect, useMemo, useState } from "react";
+import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
 import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  styledTable,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-  Input,
-} from "semantic-ui-react";
-import {
-  useTable,
+  useAsyncDebounce,
   useFilters,
   useGlobalFilter,
-  useAsyncDebounce,
   useRowSelect,
+  useTable,
 } from "react-table";
-import { FormattedMessage } from "react-intl";
-import { getAllProjects, callProjectService } from "../util/endpoints";
-import { useSelector } from "react-redux";
+import { Button, Input } from "semantic-ui-react";
+import { Headline } from "../util/AgileStyledComponents";
+import { getAllProjects } from "../util/endpoints";
 import ComponentModal from "./ComponentModal";
-import Axios from "axios";
 
-const UpdateComponent = (props) => {
+const UpdateComponent = () => {
   const [show, setShow] = useState(false);
   const [dataToRender, setDataToRender] = useState([]);
   const [creating, setCreating] = useState(false);
-  const [successfull, setSuccesfull] = useState(false);
   const [selectedRowData, setRowData] = useState({});
 
   const currentProject = useSelector(

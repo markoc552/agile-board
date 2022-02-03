@@ -1,21 +1,17 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  SideWidgetMenu,
-} from "../util/AgileStyledComponents";
-import { Search, Button, Icon, Divider } from "semantic-ui-react";
+import { useSelector } from "react-redux";
+import { Icon } from "semantic-ui-react";
 import "../../style.css";
+import {
+  ComponentWidget,
+  Headline,
+  SideWidgetMenu,
+  WidgetItem,
+} from "../util/AgileStyledComponents";
 import NewComponent from "./NewComponent";
 import UpdateComponent from "./UpdateComponent";
-import Spinner from "react-bootstrap/Spinner";
-import { useSelector } from "react-redux";
 
-const Components = (props) => {
-  const [show, setShow] = useState(false);
+const Components = () => {
   const [showPage, setShowPage] = useState("newComponent");
   const [selected, setSelected] = useState("newComponent");
 

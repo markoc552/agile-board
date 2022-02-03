@@ -1,13 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Router, Switch, Route } from "react-router-dom";
-import history from "./history";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import { ToastProvider } from "react-toast-notifications";
 import { IntlProvider } from "react-intl";
+import { Route, Router, Switch } from "react-router-dom";
+import { ToastProvider } from "react-toast-notifications";
+import history from "./history";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
 
-const App = (props) => {
+const App = () => {
   return (
     <ToastProvider autoDismiss autoDismissTimeout={5000}>
       <IntlProvider>

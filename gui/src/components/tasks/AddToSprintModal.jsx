@@ -1,35 +1,16 @@
-import React, { useState, useCallback, useEffect } from "react";
+import Axios from "axios";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Spinner from "react-bootstrap/Spinner";
-import TaskWidget from "./TaskWidget";
-import { useDropzone } from "react-dropzone";
-import {
-  TaskWidget as StyledTaskWidget,
-  TaskSection,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Icon,
-  Label,
-  Accordion,
-  Input,
-  Form,
-  Select,
-  TextArea,
-  Segment,
-  Header,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage, FieldArray } from "formik";
-import Axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
-import DatePicker from "react-datepicker";
-import {
-  loadCreatedTasks,
-  setStartedSprint,
-  loadStartedSprint,
-} from "../../redux/actions";
 import { connect, useSelector } from "react-redux";
 import { useToasts } from "react-toast-notifications";
+import { Button } from "semantic-ui-react";
+import {
+  loadCreatedTasks,
+  loadStartedSprint,
+  setStartedSprint,
+} from "../../redux/actions";
 
 const TaskModal = (props) => {
   const [sending, isSending] = useState(false);

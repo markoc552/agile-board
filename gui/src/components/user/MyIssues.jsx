@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { Icon, Search } from "semantic-ui-react";
 import {
-  Headline,
-  DashboardNav as Navigation,
   ComponentWidget,
+  DashboardNav as Navigation,
+  Headline,
 } from "../util/AgileStyledComponents";
-import { Search, Button, Icon, Divider } from "semantic-ui-react";
 
 const MyIssues = (props) => {
   const [show, setShow] = useState(false);
@@ -26,7 +25,13 @@ const MyIssues = (props) => {
           }}
         >
           <Headline
-            style={{ fontSize: "15px", margin: "auto auto", width: "12vw", padding: "2px", cursor: "default" }}
+            style={{
+              fontSize: "15px",
+              margin: "auto auto",
+              width: "12vw",
+              padding: "2px",
+              cursor: "default",
+            }}
           >
             <Icon name="numbered list" size="large"></Icon>Active components: 2
           </Headline>

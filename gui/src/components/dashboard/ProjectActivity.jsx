@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import { Headline } from "../util/AgileStyledComponents";
-import { Feed, Icon, Label, Segment } from "semantic-ui-react";
-import { useSelector } from "react-redux";
 import Axios from "axios";
 import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Feed, Icon, Label, Segment } from "semantic-ui-react";
+import { Headline } from "../util/AgileStyledComponents";
+import { secondVariants } from "../util/animations";
 
-const ProjectActivity = (props) => {
+const ProjectActivity = () => {
   const [feed, setFeed] = useState([]);
 
   const projectData = useSelector((state) => state.managment.projectData);
@@ -16,15 +16,6 @@ const ProjectActivity = (props) => {
   );
 
   const token = useSelector((state) => state.auth.token);
-
-  const secondVariants = {
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.45 },
-    },
-    hidden: { opacity: 0 },
-  };
 
   useEffect(() => {
     Axios.get(`${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/getActivity`, {

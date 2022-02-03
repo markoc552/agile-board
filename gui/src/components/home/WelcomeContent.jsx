@@ -1,8 +1,11 @@
 import React from "react";
-import {Container, Image} from "semantic-ui-react"
-import {WelcomeDialog, WelcomeDivWrapper} from "../util/AgileStyledComponents"
+import { Container, Image } from "semantic-ui-react";
+import {
+  WelcomeDialog,
+  WelcomeDivWrapper,
+} from "../util/AgileStyledComponents";
 
-const WelcomeContent = (props) => {
+const WelcomeContent = () => {
   return (
     <>
       <WelcomeDialog>

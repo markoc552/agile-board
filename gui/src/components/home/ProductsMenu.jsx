@@ -1,17 +1,52 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
+import { Divider, Icon, Message } from "semantic-ui-react";
 import {
   MenuBoard,
-  MenuTitle,
   MenuSubTitle,
+  MenuTitle,
 } from "../util/AgileStyledComponents";
-import { Grid, Icon, Divider, Message } from "semantic-ui-react";
 
 const Menu = (props) => {
   const items = [
     "You can now have cover images on blog pages",
     "Drafts will now auto-save while writing",
   ];
+
+  const icons = [
+    "address card",
+    "book",
+    "compass outline",
+    "envelope",
+    "pen square",
+    "file code",
+    "inbox",
+    "terminal",
+  ];
+
+  const contents = [
+    "Content 1",
+    "Content 2",
+    "Content 3",
+    "Content 4",
+    "Content 5",
+  ];
+
+  const titles = ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"];
+
+  const renderTiles = () => (
+    <div style={{ marginLeft: "15vw" }}>
+      {contents.map((content, index) => (
+        <div>
+          <MenuTitle>{titles[index]}</MenuTitle>
+          <MenuSubTitle>
+            <Icon name={`${icons[index]}`} size="big" />
+            {content}
+          </MenuSubTitle>
+        </div>
+      ))}
+    </div>
+  );
 
   return ReactDOM.createPortal(
     <div
@@ -20,88 +55,7 @@ const Menu = (props) => {
     >
       <MenuBoard onClick={(e) => e.stopPropagation()}>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          <div style={{ marginLeft: "15vw" }}>
-            <div>
-              <MenuTitle>Title 1</MenuTitle>
-              <MenuSubTitle>
-                <Icon name="address card" size="big" />
-                Content 1
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="book" size="big" />
-                Content 2
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="compass outline" size="big" />
-                Content 3
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="book" size="big" />
-                Content 4
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="compass outline" size="big" />
-                Content 5
-              </MenuSubTitle>
-            </div>
-          </div>
-          <div>
-            <div>
-              <MenuTitle>Title 2</MenuTitle>
-              <MenuSubTitle>
-                <Icon name="envelope" size="big" />
-                Content 4
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="pen square" size="big" />
-                Content 5
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuTitle>Title 3</MenuTitle>
-              <MenuSubTitle>
-                <Icon name="envelope" size="big" />
-                Content 4
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="envelope" size="big" />
-                Content 4
-              </MenuSubTitle>
-            </div>
-          </div>
-          <div>
-            <div>
-              <MenuTitle>Title 4</MenuTitle>
-              <MenuSubTitle>
-                <Icon name="file code" size="big" />
-                Content 7
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="inbox" size="big" />
-                Content 8
-              </MenuSubTitle>
-            </div>
-            <div>
-              <MenuSubTitle>
-                <Icon name="terminal" size="big" />
-                Content 9
-              </MenuSubTitle>
-            </div>
-          </div>
+          {renderTiles()}
           <Divider style={{ height: "250px" }} vertical />
           <div
             style={{

@@ -1,27 +1,22 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { connect, useSelector } from "react-redux";
+import { Button, Dropdown, Icon, Image, Search } from "semantic-ui-react";
+import { useMedia } from "use-media";
+import { login } from "../../redux/actions";
 import {
   DashboardNav as Navigation,
-  DashboardNavItem,
-  DashboardNavHeadline,
-  DashboardUserWrapper,
-  DashboardNavHeadlineItemWrapper,
   DashboardNavHeadlineItemContainer,
+  DashboardNavHeadlineItemWrapper,
+  DashboardUserWrapper,
 } from "../util/AgileStyledComponents";
-import { Image, Search, Dropdown, Icon, Button } from "semantic-ui-react";
-import { useSelector, connect } from "react-redux";
 import ProjectSelectModal from "./ProjectSelectModal";
-import { login } from "../../redux/actions";
-import { useMedia } from "use-media";
 
 const DashboardNav = (props) => {
   const [showModal, isModalShow] = useState(false);
 
   const user = useSelector((state) => state.auth.user);
 
-  const isMobile = useMedia("only screen and (max-width: 645px)")
-
-  console.log(user);
+  const isMobile = useMedia("only screen and (max-width: 645px)");
 
   return (
     <Navigation>
@@ -43,13 +38,15 @@ const DashboardNav = (props) => {
               <Button
                 color="teal"
                 circular
-                style={{margin: "auto 0"}}
+                style={{ margin: "auto 0" }}
                 onClick={() => isModalShow(true)}
               >
                 Choose project
               </Button>
               <DashboardNavHeadlineItemWrapper>
-                <Search style={{ margin: "auto 50px", display: isMobile && "none" }} />
+                <Search
+                  style={{ margin: "auto 50px", display: isMobile && "none" }}
+                />
               </DashboardNavHeadlineItemWrapper>
               <div>
                 <Dropdown
@@ -77,7 +74,7 @@ const DashboardNav = (props) => {
                           fontWeight: "bold",
                         }}
                       >
-                        <div style={{fontSize: 14}}>
+                        <div style={{ fontSize: 14 }}>
                           <div>{`${user.firstname} ${user.lastname}`}</div>
                           <div>
                             <Icon name="circle" color="green" />

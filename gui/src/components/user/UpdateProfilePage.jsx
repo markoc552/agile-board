@@ -1,20 +1,7 @@
+import { Formik } from "formik";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Button, Form, Message } from "semantic-ui-react";
+import { Headline } from "../util/AgileStyledComponents";
 
 const NewUser = (props) => {
   const [submitting, isSubmitting] = useState(false);
@@ -117,9 +104,9 @@ const NewUser = (props) => {
             )}
           </Formik>
         </div>
-        <Message color="green" style={{width: "25vw", height: "10vh"}}>
+        <Message color="green" style={{ width: "25vw", height: "10vh" }}>
           <Message.Header>Successfull</Message.Header>
-          <p style={{fontSize: "15px", marginTop: "10px", color: "#253858"}}>
+          <p style={{ fontSize: "15px", marginTop: "10px", color: "#253858" }}>
             Profile has been successfully updated!
           </p>
         </Message>

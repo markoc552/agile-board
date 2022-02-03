@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
   RegisterLoginWrapper,
   WelcomeWidgetHello,
 } from "../util/AgileStyledComponents";
-import { Button, Checkbox, Form, Image, Message } from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
-import {
-  createAccount,
-  getAdminToken,
-  getCentralToken,
-} from "../util/endpoints";
+import { Button, Form, Image } from "semantic-ui-react";
+import { Formik } from "formik";
+import { createAccount } from "../util/endpoints";
 import { connect } from "react-redux";
 import { saveToken, login } from "../../redux/actions";
 import Spinner from "react-bootstrap/Spinner";
@@ -164,10 +159,7 @@ const Register = (props) => {
                   onBlur={handleBlur}
                   value={values.email}
                 />
-                <Button.Group
-                  size="mini"
-                  style={{ margin: "0px auto" }}
-                >
+                <Button.Group size="mini" style={{ margin: "0px auto" }}>
                   <Button
                     color="orange"
                     onClick={() => props.setAction("Login")}

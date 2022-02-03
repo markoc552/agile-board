@@ -1,22 +1,22 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Button, Icon, Image } from "semantic-ui-react";
+import useMediaQuery from "use-mediaquery";
+import history from "../../history";
 import {
-  NavigationWrapper,
-  HeadlineWrapper,
-  NavItemWrapper,
-  NavItem,
   AccountsWrapper,
-  NavAccountsItem,
   HeadlineNameWrapper,
+  HeadlineWrapper,
+  NavAccountsItem,
+  NavigationWrapper,
+  NavItem,
+  NavItemWrapper,
 } from "../util/AgileStyledComponents";
-import { Image, Button, Icon } from "semantic-ui-react";
+import AccountModal from "./AccountModal";
 import ProductsMenu from "./ProductsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-import AccountModal from "./AccountModal";
-import history from "../../history";
-import { useSelector } from "react-redux";
-import useMediaQuery from "use-mediaquery";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const [showProducts, setShowProducts] = useState(false);
   const [showResources, setShowResources] = useState(false);
   const [accountShow, setAccountShow] = useState(false);
@@ -40,6 +40,25 @@ const Navigation = (props) => {
     body.setAttribute("style", "filter: blur(0px)");
   }
 
+  const renderAccountModal = () => (
+    <AccountsWrapper>
+      <NavItem>
+        <Button
+          circular
+          color="blue"
+          size={isTabletOnly ? "mini" : "medium"}
+          onClick={() => history.push("/dashboard")}
+        >
+          Dashboard
+        </Button>
+      </NavItem>
+      <NavAccountsItem onClick={() => setAccountShow(true)}>
+        <Icon name="user circle" size="large" />{" "}
+        {user !== undefined && `${user.firstname} ${user.lastname}`}
+      </NavAccountsItem>
+    </AccountsWrapper>
+  );
+
   return (
     <NavigationWrapper>
       <HeadlineWrapper>
@@ -56,17 +75,7 @@ const Navigation = (props) => {
         <NavItem onClick={() => setShowResources(true)}>For teams</NavItem>
         <NavItem>Support</NavItem>
       </NavItemWrapper>
-      <AccountsWrapper>
-        <NavItem>
-          <Button circular color="blue" size={isTabletOnly ? "mini" : "medium"} onClick={() => history.push("/dashboard")}>
-            Dashboard
-          </Button>
-        </NavItem>
-        <NavAccountsItem onClick={() => setAccountShow(true)}>
-          <Icon name="user circle" size="large" />{" "}
-          {user !== undefined && `${user.firstname} ${user.lastname}`}
-        </NavAccountsItem>
-      </AccountsWrapper>
+      {renderAccountModal()}
       {showProducts && <ProductsMenu setShow={setShowProducts} />}
       {showResources && <ResourcesMenu setShow={setShowResources} />}
       {accountShow && (

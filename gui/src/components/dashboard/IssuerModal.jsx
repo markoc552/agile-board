@@ -1,37 +1,9 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import { Dropdown, Divider, Input, TextArea } from "semantic-ui-react";
+import Modal from "react-bootstrap/Modal";
+import { Divider, Dropdown, Input, TextArea } from "semantic-ui-react";
 import "../../style.css";
-
-const types = [
-  {
-    key: "epic",
-    text: "Epic",
-    value: "epic",
-    image: { avatar: true, src: "/images/avatar/small/jenny.jpg" },
-  },
-  {
-    key: "bug",
-    text: "Bug",
-    value: "bug",
-  },
-  {
-    key: "incident",
-    text: "Incident",
-    value: "incident",
-  },
-  {
-    key: "task",
-    text: "Task",
-    value: "task",
-  },
-  {
-    key: "story",
-    text: "Story",
-    value: "story",
-  },
-];
+import { types } from "./issueTypes";
 
 const IssuerModal = (props) => {
   return (
@@ -93,11 +65,7 @@ const IssuerModal = (props) => {
                 Components
               </div>
               <div>
-                <Dropdown
-                  fluid
-                  selection
-                  style={{ margin: "10px 35px" }}
-                />
+                <Dropdown fluid selection style={{ margin: "10px 35px" }} />
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "row" }}>

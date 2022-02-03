@@ -1,36 +1,29 @@
-import React, { useCallback, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import Axios from "axios";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { useSelector } from "react-redux";
 import {
-  IssuesList,
-  IssueCard,
-  StyledLabel,
-  IssueCardItem,
-} from "../util/AgileStyledComponents";
-import Spinner from "react-bootstrap/Spinner";
-
-import {
-  Label,
-  Segment,
-  Header,
-  Icon,
   Button,
   Form,
+  Header,
+  Icon,
+  Label,
+  Segment,
   TextArea,
 } from "semantic-ui-react";
-import { useDropzone } from "react-dropzone";
-import { useSelector, useDispatch } from "react-redux";
+import {
+  IssueCard,
+  IssueCardItem,
+  IssuesList,
+  StyledLabel,
+} from "../util/AgileStyledComponents";
 import ProjectSelectModal from "./ProjectSelectModal";
-import Axios from "axios";
-import { loadCreatedTasks } from "../../redux/actions";
-import { motion } from "framer-motion";
 
 const Issues = (props) => {
   const tasks = useSelector((state) => state.managment.tasks);
   const [attachemnts, setAttachments] = useState([]);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState();
-
-  const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.token);
 

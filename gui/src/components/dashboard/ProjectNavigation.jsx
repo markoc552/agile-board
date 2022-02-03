@@ -1,18 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { Icon, Image } from "semantic-ui-react";
 import {
-  DashboardWelcomeWrapper,
-  Headline,
-  SystemDashboardContentWrapper,
-  ContentNav,
-  DashboardNavItem as NavItem,
-  DashboardNavHeadline,
-  ProjectNavigationItem,
   DashboardHeadline,
-  ProjectNavigationBar,
   DashboardHeadlineWrapper,
+  DashboardNavHeadline,
+  DashboardNavItem as NavItem,
+  ProjectNavigationBar,
 } from "../util/AgileStyledComponents";
-import { Divider, Icon, Image } from "semantic-ui-react";
 
 const ProjectNavigation = (props) => {
   return (
@@ -24,12 +18,12 @@ const ProjectNavigation = (props) => {
       }}
     >
       <DashboardNavHeadline>
-          <Image
-            src={require("../../assets/images/agile-logo.png")}
-            size="mini"
-            avatar
-          />
-          AGILE BOARD
+        <Image
+          src={require("../../assets/images/agile-logo.png")}
+          size="mini"
+          avatar
+        />
+        AGILE BOARD
       </DashboardNavHeadline>
       <div style={{ display: !props.showMenu ? "none" : "block" }}>
         <DashboardHeadlineWrapper>
@@ -54,7 +48,8 @@ const ProjectNavigation = (props) => {
         </DashboardHeadlineWrapper>
         <NavItem onClick={() => props.setPage("sprint")}>
           <div style={{ margin: "auto 0", verticalAlign: "middle" }}>
-            <Icon name="keyboard outline" color="green" size="big" /> Sprint dashboard
+            <Icon name="keyboard outline" color="green" size="big" /> Sprint
+            dashboard
           </div>
         </NavItem>
         <NavItem onClick={() => props.setPage("backlog")}>

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  SideWidgetMenu,
-} from "../util/AgileStyledComponents";
-import { Search, Button, Icon, Divider } from "semantic-ui-react";
-import EnrolledProjects from "./EnrolledProjects";
+import { Icon } from "semantic-ui-react";
 import "../../style.css";
+import {
+  ComponentWidget,
+  Headline,
+  SideWidgetMenu,
+  WidgetItem,
+} from "../util/AgileStyledComponents";
+import EnrolledProjects from "./EnrolledProjects";
 
 const MyProjects = (props) => {
   const [show, setShow] = useState(false);

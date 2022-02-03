@@ -1,21 +1,7 @@
+import { Formik } from "formik";
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import {
-  Headline,
-  DashboardNav as Navigation,
-  ComponentWidget,
-  WidgetItem,
-  FormikWrapper
-} from "../util/AgileStyledComponents";
-import {
-  Button,
-  Checkbox,
-  Form,
-  Image,
-  Message,
-  Divider,
-} from "semantic-ui-react";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Button, Divider, Form } from "semantic-ui-react";
+import { FormikWrapper, Headline } from "../util/AgileStyledComponents";
 
 const NewUser = (props) => {
   const [submitting, isSubmitting] = useState(false);
@@ -105,7 +91,12 @@ const NewUser = (props) => {
                 onBlur={handleBlur}
                 value={values.email}
               />
-            <Button type="submit" color="instagram" style={{marginTop: "25px"}} disabled={isSubmitting}>
+              <Button
+                type="submit"
+                color="instagram"
+                style={{ marginTop: "25px" }}
+                disabled={isSubmitting}
+              >
                 Register
               </Button>
             </Form>
