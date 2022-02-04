@@ -38,7 +38,7 @@ const TaskModal = (props) => {
         },
       }
     )
-      .then((res) => {
+      .then(() => {
         isSending(false);
         props.setShow(false);
         props.loadStartedSprint(projectName, token);
@@ -46,7 +46,7 @@ const TaskModal = (props) => {
           appearance: "success",
         });
       })
-      .catch((err) =>
+      .catch(() =>
         addToast("Error while adding task", {
           appearance: "error",
         })

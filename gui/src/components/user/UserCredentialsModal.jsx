@@ -14,6 +14,51 @@ const roles = [
 const UserCredentialsModal = (props) => {
   const token = useSelector((state) => state.auth.token);
 
+  const getAllUsers = () =>
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        props.setDataToRender(res.data);
+        props.isSubmitting(false);
+        props.setShow(false);
+      })
+      .catch((err) => console.log(err));
+
+  const changeRole = (values) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changeRole`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          username: values.username,
+          role: values.role,
+        },
+      }
+    ).then(() => getAllUsers());
+
+  const changePassword = (values) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changePassword`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          username: values.username,
+          password: values.password,
+        },
+      }
+    )
+      .then(() => changeRole(values))
+      .catch((err) => console.log(err));
+
   return (
     <Modal
       show={props.show}
@@ -33,66 +78,16 @@ const UserCredentialsModal = (props) => {
           onSubmit={async (values, { setSubmitting }) => {
             props.isSubmitting(true);
 
-            console.log(values);
-
-            setTimeout(() => {
-              Axios.post(
-                `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changePassword`,
-                {},
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                  params: {
-                    username: values.username,
-                    password: values.password,
-                  },
-                }
-              )
-                .then(() => {
-                  Axios.post(
-                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/changeRole`,
-                    {},
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                      params: {
-                        username: values.username,
-                        role: values.role,
-                      },
-                    }
-                  ).then(() => {
-                    Axios.get(
-                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    )
-                      .then((res) => {
-                        props.setDataToRender(res.data);
-                        props.isSubmitting(false);
-                        props.setShow(false);
-                      })
-                      .catch((err) => console.log(err));
-                  });
-                })
-                .catch((err) => console.log(err));
-            }, 3000);
+            setTimeout(() => changePassword(values), 3000);
           }}
         >
           {({
             values,
-            errors,
-            touched,
             handleChange,
             handleBlur,
             handleSubmit,
             isSubmitting,
             setFieldValue,
-            /* and other goodies */
           }) => (
             <Form
               style={{

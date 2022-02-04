@@ -27,7 +27,7 @@ const UpdateComponent = () => {
   const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
-    const result = Axios.get(
+    Axios.get(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/getComponents`,
       {
         headers: {
@@ -39,6 +39,17 @@ const UpdateComponent = () => {
       }
     ).then((res) => setDataToRender(res.data));
   }, []);
+
+  const deleteComponent = (row) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/component/deleteComponent`,
+      { ...row.original }
+    )
+      .then(async () => {
+        setDataToRender(await getAllProjects());
+        setCreating(false);
+      })
+      .catch((err) => console.log(err));
 
   function GlobalFilter({
     preGlobalFilteredRows,
@@ -112,18 +123,8 @@ const UpdateComponent = () => {
               onClick={() => {
                 setCreating(true);
 
-                console.log("Is submitting: ", creating);
-
                 setTimeout(() => {
-                  Axios.post(
-                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/component/deleteComponent`,
-                    { ...row.original }
-                  )
-                    .then(async (res) => {
-                      setDataToRender(await getAllProjects());
-                      setCreating(false);
-                    })
-                    .catch((err) => console.log(err));
+                  deleteComponent(row);
                 }, 3000);
               }}
             >

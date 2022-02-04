@@ -1,21 +1,50 @@
+import axios from "axios";
+import { Formik } from "formik";
 import React, { useState } from "react";
+import Spinner from "react-bootstrap/Spinner";
+import { connect } from "react-redux";
+import { useToasts } from "react-toast-notifications";
+import { Button, Form, Image } from "semantic-ui-react";
+import { login, saveToken } from "../../redux/actions";
 import {
   RegisterLoginWrapper,
   WelcomeWidgetHello,
 } from "../util/AgileStyledComponents";
-import { Button, Form, Image } from "semantic-ui-react";
-import { Formik } from "formik";
 import { createAccount } from "../util/endpoints";
-import { connect } from "react-redux";
-import { saveToken, login } from "../../redux/actions";
-import Spinner from "react-bootstrap/Spinner";
-import { useToasts } from "react-toast-notifications";
-import axios from "axios";
 
 const Register = (props) => {
   const [submitting, isSubmitting] = useState(false);
 
   const { addToast } = useToasts();
+
+  const authenticate = async (values, setSubmitting) => {
+    try {
+      await createAccount(values, "USER");
+
+      const credentials = {
+        username: `${values.username}`,
+        password: `${values.password}`,
+      };
+
+      const adminToken = await axios.post(
+        `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/jwt/authenticate`,
+        credentials
+      );
+
+      const centralToken = await axios.post(
+        `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/jwt/authenticate`,
+        credentials
+      );
+
+      return { adminToken, centralToken };
+    } catch (e) {
+      addToast("User already exists!", {
+        appearance: "error",
+      });
+      setSubmitting(false);
+      isSubmitting(false);
+    }
+  };
 
   return (
     <RegisterLoginWrapper
@@ -60,33 +89,10 @@ const Register = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
-              let adminToken;
-              let centralToken;
-
-              try {
-                const user = await createAccount(values, "USER");
-
-                const credentials = {
-                  username: `${values.username}`,
-                  password: `${values.password}`,
-                };
-
-                adminToken = await axios.post(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/jwt/authenticate`,
-                  credentials
-                );
-
-                centralToken = await axios.post(
-                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/jwt/authenticate`,
-                  credentials
-                );
-              } catch (e) {
-                addToast("User already exists!", {
-                  appearance: "error",
-                });
-                setSubmitting(false);
-                isSubmitting(false);
-              }
+              let { adminToken, centralToken } = await authenticate(
+                values,
+                setSubmitting
+              );
 
               props.saveToken(adminToken.data.token, centralToken.data.token);
               props.login(true, values);
@@ -101,13 +107,10 @@ const Register = (props) => {
           >
             {({
               values,
-              errors,
-              touched,
               handleChange,
               handleBlur,
               handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => (
               <Form
                 style={{

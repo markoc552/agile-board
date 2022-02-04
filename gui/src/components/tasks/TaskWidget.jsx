@@ -218,7 +218,6 @@ const TaskWidget = (props) => {
               Attachments
             </Accordion.Title>
             <Accordion.Content active={activeIndexs.includes(5)}>
-              {console.log(attachemnts)}
               <div style={{ display: "flex", flexDirection: "row" }}>
                 {attachemnts.map((file) => (
                   <div

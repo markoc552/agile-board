@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="426fdf7c-42e6-434d-b200-6ae889a72dfe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/aspects/LoggingAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/administrator-service/src/main/java/agile/administrator/aspects/LogAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/administrator-service/src/main/resources/aspects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/administrator-service/src/main/resources/aspects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,7 @@
       <workItem from="1639512998372" duration="2578000" />
       <workItem from="1639595264443" duration="871000" />
       <workItem from="1643924891987" duration="4250000" />
-      <workItem from="1643966769780" duration="1099000" />
+      <workItem from="1643966769780" duration="1592000" />
     </task>
     <servers />
   </component>

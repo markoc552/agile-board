@@ -57,6 +57,7 @@ const General = () => {
           >
             <div style={{ margin: "0 auto" }}>
               <Calendar
+                style={{ width: "30vw", height: "31vh" }}
                 value={selectedDay}
                 onChange={setSelectedDay}
                 calendarClassName="responsive-calendar"
@@ -73,7 +74,6 @@ const General = () => {
             </TimeWidget>
           </div>
         </div>
-        <TodoWidget></TodoWidget>
       </div>
 
       <Divider style={{ marginTop: "0.5vh" }} />

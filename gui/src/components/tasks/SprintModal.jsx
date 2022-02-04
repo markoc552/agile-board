@@ -25,6 +25,49 @@ const TaskModal = (props) => {
 
   const token = useSelector((state) => state.auth.token);
 
+  const formatDateTime = (date) =>
+    date.getFullYear() + "-" + date.getMonth() + 1 + "-" + date.getDate();
+
+  const setNewSprint = (data) => {
+    props.setStartedSprint(data);
+
+    props.setShow(false);
+
+    props.loadStartedSprint(projectName, token);
+  };
+
+  const createSprint = (values) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/sprints/createSprint`,
+      {
+        projectName,
+        name: values.name,
+        from: formatDateTime(values.from),
+        to: formatDateTime(values.to),
+        tasks: props.sprintTasks,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          person: `${user.firstname} ${user.lastname}`,
+        },
+      }
+    )
+      .then((res) => {
+        isSending(false);
+        setNewSprint(res.data);
+        addToast("Sprint successfully started!", {
+          appearance: "success",
+        });
+      })
+      .catch(() =>
+        addToast("Sprint has not been started!", {
+          appearance: "error",
+        })
+      );
+
   return (
     <Modal
       show={props.show}
@@ -49,68 +92,16 @@ const TaskModal = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSending(true);
 
-              setTimeout(() => {
-                Axios.post(
-                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/sprints/createSprint`,
-                  {
-                    projectName,
-                    name: values.name,
-                    from:
-                      values.from.getFullYear() +
-                      "-" +
-                      values.from.getMonth() +
-                      1 +
-                      "-" +
-                      values.from.getDate(),
-                    to:
-                      values.to.getFullYear() +
-                      "-" +
-                      values.to.getMonth() +
-                      1 +
-                      "-" +
-                      values.to.getDate(),
-                    tasks: props.sprintTasks,
-                  },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                    params: {
-                      person: `${user.firstname} ${user.lastname}`,
-                    },
-                  }
-                )
-                  .then((res) => {
-                    isSending(false);
-
-                    props.setStartedSprint(res.data);
-
-                    props.setShow(false);
-
-                    props.loadStartedSprint(projectName, token);
-
-                    addToast("Sprint successfully started!", {
-                      appearance: "success",
-                    });
-                  })
-                  .catch((e) =>
-                    addToast("Sprint has not been started!", {
-                      appearance: "error",
-                    })
-                  );
-              }, 3000);
+              setTimeout(() => createSprint(values), 3000);
             }}
           >
             {({
               values,
-              errors,
-              touched,
               handleChange,
               handleBlur,
               handleSubmit,
               isSubmitting,
               setFieldValue,
-              /* and other goodies */
             }) => (
               <Form
                 style={{

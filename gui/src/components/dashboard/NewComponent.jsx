@@ -15,6 +15,23 @@ const NewComponent = (props) => {
 
   const token = useSelector((state) => state.auth.token);
 
+  const createComponent = (name, setSubmitting) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/createComponent`,
+      { name: name, projectName: props.currentProject },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => {
+        setSubmitting(false);
+        isSubmitting(false);
+        setSuccesfull(true);
+      })
+      .catch((err) => console.log(err));
+
   return (
     <div>
       <Headline>Create new component</Headline>
@@ -25,24 +42,8 @@ const NewComponent = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
-              console.log(values, props.currentProject);
-
               setTimeout(() => {
-                Axios.post(
-                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/component/createComponent`,
-                  { name: values.name, projectName: props.currentProject },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  }
-                )
-                  .then((res) => {
-                    setSubmitting(false);
-                    isSubmitting(false);
-                    setSuccesfull(true);
-                  })
-                  .catch((err) => console.log(err));
+                createComponent(values.name, setSubmitting);
               }, 2000);
             }}
           >
@@ -55,7 +56,6 @@ const NewComponent = (props) => {
               handleSubmit,
               isSubmitting,
               setFieldValue,
-              /* and other goodies */
             }) => (
               <Form
                 style={{

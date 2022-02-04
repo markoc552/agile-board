@@ -106,7 +106,7 @@ const TaskModal = (props) => {
     setActiveIndexs(newIndex);
   };
 
-  const downloadAttachment = (name) => {
+  const downloadAttachment = (name) =>
     Axios.get(
       `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/attachment/downloadAttachment`,
       {
@@ -128,9 +128,6 @@ const TaskModal = (props) => {
           const link = document.createElement("a");
 
           link.href = url;
-
-          console.log("Downloading file", name);
-
           link.setAttribute("download", name);
 
           document.body.appendChild(link);
@@ -139,7 +136,18 @@ const TaskModal = (props) => {
         }
       })
       .catch((err) => console.log(err));
-  };
+
+  const uploadAttachment = (formData) =>
+    Axios.post(
+      `${
+        window.ENVIRONMENT.AGILE_CENTRAL
+      }/v1/attachment/uploadAttachment/${props.selectedProject.toUpperCase()}_${
+        props.taskNo
+      }`,
+      formData
+    ).then((res) => {
+      uploadedFiles.push(res.data);
+    });
 
   const onDrop = useCallback((acceptedFiles) => {
     acceptedFiles.forEach((file, i) => {
@@ -158,22 +166,67 @@ const TaskModal = (props) => {
 
         formData.set("file", file);
 
-        Axios.post(
-          `${
-            window.ENVIRONMENT.AGILE_CENTRAL
-          }/v1/attachment/uploadAttachment/${props.selectedProject.toUpperCase()}_${
-            props.taskNo
-          }`,
-          formData
-        ).then((res) => {
-          uploadedFiles.push(res.data);
-          console.log("Uploaded file: ", res.data);
-        });
+        uploadAttachment(formData);
       };
 
       reader.readAsArrayBuffer(file);
     });
   }, []);
+
+  const updateCurrentTasks = (task) => {
+    props.loadCreatedTasks(projectName, token);
+    props.setShow(false);
+    props.updateTasks({
+      id: task.dndId,
+      content: (
+        <div>
+          <Label color="blue" basic style={{ marginRight: "1vw" }}>
+            {task.keyword}
+          </Label>
+          {task.name}
+          <Icon name="user" style={{ marginLeft: "1.5vw" }} />
+        </div>
+      ),
+    });
+  };
+
+  const formatDateTime = (date) =>
+    date.getFullYear() + "-" + date.getMonth() + 1 + "-" + date.getDate();
+
+  const createTask = (values) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/createTask`,
+      {
+        dndId: uuid(),
+        ...values,
+        priority: 0,
+        ticket: `${props.selectedProject.toUpperCase()}_${props.taskNo}`,
+        projectName: props.selectedProject,
+        createdAt: formatDateTime(new Date()),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          person: `${user.firstname} ${user.lastname}`,
+        },
+      }
+    )
+      .then((res) => {
+        isSending(false);
+        updateCurrentTasks(res.data);
+
+        addToast("Task has been successfully created!", {
+          appearance: "success",
+        });
+      })
+      .catch(() =>
+        addToast("Error while creating task", {
+          appearance: "error",
+        })
+      );
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
@@ -199,69 +252,7 @@ const TaskModal = (props) => {
             initialValues={{ estimated: new Date() }}
             onSubmit={async (values, { setSubmitting }) => {
               isSending(true);
-
-              console.log(values);
-
-              setTimeout(() => {
-                Axios.post(
-                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/tasks/createTask`,
-                  {
-                    dndId: uuid(),
-                    ...values,
-                    priority: 0,
-                    ticket: `${props.selectedProject.toUpperCase()}_${
-                      props.taskNo
-                    }`,
-                    projectName: props.selectedProject,
-                    createdAt:
-                      new Date().getFullYear() +
-                      "-" +
-                      new Date().getMonth() +
-                      1 +
-                      "-" +
-                      new Date().getDate(),
-                  },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                    params: {
-                      person: `${user.firstname} ${user.lastname}`,
-                    },
-                  }
-                )
-                  .then((res) => {
-                    isSending(false);
-                    const task = res.data;
-                    props.loadCreatedTasks(projectName, token);
-                    props.setShow(false);
-                    props.updateTasks({
-                      id: task.dndId,
-                      content: (
-                        <div>
-                          <Label
-                            color="blue"
-                            basic
-                            style={{ marginRight: "1vw" }}
-                          >
-                            {task.keyword}
-                          </Label>
-                          {task.name}
-                          <Icon name="user" style={{ marginLeft: "1.5vw" }} />
-                        </div>
-                      ),
-                    });
-
-                    addToast("Task has been successfully created!", {
-                      appearance: "success",
-                    });
-                  })
-                  .catch((e) =>
-                    addToast("Error while creating task", {
-                      appearance: "error",
-                    })
-                  );
-              }, 3000);
+              setTimeout(() => createTask(values), 3000);
             }}
           >
             {({
@@ -273,7 +264,6 @@ const TaskModal = (props) => {
               handleSubmit,
               isSubmitting,
               setFieldValue,
-              /* and other goodies */
             }) => (
               <Form
                 style={{

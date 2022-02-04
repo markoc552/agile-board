@@ -10,6 +10,32 @@ import { StyledLabel } from "../util/AgileStyledComponents";
 const UserModal = (props) => {
   const token = useSelector((state) => state.auth.token);
 
+  const getAllUsers = () =>
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        props.setDataToRender(res.data);
+        props.isSubmitting(false);
+        props.setShow(false);
+      })
+      .catch((err) => console.log(err));
+
+  const updateUser = (values) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/updateUser`,
+      { ...values },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then(() => getAllUsers())
+      .catch((err) => console.log(err));
+
   return (
     <Modal
       show={props.show}
@@ -30,46 +56,16 @@ const UserModal = (props) => {
           onSubmit={async (values, { setSubmitting }) => {
             props.isSubmitting(true);
 
-            setTimeout(() => {
-              Axios.post(
-                `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/updateUser`,
-                { ...values },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              )
-                .then(() => {
-                  Axios.get(
-                    `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  )
-                    .then((res) => {
-                      props.setDataToRender(res.data);
-                      props.isSubmitting(false);
-                      props.setShow(false);
-                    })
-                    .catch((err) => console.log(err));
-                })
-                .catch((err) => console.log(err));
-            }, 3000);
+            setTimeout(() => updateUser(values), 3000);
           }}
         >
           {({
             values,
-            errors,
-            touched,
             handleChange,
             handleBlur,
             handleSubmit,
             isSubmitting,
             setFieldValue,
-            /* and other goodies */
           }) => (
             <Form
               style={{

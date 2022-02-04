@@ -32,13 +32,10 @@ const NewUser = (props) => {
         >
           {({
             values,
-            errors,
-            touched,
             handleChange,
             handleBlur,
             handleSubmit,
             isSubmitting,
-            /* and other goodies */
           }) => (
             <Form
               style={{

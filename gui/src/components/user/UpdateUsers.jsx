@@ -66,6 +66,31 @@ const UpdateUsers = (props) => {
     setDataToRender(result.data);
   }, []);
 
+  const getAllUsers = () =>
+    Axios.get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        setDataToRender(res.data);
+        setCreating(false);
+      })
+      .catch((err) => console.log(err));
+
+  const deleteUser = (row) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/deleteUser`,
+      { ...row.original },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then(async () => getAllUsers())
+      .catch((err) => console.log(err));
+
   const data = useMemo(() => [...dataToRender], [dataToRender]);
 
   const columns = useMemo(
@@ -144,35 +169,7 @@ const UpdateUsers = (props) => {
                 onClick={() => {
                   setCreating(true);
 
-                  console.log("Is submitting: ", creating);
-
-                  setTimeout(() => {
-                    Axios.post(
-                      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/deleteUser`,
-                      { ...row.original },
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    )
-                      .then(async (res) => {
-                        Axios.get(
-                          `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getAllUsers`,
-                          {
-                            headers: {
-                              Authorization: `Bearer ${token}`,
-                            },
-                          }
-                        )
-                          .then((res) => {
-                            setDataToRender(res.data);
-                            setCreating(false);
-                          })
-                          .catch((err) => console.log(err));
-                      })
-                      .catch((err) => console.log(err));
-                  }, 3000);
+                  setTimeout(() => deleteUser(row), 3000);
                 }}
               >
                 <FormattedMessage

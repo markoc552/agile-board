@@ -16,6 +16,60 @@ const Login = (props) => {
 
   const { addToast } = useToasts();
 
+  const login = (
+    adminToken,
+    centralToken,
+    username,
+    setSubmitting,
+    isSubmitting
+  ) =>
+    axios
+      .get(`${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getUserInfo`, {
+        headers: {
+          Authorization: `Bearer ${adminToken.data.token}`,
+        },
+        params: {
+          username: username,
+        },
+      })
+      .then((res) => {
+        props.saveToken(adminToken.data.token, centralToken.data.token);
+        props.login(true, res.data);
+        addToast("Login successfull!", {
+          appearance: "success",
+        });
+
+        setSubmitting(false);
+        isSubmitting(false);
+      });
+
+  const authenticate = async (values, setSubmitting, isSubmitting) => {
+    try {
+      const credentials = {
+        username: `${values.username}`,
+        password: `${values.password}`,
+      };
+
+      const adminToken = await axios.post(
+        `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/jwt/authenticate`,
+        credentials
+      );
+
+      const centralToken = await axios.post(
+        `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/jwt/authenticate`,
+        credentials
+      );
+
+      return { adminToken, centralToken };
+    } catch (e) {
+      addToast("Username/Password incorrect!", {
+        appearance: "error",
+      });
+      setSubmitting(false);
+      isSubmitting(false);
+    }
+  };
+
   return (
     <RegisterLoginWrapper
       style={{
@@ -51,68 +105,27 @@ const Login = (props) => {
               setSubmitting(true);
               isSubmitting(true);
 
-              let adminToken;
-              let centralToken;
+              let { adminToken, centralToken } = await authenticate(
+                values,
+                setSubmitting,
+                isSubmitting
+              );
 
-              try {
-                const credentials = {
-                  username: `${values.username}`,
-                  password: `${values.password}`,
-                };
-
-                adminToken = await axios.post(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/jwt/authenticate`,
-                  credentials
-                );
-
-                centralToken = await axios.post(
-                  `${window.ENVIRONMENT.AGILE_CENTRAL}/v1/jwt/authenticate`,
-                  credentials
-                );
-              } catch (e) {
-                addToast("Username/Password incorrect!", {
-                  appearance: "error",
-                });
-                setSubmitting(false);
-                isSubmitting(false);
-              }
-
-              axios
-                .get(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/getUserInfo`,
-                  {
-                    headers: {
-                      Authorization: `Bearer ${adminToken.data.token}`,
-                    },
-                    params: {
-                      username: values.username,
-                    },
-                  }
-                )
-                .then((res) => {
-                  props.saveToken(
-                    adminToken.data.token,
-                    centralToken.data.token
-                  );
-                  props.login(true, res.data);
-                  addToast("Login successfull!", {
-                    appearance: "success",
-                  });
-
-                  setSubmitting(false);
-                  isSubmitting(false);
-                });
+              login(
+                adminToken,
+                centralToken,
+                values.username,
+                setSubmitting,
+                isSubmitting
+              );
             }}
           >
             {({
               values,
-              errors,
-              touched,
               handleChange,
               handleBlur,
               handleSubmit,
               isSubmitting,
-              /* and other goodies */
             }) => (
               <Form
                 style={{

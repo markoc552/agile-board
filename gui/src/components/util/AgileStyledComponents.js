@@ -619,7 +619,7 @@ export const ProjectNavigation = styled.div`
 `;
 
 export const WelcomeWidget = styled.div`
-  width: 40vw;
+  width: 70vw;
   height: 35.9vh;
   background-color: white;
   border-radius: 10px;
@@ -760,8 +760,8 @@ export const TodoWidget = styled.div`
 `;
 
 export const TimeWidget = styled.div`
-  width: 19vw;
-  height: 28vh;
+  width: 30vw;
+  height: 40vh;
   background-color: white;
   padding: 35px;
   border-radius: 10px;

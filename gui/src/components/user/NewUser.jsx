@@ -16,6 +16,23 @@ const NewUser = (props) => {
 
   const token = useSelector((state) => state.auth.token);
 
+  const createUser = (values, setSubmitting) =>
+    Axios.post(
+      `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
+      { ...values },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then(() => {
+        setSubmitting(false);
+        isSubmitting(false);
+        setSuccesfull(true);
+      })
+      .catch((err) => console.log(err));
+
   return (
     <div>
       <Headline>Register new user</Headline>
@@ -37,29 +54,11 @@ const NewUser = (props) => {
             onSubmit={async (values, { setSubmitting }) => {
               isSubmitting(true);
 
-              setTimeout(() => {
-                Axios.post(
-                  `${window.ENVIRONMENT.AGILE_ADMINISTRATOR}/v1/user/createUser`,
-                  { ...values },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  }
-                )
-                  .then((res) => {
-                    setSubmitting(false);
-                    isSubmitting(false);
-                    setSuccesfull(true);
-                  })
-                  .catch((err) => console.log(err));
-              }, 2000);
+              setTimeout(() => createUser(values, setSubmitting), 2000);
             }}
           >
             {({
               values,
-              errors,
-              touched,
               handleChange,
               handleBlur,
               handleSubmit,
