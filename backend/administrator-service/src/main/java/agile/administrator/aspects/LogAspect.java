@@ -1,4 +1,4 @@
-package agile.central.aspects;
+package agile.administrator.aspects;
 
 
 import lombok.SneakyThrows;
@@ -18,13 +18,13 @@ import java.util.Arrays;
 
 @Aspect
 @Component
-public class LoggingAspect {
+public class LogAspect {
 
     private Logger logger;
     private ProceedingJoinPoint jp;
     private final StringBuilder builder;
 
-    public LoggingAspect() {
+    public LogAspect() {
         builder = new StringBuilder();
     }
 

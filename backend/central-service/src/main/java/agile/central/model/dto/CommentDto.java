@@ -14,6 +14,7 @@ import java.sql.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CommentDto implements Serializable {
 
     private String taskNumber;
@@ -21,4 +22,6 @@ public class CommentDto implements Serializable {
     private String content;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date publishTime;
+
+
 }

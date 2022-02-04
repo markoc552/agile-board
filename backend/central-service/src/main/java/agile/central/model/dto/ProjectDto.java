@@ -10,6 +10,7 @@ import java.io.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ProjectDto implements Serializable {
 
     @NotNull

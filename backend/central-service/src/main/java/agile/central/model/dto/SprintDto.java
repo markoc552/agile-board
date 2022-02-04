@@ -12,6 +12,7 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class SprintDto implements Serializable {
 
     private String projectName;

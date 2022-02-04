@@ -10,6 +10,7 @@ import java.io.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ComponentDto implements Serializable {
 
     private String name;

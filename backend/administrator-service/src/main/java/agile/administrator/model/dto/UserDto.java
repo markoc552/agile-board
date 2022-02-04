@@ -11,6 +11,7 @@ import java.io.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserDto implements Serializable {
 
     @NotNull

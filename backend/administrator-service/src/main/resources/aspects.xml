@@ -6,7 +6,7 @@
     </weaver>
 
     <aspects>
-        <aspect name="agile.administrator.aspects.LoggingAspect" />
+        <aspect name="agile.administrator.aspects.LogAspect" />
     </aspects>
 
 </aspectj>

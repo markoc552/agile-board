@@ -15,6 +15,7 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class TaskDto implements Serializable {
 
     private String name;

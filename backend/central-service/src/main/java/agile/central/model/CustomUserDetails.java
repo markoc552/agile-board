@@ -11,6 +11,7 @@ import java.util.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class CustomUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
